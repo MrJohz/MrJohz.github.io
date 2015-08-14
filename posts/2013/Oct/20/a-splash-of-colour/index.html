@@ -2,75 +2,71 @@
 <html lang="en">
 
   <head>
-
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
-  <script type="text/javascript">
-  themes = [
-    'dark',
-    'light',
-  ];
-      themeDefault = "dark";
-  </script>
-
-  <script type="text/javascript">
-    window.themeSwitcher=new function(e,t){"use strict";var n=function(e,t,n){if(Array.prototype.indexOf){return Array.prototype.indexOf.apply(e,Array.prototype.slice.call(arguments,1))}var r,i=n?n:0,s;s=e.length;if(s===0||i>=s){return-1}if(i<0){i=s-Math.abs(i)}for(r=i;r<s;r++){if(e[r]==t){return r}}return-1};var r="pillbox-theme-tester-value";var i="pillbox-theme";var s=this;s.lsExists=false;s.themes=e;s.defaultTheme=n(e,t);s.currentTheme=s.defaultTheme;try{localStorage.setItem(r,r);if(localStorage.getItem(r)===r){localStorage.removeItem(r);s.lsExists=true}}catch(o){}var u=function(e){if(e>=0&&e<s.themes.length){return{s:s.themes[e],i:e}}else{return{s:s.themes[s.currentTheme],i:s.currentTheme}}};var a;if(s.lsExists){var f=localStorage.getItem(i);s.currentTheme=n(e,f);if(s.currentTheme<0){s.currentTheme=s.defaultTheme}a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");localStorage.setItem(i,t.s);s.currentTheme=t.i}}else{a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");s.currentTheme=t.i}}s.writeStyle=function(){var e=s.themes[s.currentTheme];document.write('<link id="main-theme" href="https://mrjohz.github.io/theme/css/');document.write(e+'.min.css" rel="stylesheet" />')};s.getStyle=function(e){if(e==null||typeof e==="undefined"){return s.currentTheme}else if(typeof e==="number"&&e===Math.floor(e)){return u(t).s}else{var t=n(s.themes,e);if(t>-1){return t}else{return s.currentTheme}}};s.setStyle=function(e){var t=s.getStyle(e);if(t==s.currentTheme){return}a(t)};s.cycleStyle=function(){console.log(s.currentTheme);a((s.currentTheme+1)%s.themes.length)};s.addSwitcher=function(e){var t=document.getElementById(e);var n=document.createElement("select");n.id="theme-switcher-select";for(var r=0;r<s.themes.length;r++){var i=s.themes[r];var o=document.createElement("option");o.value=i;o.appendChild(document.createTextNode(i));if(r==s.currentTheme){o.selected=true}n.appendChild(o)}n.onchange=function(){var e=this.options[this.selectedIndex].value;themeSwitcher.setStyle(e)};t.appendChild(n)};s.addCycleButtons=function(){var e=document.querySelectorAll("a[href='#cycle-themes']");for(var t=0;t<e.length;t++){var n=e[t];n.addEventListener("click",function(e){e.preventDefault();s.cycleStyle()})}}}(themes,themeDefault)
-
-    themeSwitcher.writeStyle();
-  </script>
-  <noscript>
-    <link id="main-theme" href="https://mrjohz.github.io/theme/css/dark.min.css" rel="stylesheet" />
-  </noscript>
-
       <title>Johz</title>
-
-  <link href="https://mrjohz.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Johz Full Atom Feed" />
-  <link href="https://mrjohz.github.io/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="Johz Categories Atom Feed" />
-
-
-
-
-
-    <meta name="tags" contents="meta" />
-
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css' />
+      <link href='http://fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'/>
+      <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700' rel='stylesheet' type='text/css'/>
+      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/styles.css"/>
+      <meta charset="utf-8" />
   </head>
 
-  <body>
-    <header id="header">
-      <h1 id="header-title"><a class="no-hilite" href="https://mrjohz.github.io/">
-        <div id="sitename">Johz</div>
-      </a></h1>
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+        <div class= "sitetitle">
+          <a class="nodec" href="https://mrjohz.github.io">
+            Johz
+          </a>
+        </div>
+
+      <div class = "sitebanner">
+        <h3 class ="sitesubtitle">  <script>
+    quotes = [
+        "The blog that's always right, for an entirely arbitrary value of 'right'.",
+        "Disclaimer: I have no idea what I'm doing']&lt;&amp;#47;div&gt;); DROP TABLE *;",
+        "Currently working towards being 100% <a href='http://xkcd.com/1271'>XKCD/1271</a> compliant.",
+        "More than just a blog, it's a way of life.",
+        "- zen -",
+        "This div container is left deliberately blank.",
+        "<a href='https://github.com/MrJohz'>Fork me on GitHub!</a>  Fix an issue with Johz today!",
+        "Proud Fenda Scum",
+    ]
+
+    index = Math.floor(Math.random() * quotes.length);
+    document.write(quotes[index])
+  </script>
+</h3>
+        <!-- nav -->
+        <nav class="menu">
+          <ul>
+            <!-- menu items-->
+            <!--pages-->
+            <!-- services icons -->
+          </ul>
+        </nav>
+      </div> <!-- sitebanner -->
     </header>
 
-      <nav id="menu"><ul>
+    <!-- content -->
 
+<section class="content">
 
-          <li><a href="#cycle-themes">Change Theme</a></li>
+  <h3 class="posttitle">
+    <a class="nodec" href="/posts/2013/Oct/20/a-splash-of-colour/" rel="bookmark" title="Permalink to A Splash of Colour">
+      A Splash of&nbsp;Colour
+    </a>
+  </h3>
 
-            <li  ><a href="https://mrjohz.github.io/pages/about-me.html">About&nbsp;Me</a></li>
+  <div class="postinfo">
+    <p class="published" title="2013-10-20T13:12:44+00:00">
+      Sun 20 October 2013
+    </p>
 
+  </div><!-- .postinfo -->
 
-
-      </ul></nav>
-
-
-<section id="content">
-  <article class="article blog-article">
-    <header class="article-header">
-      <h2 class="entry-title">
-        <a href="https://mrjohz.github.io/posts/2013/Oct/20/a-splash-of-colour/" class="no-hilite" rel="bookmark" title="Permalink to A Splash of Colour">
-          A Splash of&nbsp;Colour
-        </a>
-      </h2>
-    </header>
-    <footer class="article-footer">
-        Published <abbr class="published" title="2013-10-20T13:12:44+00:00"> Sun 20 October 2013 </abbr>
-          by <a href="https://mrjohz.github.io/author/johz.html">Johz</a>
-      </footer>
-    <div class="article-text">
-      <p>The aim is that this will be my last post about my blog for a while, but I just wanted to point out some of the interesting features, because I think that&#8217;s what one does on technology-related blogs, and really I just want to fit in an be like the other cool guys.  Dammit, I&#8217;m a terrible&nbsp;person.</p>
+  <div class="article">
+    <p>The aim is that this will be my last post about my blog for a while, but I just wanted to point out some of the interesting features, because I think that&#8217;s what one does on technology-related blogs, and really I just want to fit in an be like the other cool guys.  Dammit, I&#8217;m a terrible&nbsp;person.</p>
 <p>As mentioned before, this is a <a href="http://blog.getpelican.com/">Pelican</a> blog.  Excuse the mild ideosyncracies of the documentation (particularly that if you click on a link, you will <em>never</em> be able to get back to the main page), it&#8217;s actually quite a nice system.  Pelican is a static-site generator, in the style of all the other static-site generators that I&#8217;m sure we could name between us, but with a few nice touches of it&#8217;s own.  For example, unlike Jekyll and associated software, it only requires a directory of posts and pages, as opposed to a directory containing all the parts of a blog.  It&#8217;s relatively well supported, particularly among the French-speaking community.  It&#8217;s also written in Python, which, as a Pythonista first and foremost, means I can read the code and actually understand most of what it&#8217;s&nbsp;doing.</p>
 <p>Secondly, you&#8217;ll notice the theme.  The theme is custom-built.  This is amazing.  My knowledge of <span class="caps">CSS</span> is approximately equal to my knowledge on the dietary habits of pregnant sperm whales.  Seriously, any good impressions you have of the styling of this site are more an indication of the power and ease-of-use of <a href="http://lesscss.org/">less</a> than my own ability.  Some interesting and exciting&nbsp;things:</p>
 <ul>
@@ -86,48 +82,19 @@
 </ul>
 <p>There are still a few things that I haven&#8217;t quite sorted, that I still need to work on.  I&#8217;ve only really been concentrating on the index template and the pages template, so it might be that other pages look slightly more broken.  When I get comments, you can tell me about those pages.  Although first I really need to get a comments system in&nbsp;place.</p>
 <p>The theme is open source, obviously, and is available <a href="https://github.com/MrJohz/pillbox-theme">on GitHub</a> as the Pillbox theme.  Feel free to fork&nbsp;away.</p>
-    </div>
-  </article>
+  </div><!-- .content -->
 
-  <p class="paginator">
-      <a href="https://mrjohz.github.io/posts/2013/Nov/02/old-news/">&laquo;</a>
-    A Splash of&nbsp;Colour
-      <a href="https://mrjohz.github.io/posts/2013/Oct/18/the-truth-of-the-matter/">&raquo;</a>
-  </p>
-
-  <div id="disqus-comments-container"></div>
 </section>
 
 
-      <div id="theme-switcher">
-        Change Theme <br />
-      </div>
-      <script>
-        themeSwitcher.addSwitcher('theme-switcher');
-        themeSwitcher.addCycleButtons();
-      </script>
-
-    <footer id="footer">
-      <p>This blog is built using <a href="http://getpelican.com">Pelican</a>, <a href="http://python.org">Python</a>, and the Pillbox theme.</p>
+    <!-- footer -->
+    <footer>
       <p>
-<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/" class="no-hilite">
-    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" />
-</a>
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" class="no-hilite">
-    <img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
-</a><br />
-Unless otherwise specified, content on this blog is available under the
-<a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons
-Attribution 4.0 International License</a>.  Likewise, unless otherwise
-specified, code samples are in the
-<a href="http://creativecommons.org/publicdomain/zero/1.0/">public domain</a>.
-The blog's theme (pillbox) is available under the MIT license on
-<a href="https://github.com/MrJohz/pillbox-theme">Github</a>.
-</p>
+        © Jonathan Frere, license <a href=""> </a>
+        unless otherwise noted.
+        Generated by <a href= "http://docs.getpelican.com/">Pelican</a> with
+        <a href="http://github.com/porterjamesj/crowsfoot">crowsfoot</a> theme.
+      </p>
     </footer>
-
-
-
   </body>
-
 </html>
