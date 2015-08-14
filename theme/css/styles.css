@@ -89,7 +89,6 @@ body {
 }
 
 .postsummary {
-    font-family: Merriweather;
     font-weight: 300;
 }
 
@@ -102,10 +101,10 @@ body {
 a { /* Generic link styling, greyish and underlined. */
     color: #2E2E2E;
     text-decoration: underline;
-    -o-transition:color .2s ease-in-out;
-    -webkit-transition:color .2s ease-in-out;
-    -moz-transition:color .2s ease-in-out;
-    transition:color .2s ease-in-out;
+    -o-transition:color .1s ease-in-out;
+    -webkit-transition:color .1s ease-in-out;
+    -moz-transition:color .1s ease-in-out;
+    transition:color .1s ease-in-out;
 }
 
 .nodec {
@@ -113,12 +112,12 @@ a { /* Generic link styling, greyish and underlined. */
     text-decoration: none;
 }
 
-a:hover { /* Hover style: transition to orange. Cool! */
-    -o-transition:color .2s ease-in-out;
-    -webkit-transition:color .2s ease-in-out;
-    -moz-transition:color .2s ease-in-out;
-    transition:color .2s ease-in-out;
-    color: orange;
+a:hover { /* Hover style: transition to blue. Cool! */
+    -o-transition:color .1s ease-in-out;
+    -webkit-transition:color .1s ease-in-out;
+    -moz-transition:color .1s ease-in-out;
+    transition:color .1s ease-in-out;
+    color: #000D96;
 }
 
 /* Generic to all content. */
