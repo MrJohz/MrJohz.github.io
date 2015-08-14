@@ -36,6 +36,9 @@
     index = Math.floor(Math.random() * quotes.length);
     document.write(quotes[index])
   </script>
+  <noscript>
+    - zen -
+  </noscript>
 </h3>
         <!-- nav -->
         <nav class="menu">
@@ -53,7 +56,7 @@
 <section class="content">
 
   <h3 class="posttitle">
-    <a class="nodec" href="/drafts/completion-in-fish.html" rel="bookmark" title="Permalink to Shell Completion in Fish">
+    <a class="nodec" href="/posts/2015/Aug/14/completion-in-fish/" rel="bookmark" title="Permalink to Shell Completion in Fish">
       Shell Completion in&nbsp;Fish
     </a>
   </h3>
@@ -100,7 +103,45 @@ OPTIONS:
 </pre></div>
 
 
-<p>This is okay, but it&#8217;s a bit boring.  Many options require an argument of some&nbsp;kind.</p>
+<p>This is okay, but it&#8217;s a bit boring.  Many options require an argument of some kind.  How does that&nbsp;work?</p>
+<p>Fish has a couple of different switches here.  Firstly, option arguments can be specified using the <code>--arguments</code> option.  <code>--arguments</code> takes a single parameter that takes &#8220;a space-separated list of possible option-arguments, which may contain&nbsp;subshells&#8221;.</p>
+<p>There&#8217;s also some extra switches that specify particulars about how the argument should be treated.  For example, the <code>--require-parameter</code> switch tells fish that a particular argument must have an argument.  This means, among other things, that it can&#8217;t be used in the middle of a set of short options.  For example, given a command with options <code>-a -b -c</code> where <code>-b</code> has a required parameter, fish shell knows that <code>-ac</code> can still be followed by another option, but that <code>-ab</code> cannot be followed by the <code>-c</code> option, it will be followed by an&nbsp;argument.</p>
+<p>Additionally, by default fish will assume that the files in the current directory can always be passed as arguments to the current option.  To prevent this, the <code>--no-files</code> switch can be passed.  <code>--no-files</code> can be combined with <code>--require-parameter</code> using the <code>--exclusive</code> switch.</p>
+<p>Let&#8217;s go back to the original program definition, change it so some of the commands take arguments, and try to fill those arguments&nbsp;in.</p>
+<div class="highlight"><pre>USAGE:
+    my-favourite-program [OPTIONS]
+
+OPTIONS:
+    -f, --file FILE         Include FILE in program
+    -x, --extra on|off      Turns extra on or off
+    -c, --command COMMAND   The cargo command to execute beforehand
+</pre></div>
+
+
+<p>Okay, so this program is getting more and more contrived.  I&#8217;ve added a few different options to play with to try out different&nbsp;things.</p>
+<p>The <code>--file</code> option is probably the easiest one to start with.  It takes any file - that&#8217;s fish&#8217;s default anyway.  It is also a required parameter, so the <code>--require-parameter</code> option can be added in.  This is what it looks&nbsp;like:</p>
+<div class="highlight"><pre><span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> --short-option <span class="s1">&#39;f&#39;</span> --long-option <span class="s1">&#39;file&#39;</span> <span class="se">\</span>
+    --require-parameter <span class="se">\</span>
+    --description <span class="s1">&#39;Include FILE in program&#39;</span>
+</pre></div>
+
+
+<p>The second option, <code>--extra</code> is also fairly simple.  It takes either &#8216;on&#8217; or &#8216;off&#8217; and nothing else.  As there&#8217;s a required option, and files aren&#8217;t allowed, this deserves the <code>--exclusive</code> switch, as well as the argument&nbsp;specification.</p>
+<div class="highlight"><pre><span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> --short-option <span class="s1">&#39;x&#39;</span> --long-option <span class="s1">&#39;extra&#39;</span> <span class="se">\</span>
+    --exclusive --arguments <span class="s1">&#39;on off&#39;</span> <span class="se">\</span>
+    --description <span class="s1">&#39;Turns extra on or off&#39;</span>
+</pre></div>
+
+
+<p>You can try both of those fairly easily, although the first one doesn&#8217;t really do all that much.  The last option, <code>--command</code>, is the most interesting.  It takes a cargo command.  This could be produced by manually typing out all the different cargo commands, but dammit this is the future, and if we aren&#8217;t allowed hoverboards and ray-guns we might as well use what we have&nbsp;got.</p>
+<p>What we have is subshells.  Interestingly, in fish, subshells aren&#8217;t expanded inside strings as one might expect, which means that the <code>complete</code> command can use them to define short functions that list the available arguments dynamically.  This particular feature isn&#8217;t necessarily all that useful for listing cargo commands, as those commands are unlikely to change very often, but it is pretty neat and comes in handy&nbsp;elsewhere.</p>
+<p>To get a list of cargo commands, I&#8217;ve used the command <code>cargo --list | tr -d ' ' | sed '1d'</code>.  It probably isn&#8217;t the most efficient, but it&nbsp;works.</p>
+<div class="highlight"><pre><span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> --short-option <span class="s1">&#39;c&#39;</span> --long-option <span class="s1">&#39;command&#39;</span> <span class="se">\</span>
+    --exclusive --arguments <span class="s2">&quot;(cargo --list | tr -d &#39; &#39; | sed &#39;1d&#39;)&quot;</span> <span class="se">\</span>
+    --description <span class="s1">&#39;The cargo command to execute beforehand&#39;</span>
+</pre></div>
+
+
 <div class="footnote">
 <hr />
 <ol>

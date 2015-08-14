@@ -5,28 +5,35 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mrjohz.github.io/</loc>
-<lastmod>2015-08-14T16:25:48-00:00</lastmod>
+<lastmod>2015-08-14T21:12:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://mrjohz.github.io/tags.html</loc>
-<lastmod>2015-08-14T16:25:48-00:00</lastmod>
+<lastmod>2015-08-14T21:12:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://mrjohz.github.io/categories.html</loc>
-<lastmod>2015-08-14T16:25:48-00:00</lastmod>
+<lastmod>2015-08-14T21:12:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://mrjohz.github.io/pages/about-me.html</loc>
-<lastmod>2015-08-14T16:25:48-00:00</lastmod>
+<lastmod>2015-08-14T21:12:09-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://mrjohz.github.io/posts/2015/Aug/14/completion-in-fish/</loc>
+<lastmod>2015-08-14T14:50:04+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -117,14 +124,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mrjohz.github.io/category/misc.html</loc>
-<lastmod>2015-01-17T12:02:32-00:01</lastmod>
+<lastmod>2015-08-14T14:50:04-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://mrjohz.github.io/tag/pelican.html</loc>
-<lastmod>2013-10-18T01:10:00-00:01</lastmod>
+<loc>https://mrjohz.github.io/tag/fish-shell.html</loc>
+<lastmod>2015-08-14T14:50:04-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -151,6 +158,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://mrjohz.github.io/tag/pelican.html</loc>
+<lastmod>2013-10-18T01:10:00-00:01</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://mrjohz.github.io/tag/python.html</loc>
 <lastmod>2014-07-16T10:35:18-00:01</lastmod>
 <changefreq>daily</changefreq>
@@ -166,7 +180,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mrjohz.github.io/tag/coding.html</loc>
-<lastmod>2015-01-17T12:02:32-00:01</lastmod>
+<lastmod>2015-08-14T14:50:04-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -215,7 +229,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mrjohz.github.io/author/jonathan-frere.html</loc>
-<lastmod>2015-01-17T12:02:32-00:01</lastmod>
+<lastmod>2015-08-14T14:50:04-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
