@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <title>Johz</title>
+      <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css' />
+      <link href='//fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'/>
+      <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700' rel='stylesheet' type='text/css'/>
+      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/styles.css"/>
+      <meta charset="utf-8" />
+  </head>
+
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+        <div class= "sitetitle">
+          <a class="nodec" href="https://mrjohz.github.io">
+            Johz
+          </a>
+        </div>
+
+      <div class = "sitebanner">
+        <h3 class ="sitesubtitle">  <script>
+    quotes = [
+        "The blog that's always right, for an entirely arbitrary value of&nbsp;'right'.",
+        "Disclaimer: I have no idea what I'm doing']&lt;&amp;#47;div&gt;); DROP TABLE&nbsp;*;",
+        "Currently working towards being 100% <a href='http://xkcd.com/1271'>XKCD/1271</a>&nbsp;compliant.",
+        "More than just a blog, it's a way of&nbsp;life.",
+        "- zen -",
+        "This div container is left deliberately&nbsp;blank.",
+        "<a href='https://github.com/MrJohz'>Fork me on GitHub!</a>  Fix an issue with Johz&nbsp;today!",
+        "Proud Fenda Scum",
+    ]
+
+    index = Math.floor(Math.random() * quotes.length);
+    document.write(quotes[index])
+  </script>
+</h3>
+        <!-- nav -->
+        <nav class="menu">
+          <ul>
+            <!-- menu items-->
+            <!--pages-->
+            <!-- services icons -->
+          </ul>
+        </nav>
+      </div> <!-- sitebanner -->
+    </header>
+
+    <!-- content -->
+
+<section class="content">
+
+  <h3 class="posttitle">
+    <a class="nodec" href="/drafts/completion-in-fish.html" rel="bookmark" title="Permalink to Shell Completion in Fish">
+      Shell Completion in&nbsp;Fish
+    </a>
+  </h3>
+
+  <div class="postinfo">
+    <p class="published" title="2015-08-14T14:50:04+01:00">
+      Fri 14 August 2015
+    </p>
+
+  </div><!-- .postinfo -->
+
+  <div class="article">
+    <p>I use the <a href="http://fishshell.com/">fish shell</a> as my go-to shell.  It&#8217;s fun, it&#8217;s colourful, it&#8217;s full of features, and I&#8217;d highly recommend it.  One of those features is a shell-completion mechanism in the form of the <code>complete</code> command.  Now many other shells have completion, but for now I&#8217;m just going to play with the fish version, and then see if I can apply it to other shells later on, perhaps in a future&nbsp;post.</p>
+<p>I&#8217;m interested in shell completions because I got bored the other day and started learning <a href="http://rust-lang.org/">Rust</a>, and now I&#8217;m trying to build a program that, given an input definition, will output a shell script to define the shell completions for that input.  Yesterday I got to the point that I could just about comprehend the Rust part (if in doubt, stick another &#8220;<code>&amp;</code>&#8221; in front of it<sup id="fnref:rust-advice"><a class="footnote-ref" href="#fn:rust-advice" rel="footnote">1</a></sup>), and realised that actually the new difficulty was that I didn&#8217;t really know how to do shell&nbsp;completion.</p>
+<h2>First steps - just&nbsp;options</h2>
+<p>The best place to start is with a program to define the completions for.  Starting as simple as possible, here&#8217;s one defined in a sort-of-docopt-y&nbsp;form.</p>
+<div class="highlight"><pre>USAGE:
+    my-favourite-program [OPTIONS]
+
+OPTIONS:
+    -a, --all               Do all the favourite things
+    -u                      Only use unsigned integers
+    -w, -weird              Weird &quot;old-style&quot; option
+</pre></div>
+
+
+<p>Only options, but three different kinds.  There&#8217;s short options (<code>-x</code>), long options (<code>--long-opt</code>) and also weird single-dashed long options that fish calls &#8220;old-style&#8221;.  The example given in the fish shell docs is <code>-Wall</code>, but then I&#8217;ve always understood that to be &#8220;-W, with the argument &#8216;all&#8217;&#8221;.  Regardless, how do you complete this different&nbsp;options?</p>
+<p>The full signature of a program can&#8217;t be given in one single definition, instead each option is given separately.  The <code>complete</code> command starts by defining what command the completion applies to using the <code>--command</code> option.  This is followed by all of the alternatives for each option, using the <code>--short-option</code> flag for short options, the <code>--long-option</code> flag for long options, and the <code>--old-option</code> flag for old options.  Finally, an optional description can be attached using the <code>--description</code> flag.</p>
+<p>The order of the flags passed to <code>complete</code> don&#8217;t actually matter as far as I can tell, but doing it in the same order each time makes it much easier to read the command, so I&#8217;ll do it that way.  All in all, that means the completion file might look something like&nbsp;this:</p>
+<div class="highlight"><pre><span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> --short-option <span class="s1">&#39;a&#39;</span> --long-option <span class="s1">&#39;all&#39;</span> <span class="se">\</span>
+    --description <span class="s1">&#39;Do all the favourite things&#39;</span>
+<span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> --short-option <span class="s1">&#39;u&#39;</span> <span class="se">\</span>
+    --description <span class="s1">&#39;Only use unsigned integers&#39;</span>
+<span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> --short-option <span class="s1">&#39;w&#39;</span> --old-option <span class="s1">&#39;weird&#39;</span> <span class="se">\</span>
+    --description <span class="s1">&#39;Weird &quot;old-style&quot; option&#39;</span>
+</pre></div>
+
+
+<p>To test that this works, run those commands in a fish shell, then type <code>my-favourite-program -&lt;tab&gt;</code>.  You should get something that looks a bit like&nbsp;this:</p>
+<div class="highlight"><pre><span class="go">$ my-favourite-program -</span>
+<span class="go">--all  (Do all the favourite things)  -u  (Only use unsigned integers)  -weird  (Weird &quot;old-style&quot; option)</span>
+<span class="go">-a     (Do all the favourite things)  -w    (Weird &quot;old-style&quot; option)</span>
+<span class="go">$ my-favourite-program -weird</span>
+</pre></div>
+
+
+<p>This is okay, but it&#8217;s a bit boring.  Many options require an argument of some&nbsp;kind.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:rust-advice">
+<p>This is not true&#160;<a class="footnote-backref" href="#fnref:rust-advice" rev="footnote" title="Jump back to footnote 1 in the text">[back]</a></p>
+</li>
+</ol>
+</div>
+  </div><!-- .content -->
+
+</section>
+
+
+    <!-- footer -->
+    <footer>
+      <p>
+        © Jonathan Frere, license <a href=""> </a>
+        unless otherwise noted.
+        Generated by <a href= "http://docs.getpelican.com/">Pelican</a> with
+        <a href="http://github.com/porterjamesj/crowsfoot">crowsfoot</a> theme.
+      </p>
+    </footer>
+  </body>
+</html>
