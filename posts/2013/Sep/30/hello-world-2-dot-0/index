@@ -1,0 +1,23 @@
+title: Hello, World 2.0
+date: 2013-09-30 21:31:00Z
+slug: hello-world-2-dot-0
+tags: meta
+
+
+So I got a blog.  A second blog, to be precise.  Some of you might remember the [old blog][wordpress-blog] on [wordpress.com][wp-home].  You might also have noticed that I haven't blogged from there in over a year.  I managed to tell you all that I'd arrived at University, and then I mysteriously went silent.  Well, now I'm back, back with a vengeance, and also with hosting.  Yes, hosting.
+
+At the time that I write this, I am using [Web Faction][webfaction] for my hosting.  Why?  Well, it seemed to me like it was the most helpful.  There were docs on doing pretty much everything I wanted to do, with a healthy support base, and a generally hacker-oriented vision.  That appealed to me.  Then I managed to find a [code for 50% off hosting][wfcoupon], and it suddenly seemed like the most sensible choice.  It's certainly not the cheapest provider out there, but I'm hoping it'll turn out to be a good first choice.
+
+More technical details abound.  I'm currently hosting in Europe, because Europeans are cooler and more awesome, and my internet connection is poor enough that I need all the help I can get in improving the latency of my ssh connection.  This blog is produced using [Octopress][octopress], which is lovely, and allows me to use Markdown, which I just love.  I'm currently hunting down a nice theme for the blog, but I might have to end up making my own, and that would be bad.  No, seriously, it would be an affront to all your sensibilities, so if you've found an awesome theme, please tell me about it.  It could save your life, although I have yet to work out how.
+
+What sorts of things will you find on here other than a blog?  Well, as I have returned to [NationStates][nationstates], expect a few NS-related apps to appear.  Additionally, I'm planning on fixing up my IRC bot, K-Eight, and running him from this server.  Finally, I'd like to get back to writing.  You might have read my old poems and prose on the WordPress blog.  If you haven't, please don't go back and look at them, they were awful.  But I've got to confess, I really enjoyed being able to write, and a success in a short-story competition recently (well, half a year ago) and a few conversations with some creative friends have inspired me to try and revisit some of my old ideas.  So look out for that, maybe, if you're masochistic enough.
+
+Anyway, for now I'm going to go back to coding and thinking up new blog posts.  Again, if you know of a good Octopress theme, contact me somehow.  I'll get comments and an email address up soon, until then I recommend telepathy, sending a message in a bottle, or simply contacting me on IRC: [#johztestingchannel on Esper.net][ircchan].  Bye for now!
+
+[wordpress-blog]: http://johz.wordpress.com/ "Johz Blog"
+[wp-home]: http://wordpress.com/ "Wordpress Home"
+[webfaction]: http://www.webfaction.com "Web Faction Home"
+[wfcoupon]: http://slickdeals.net/f/5989592-webfaction-hosting-50-off-1yr-65-off-3yrs "Webfaction deals"
+[octopress]: http://www.octopress.org "Octopress Home"
+[nationstates]: http://www.nationstates.net "NationStates Home"
+[ircchan]: irc://irc.esper.net/johztestingchannel "#johztestingchannel on Esper.net"

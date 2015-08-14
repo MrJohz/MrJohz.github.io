@@ -1,0 +1,132 @@
+Title: A Collection of Benchmarks that I Found Useful
+Slug: get-benched
+Date: 2015-01-17 12:02:32
+Tags: coding, benchmarks, humour
+
+
+As Donald Knuth once explained, 97% of a programmer's time should be spent making their code as fast as possible.  (The other 3% is waiting for the code to compile.)  Most programmers have a host of shortcuts, tricks, and clever codes up their sleeves to ensure that their code runs as fast as it possibly can.  For example, in JavaScript, many developers have spent years studying the secret arts of the for-loop to determine how to loop through arbitrary numbers most quickly.  (The answer to this particular question is actually an inverse-backwards while-never-done-loop, where the first character on each line is an 'a', and where the programmer chants hymns worshipping Azathoth.)  The faster their code works, the more web-scale their <del>node.js</del> io.js programs will be.
+
+There are lots of myths, legends, and rumours about optimization, and it's often very difficult to sort out the truth from the lies.  However, to help us in our quest for absolute speed, good programmers should always use benchmarks.  Benchmarks are a way of comparing like-for-like speeds of two programs, each containing different ways of doing the same thing, to determine which method is the quickest, and should therefore be used in all circumstances.  Of course, true benchmarks are often extremely difficult, and so programmers are often forced to compare unlike-for-unlike.  However, the major differences between like-for-like and unlike-for-unlike are usually negligible, and so a good programmer can almost always simplify a complex comparison into a very straight race between two arbitrary pieces of code, and interpret the results correctly.  This simplification is done in much the same way that a physicist simplifies complex problems to simple ones using spherical cows in a vacuum.
+
+### The Importance of Whitespace
+
+The first misconception that many programmers have is that whitespace makes no difference.  While in most cases, good compilers can optimize away whitespace, and sometimes even remove it entirely from the resulting binary, it can still make a large difference to compile-times, and as programmers need to spend at least 97% of their time optimising, decreasing the length of time that a programmer needs to wait to compile a program is always a good thing.  Of course, this is to say nothing of interpreted programs, where there is no compilation stage, and so the whitespace cannot ever be optimized away, and must remain during the final execution of the program.
+
+The best way to demonstrate this is with a benchmark.  Consider the programs fast.c and slow.c (these are available on Github [here][gh-whitespace], although I would encourage you not to actually open slow.c unless you like dealing with very large text files).  They both do the same thing - print out "Hello, World!".  However, they have radically different compile times because of the amount of whitespace involved.  If we run the `make` command, we can get the output, which includes timings of individual portions as performed by `gcc`.
+
+[gh-whitespace]: <https://github.com/MrJohz/benchmarks/tree/master/whitespace>
+
+```console
+$ make
+Fast implementation (no whitespace)
+wc -c fast.c
+104 fast.c
+gcc -time fast.c
+# cc1 0.02 0.00
+# collect2 0.02 0.00
+
+Slow implementation (some whitespace)
+wc -c slow.c
+86124463 slow.c
+gcc -time slow.c
+# cc1 0.18 0.04
+# collect2 0.02 0.00
+```
+
+Here it is very easy to see that having to parse 83 thousand times the amount of bytes actually made the second implementation slightly slower to compile!  This is of huge importance in our files.  While we may not always notice the speed difference in our day-to-day programming experience, it is always good practice to use as little whitespace as possible when writing programs.  As I mentioned earlier, this applies to both compiled programs and interpreted programs, although the difference for the latter is much greater, as the performance hit will actually occur during runtime.  What you may not know (and what hasn't been demonstrated here, but is left as an exercise to the reader) is that this also applies to comments as well - this is in fact the main reason for the "self-documenting code" movement, as repeating the documentation both in the code itself, and in comments alongside the code, is known to slow down character-by-character file input by as much as 200% (for perfectly balanced code/comment combinations).
+
+### Interpreted vs Compiled
+
+Another important area of concern for programmers is the debate between interpreted languages and compiled languages.  Essentially, interpreted programming languages do all of the work when they are run, whilst compiled programming languages do some work at compile-time, and some work at runtime.  This would suggest that compiled programming languages are generally faster when being run, as they have to do less work at runtime.  The issue with this naive understanding of programming is that it doesn't take into account the amount of work done at compile-time.  Proper benchmarking should include all stages of a program's execution, even the stages before it's actually started to execute.
+
+There is also a middle ground between compiling a programming and directly interpreting a program.  Many modern interpreters are actually "JIT" compilers, which do both compilation and interpretation at the same time, at runtime.  While they still have to do all of the work at runtime, they are able to do extra work making other parts of the program take less work.  The aim is that eventually the amount of work that is saved will be greater than the amount of extra work that is required, but it is doubtful if this will ever happen.  Many computer experts believe that JIT compilers will remain in the realm of fantasy and academia for many years to come.  However, in the interests of fairness, we will also use a JIT compiler in our benchmarking.
+
+Our test will be a simple "Hello, World!" example - that is, all three programs (compiled, interpreted and JIT-interpreted) should simply print out the phrase "Hello, World!".  While this is generally an extremely simple task, we will easily be able to extrapolate from the results any conclusion that we would like to draw.  The programming languages that we shall use will be C++ (compiled using "g++ (Ubuntu 4.8.2-19ubuntu1) 4.8.2", whatever that means); Python (interpreted using "CPython 3.4.2"); and Python again (this time JIT compiled using "Python 3.2.5").  As we said previously, a good benchmark should compare all parts of a program's lifetime, so we will measure the length of time it takes the C++ program to compile, as well as the execution time for all the programs.  As in the previous test, the test-code is available on [GitHub][gh-int-comp].
+
+[gh-int-comp]: <https://github.com/MrJohz/benchmarks/tree/master/int-comp>
+
+```console
+$ make
+C++ version
+../benchmarker.py -n20 "g++ helloworld.c -ohelloworld && ./helloworld"
+
+------------------------------ 
+   g++ helloworld.c -ohelloworld && ./helloworld
+ max/min:    0.07519780099755735     0.053425493999384344
+ mean ave:   0.06308976999989682
+ median ave:     0.06266852850058058
+------------------------------
+CPython version
+../benchmarker.py -n20 'python -c "print(\"Hello, World\")"'
+
+------------------------------ 
+   python -c "print(\"Hello, World\")"
+ max/min:    0.0267868869996164      0.023469741001463262
+ mean ave:   0.02465028059996257
+ median ave:     0.02490398199915944
+------------------------------
+PyPy version
+../benchmarker.py -n20 'pypy -c "print(\"Hello, World\")"'
+
+------------------------------ 
+   pypy -c "print(\"Hello, World\")"
+ max/min:    0.22487263600123697     0.16340099499939242
+ mean ave:   0.20837249334999797
+ median ave:     0.21045488100025977
+------------------------------
+
+```
+
+The statistics here are extremely clear - interpreted programs actually run faster than compiled programs, if you include the compilation time.  What is interesting - albeit not necessarily unexpected - to note is that the pypy attempt took on average nearly ten times as long as the CPython attempt.  As I said earlier, JIT compilers are very much in the realm of academia currently, and we are unlikely to see one of these outperform a proper programming language implementation in the next decade.
+
+While not specifically tested in this particular test, it's also important to note that both of the Python programs were significantly shorter than the C++ program, and could indeed be sent to the interpreter as a single line.  On the other hand, the C++ program had to be written in a separate file, and even the command itself had more text on it.  The upshot of this is that the C++ program contains more whitespace - of course, in this benchmark that probably isn't a huge factor, but experience programmers should be wise to the fact that Python's terseness often offers a not insignificant speed bonus.
+
+### Direct Comparison
+
+Of course, these are just specific features of individual programming languages that we have been comparing so far.  In many cases, we want to know how the overall program would perform in a real-life situation.  This will often require large and extensive benchmarks that compare a number of different programming languages.  One of the big pitfalls that many of these benchmarks fail to avoid is the use of idiomatic programming features.  In most languages, there is a "right" way to do things and a "wrong" way to do things.  For example, the Java JVM is extremely versatile when it comes to loops, as it can make these run as efficiently as possible.  However, many Java users fail to realise this, and there is a lot of lost potential in many Java programs.  For example, most naive Java users would write a method that adds two numbers like so:
+
+```java
+public static int slowAdd(int a, int b) {
+    return a + b;
+}
+```
+
+In actual fact, idiomatic Java would look much more like this.
+
+```java
+public static int fastAdd(int a, int b) {
+    int result = 0;
+    for (int i=0; i < a; i++) {
+        result++;
+    }
+    for (int i=0; i < b; i++) {
+        result++;
+    }
+
+    return result;
+}
+```
+
+This will work much faster, due to the JVM's affinity for looping constructs.
+
+Of course, the differences between programming languages often goes a lot further than the best way to add different numbers together.  Most programming languages were designed for completely different purposes, and as a result testing them all in exactly the same way is usually the wrong way to do benchmarks.  Instead, the challenges given to each programming languages (and the method used to complete the challenge) should be specifically designed for each programming language.  Of course, to maintain independence, each programming language should be measured in exactly the same way, otherwise the results would be incomparable.
+
+In our comparison, we'll test Python, Java, and Perl, attempting to write the most idiomatic code possible to ensure that each language has the best possible chance.  The source code for this test will not be on GitHub, as anyone fluent in these languages should be writing these things every day, and there really is no need to bombard you with thing that I'm sure you already know.
+
+In our Python program, we will be attempting to write the most commonly written Python program, `print("Hello, World!")`.  Many people would question the use of such a basic test, but the huge number of people who demonstrate this piece of code as evidence of Python's simplicity and versatility in all things cannot be called into question.  Ultimately, if you can write the Hello, World! Python program, you can write any piece of Python code at all, as long as it solely involve printing out a string.  As a result, this is the benchmark code I will use.
+
+On the other hand, very serious people use Java to do very serious things, and so to trivialise the language to simply printing out a string would be to do the Java community a huge disservice.  Instead, our benchmark Java code will create a server, and wait indefinitely for a response.  This is basically the code that most Java experts write every day.  Unfortunately it will not be *truly* idiomatic Java, as that would require a huge number of Java classes that I honestly can't be bothered to write just for the sake of a cheap shot, especially as it's been done [before][enterprise-fizzbuzz].  It is arguable that the Java code will be unable to stop, as it will hang forever until it receives a quit signal at the terminal.  To be honest, I think this just makes it more and more clear how slow idiomatic Java code is.  Also buggy.  Java code is probably buggy too.  It's still cool to hate Java, right?
+
+[enterprise-fizzbuzz]: <https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition>
+
+Finally, we have our Perl program.  Perl is designed to be as quick as possible, by omitting any extraneous necessities like readability.  No-one is quite sure what idiomatic Perl programs should actually do, as it is difficult to remember the exact invocation syntax for that Perl script you wrote several years ago that you're quite sure did something with XML files, but you're not really sure *what*.  Of course, you could just read the source, but to be honest it would probably be easier to rewrite the whole thing rather than dabble in that sort of black magic and wizardry.
+
+It turns out that the idiomatic Perl program doesn't actually work.  I'm 90% certain I wrote everything write, so I'm going to blame the Perl interpreter.  Perl is, after all, notoriously difficult to read, and everyone knows that computers are fairly stupid.
+
+![Basically, Python won.  Also Dumbledore dies at the end.  Spoiler.](http://i.imgur.com/1kccxn5.png)
+
+In the end, it appears that Python won both of the benchmarks that it was involved in, compared to C, and also compared to Java and Perl.  A basic interpretation of these results would suggest that, when writing programs that print out "Hello, World!", Python is extremely strong.  We can also quickly extrapolate from this that Python is probably the best language in the world for most of the world's problems.  Thankfully, as a Python programmer, I have basically just proved exactly what I knew already - I mean, it would be a bit shocking if it suddenly turned out I'd been wrong, eh?
+
+Thanks for reading this short, humble, but extremely accurate blog on proper benchmarking practice.  There are a lot of people on the internet who are producing very dangerous and misleading benchmarks, that encourage people down dangerous paths, such as trying silly languages, just because they appear to beat certain things on certain benchmarks.  As I have clearly shown here, there is a right way to interpret benchmark results, and a wrong way.  I encourage you to share this with your friends, family, and strangers that you meet on the street, and particularly with those who persist in producing irrelevant and silly benchmarks simply for the sake of comparison.
+
+Python for life!

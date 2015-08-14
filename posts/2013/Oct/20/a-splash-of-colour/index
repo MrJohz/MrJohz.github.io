@@ -1,0 +1,26 @@
+title: A Splash of Colour
+slug: a-splash-of-colour
+date: 2013-10-20 13:12:44Z
+tags: meta
+
+
+The aim is that this will be my last post about my blog for a while, but I just wanted to point out some of the interesting features, because I think that's what one does on technology-related blogs, and really I just want to fit in an be like the other cool guys.  Dammit, I'm a terrible person.
+
+As mentioned before, this is a [Pelican][pelican] blog.  Excuse the mild ideosyncracies of the documentation (particularly that if you click on a link, you will *never* be able to get back to the main page), it's actually quite a nice system.  Pelican is a static-site generator, in the style of all the other static-site generators that I'm sure we could name between us, but with a few nice touches of it's own.  For example, unlike Jekyll and associated software, it only requires a directory of posts and pages, as opposed to a directory containing all the parts of a blog.  It's relatively well supported, particularly among the French-speaking community.  It's also written in Python, which, as a Pythonista first and foremost, means I can read the code and actually understand most of what it's doing.
+
+Secondly, you'll notice the theme.  The theme is custom-built.  This is amazing.  My knowledge of CSS is approximately equal to my knowledge on the dietary habits of pregnant sperm whales.  Seriously, any good impressions you have of the styling of this site are more an indication of the power and ease-of-use of [less][] than my own ability.  Some interesting and exciting things:
+
+  - You can change the colour-scheme!  I know a number of people who have really strong preferences over light vs dark, so if you scroll to the bottom, you'll find a switcher that allows you to switch between light and dark.  Everything is entirely client-side, and the preference is saved in localStorage so your theme-choice will persist between sessions.  If you don't have either localStorage, or javascript in general, the page will load the dark theme by default, because dark is clearly the cooler choice.
+
+  - The theme includes a random quote of the page load.  This is the second 'bubble' that appears on the main page.  The quotes are taken from the RANDOMQUOTES pelican option, and then every time the page loads, a javascript function writes out a div containing a random quote.  Obviously, if there is no javascript, the div never gets written at all, and so the page still runs beautifully.
+
+  - The theme is largely XKCD/1271 compliant.  For those that don't obsessively follow the famous webcomic, [comic #1271][xkcd1271] recently described the habit of highlighting text while browsing websites, and then feeling good when the highlighted text makes a beautiful shape.  As someone who suffers from a similar compulsion (for reference, I consider option 4 of Randall's list to be the only viable option) I spent last night redesigning parts of the article layout so that when one highlights text in Chrome, there are no longer any horrible overhangs.
+
+There are still a few things that I haven't quite sorted, that I still need to work on.  I've only really been concentrating on the index template and the pages template, so it might be that other pages look slightly more broken.  When I get comments, you can tell me about those pages.  Although first I really need to get a comments system in place.
+
+The theme is open source, obviously, and is available [on GitHub][pillbox] as the Pillbox theme.  Feel free to fork away.
+
+[pelican]: <http://blog.getpelican.com/>
+[less]: <http://lesscss.org/>
+[xkcd1271]: <http://xkcd.com/1271>
+[pillbox]: <https://github.com/MrJohz/pillbox-theme>

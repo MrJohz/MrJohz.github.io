@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <script type="text/javascript">
+  themes = [
+    'dark',
+    'light',
+  ];
+      themeDefault = "dark";
+  </script>
+
+  <script type="text/javascript">
+    window.themeSwitcher=new function(e,t){"use strict";var n=function(e,t,n){if(Array.prototype.indexOf){return Array.prototype.indexOf.apply(e,Array.prototype.slice.call(arguments,1))}var r,i=n?n:0,s;s=e.length;if(s===0||i>=s){return-1}if(i<0){i=s-Math.abs(i)}for(r=i;r<s;r++){if(e[r]==t){return r}}return-1};var r="pillbox-theme-tester-value";var i="pillbox-theme";var s=this;s.lsExists=false;s.themes=e;s.defaultTheme=n(e,t);s.currentTheme=s.defaultTheme;try{localStorage.setItem(r,r);if(localStorage.getItem(r)===r){localStorage.removeItem(r);s.lsExists=true}}catch(o){}var u=function(e){if(e>=0&&e<s.themes.length){return{s:s.themes[e],i:e}}else{return{s:s.themes[s.currentTheme],i:s.currentTheme}}};var a;if(s.lsExists){var f=localStorage.getItem(i);s.currentTheme=n(e,f);if(s.currentTheme<0){s.currentTheme=s.defaultTheme}a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");localStorage.setItem(i,t.s);s.currentTheme=t.i}}else{a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");s.currentTheme=t.i}}s.writeStyle=function(){var e=s.themes[s.currentTheme];document.write('<link id="main-theme" href="http://johz.me/theme/css/');document.write(e+'.min.css" rel="stylesheet" />')};s.getStyle=function(e){if(e==null||typeof e==="undefined"){return s.currentTheme}else if(typeof e==="number"&&e===Math.floor(e)){return u(t).s}else{var t=n(s.themes,e);if(t>-1){return t}else{return s.currentTheme}}};s.setStyle=function(e){var t=s.getStyle(e);if(t==s.currentTheme){return}a(t)};s.cycleStyle=function(){console.log(s.currentTheme);a((s.currentTheme+1)%s.themes.length)};s.addSwitcher=function(e){var t=document.getElementById(e);var n=document.createElement("select");n.id="theme-switcher-select";for(var r=0;r<s.themes.length;r++){var i=s.themes[r];var o=document.createElement("option");o.value=i;o.appendChild(document.createTextNode(i));if(r==s.currentTheme){o.selected=true}n.appendChild(o)}n.onchange=function(){var e=this.options[this.selectedIndex].value;themeSwitcher.setStyle(e)};t.appendChild(n)};s.addCycleButtons=function(){var e=document.querySelectorAll("a[href='#cycle-themes']");for(var t=0;t<e.length;t++){var n=e[t];n.addEventListener("click",function(e){e.preventDefault();s.cycleStyle()})}}}(themes,themeDefault)
+
+    themeSwitcher.writeStyle();
+  </script>
+  <noscript>
+    <link id="main-theme" href="http://johz.me/theme/css/dark.min.css" rel="stylesheet" />
+  </noscript>
+
+      <title>  Johz - news
+</title>
+
+  <link href="http://johz.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Johz Full Atom Feed" />
+
+  </head>
+
+  <body>
+    <header id="header">
+      <h1 id="header-title"><a class="no-hilite" href="http://johz.me/">
+        <div id="sitename">Johz</div>
+      </a></h1>
+    </header>
+
+      <nav id="menu"><ul>
+
+
+          <li><a href="#cycle-themes">Change Theme</a></li>
+
+            <li  ><a href="http://johz.me/pages/about-me.html">About&nbsp;Me</a></li>
+
+
+
+      </ul></nav>
+
+
+<!-- Random quote on index page -->
+  <script>
+    quotes = [
+        "The blog that's always right, for an entirely arbitrary value of 'right'.",
+        "Disclaimer: I have no idea what I'm doing']&lt;&amp;#47;div&gt;); DROP TABLE *;",
+        "Currently working towards being 100% <a href='http://xkcd.com/1271'>XKCD/1271</a> compliant.",
+        "More than just a blog, it's a way of life.",
+        "- zen -",
+        "This div container is left deliberately blank.",
+        "<a href='https://github.com/MrJohz'>Fork me on GitHub!</a>  Fix an issue with Johz today!",
+        "Proud Fenda Scum",
+        "Try this site in a <a href='#theme-switcher'>different theme</a>.",
+        "Built with the three 'P's, <a href='http://getpelican.com/'>Pelican</a>, <a href='http://python.org/'>Python</a>, and <a href='https://github.com/MrJohz/pillbox-theme'>Pillbox</a>.",
+    ]
+
+    index = Math.floor(Math.random() * quotes.length);
+    document.writeln("<div id='quote'>")
+    document.writeln("    " + quotes[index])
+    document.writeln("</div>")
+  </script>
+
+<section id="content">
+  <h2 id="content-title">Articles with the news tag</h2>
+    <article class="blog-article">
+
+      <header class="article-header">
+        <h2 class="entry-title">
+          <a href="http://johz.me/posts/2013/Nov/02/old-news/" class="no-hilite" rel="bookmark" title="Permalink to Old News">
+            Old&nbsp;News
+          </a>
+        </h2>
+      </header>
+      <footer class="article-footer">
+        Published <abbr class="published" title="2013-11-02T13:32:03+00:00"> Sat 02 November 2013 </abbr>
+          by <a href="http://johz.me/author/johz.html">Johz</a>
+      </footer>
+
+      <div class="article-text">
+        <p>It has come to my attention recently that I am very much out of the loop when it comes to the news.  As someone who used to obsessively spend their lunch hour shouting excitedly about the latest national policies at anyone who would listen, and a number of people who really wished they didn&#8217;t have to listen, this is all a bit weird, and I&#8217;m honestly slightly worried about it.  Even the things that should excite me beyond words have failed to catch my interest recently.  I&#8217;m vaguely aware of nuclear power coming back to the <span class="caps">UK</span>.  There&#8217;s something weird happening to GCSEs.  I can feel some remnants of old enthusiasm stirring up in me, but if I&#8217;m honest it&#8217;s not stirring up very&nbsp;far.</p>
+<p>So, to rectify this, I have decided to run my expert eye over some of the recent news, and really find out what&#8217;s happening.  And, because my entirely uninformed commentary will almost certainly be amazingly insightful, I thought I probably ought to share it with you, because that&#8217;s what good friends and narcissistic bloggers&nbsp;do.</p>
+<p>I started this post thinking that the <a href="http://www.bbc.co.uk/news/world-us-canada-24773025"><span class="caps">LA</span> airport shooting</a> would be the biggest piece of news for today, but on the <span class="caps">BBC</span> it&#8217;s been relegated to first primary article in the &#8220;and in other news&#8221; section, with a bit of footage making the &#8220;Watch/Listen&#8221; section, so apparently that&#8217;s not all that interesting.  After all, only one person died, and they&#8217;ve already caught the killer, so is it much more than just another &#8220;Only in America&#8221; story?  I mean, I could go on a bit of a rant about how terrible the gun culture is in America, but a foreigner can&#8217;t tell Americans how to live their lives, even if they are living them wrong, so I guess we&#8217;ll just skip this&nbsp;altogether.</p>
+<p>In fact, the <span class="caps">BBC</span>&#8217;s top story is that <a href="http://www.bbc.co.uk/news/world-asia-24776363">Hakimullah Mehsud has been killed by a drone</a>.  That name doesn&#8217;t actually ring any bells, but I will assume this is because of how out of the loop I am.  This is somewhat of an important development, as this man is apparently leader of the Pakistani Taliban, and the power vacuum may lead to the rise of a leader who will more readily submit to negotiations.  I seem to remember that my old, news-reading self would have seen this as another sign that the war on organised terror is over, and that we now need to turn to our own homes to sort out the problems of hate-crime and racial tension, rather than continually blame an &#8220;enemy out there&#8221;.  Unfortunately, my new self feels rather apathetic to this sort of stuff.  After all, this is a war that America is fighting, not the <span class="caps">UK</span>.  And it&#8217;s happening in Pakistan, which also isn&#8217;t the <span class="caps">UK</span>.  And this &#8220;Taliban&#8221; place doesn&#8217;t sound like it&#8217;s in the <span class="caps">UK</span> either, so why are we so excited about&nbsp;it?</p>
+<p>The second story is about a <a href="http://www.bbc.co.uk/news/uk-24779908">Mr Paul Gambaccini</a>, and how he&#8217;s clearly an evil paedophile like that nasty Saville bloke, and Rolf Harris, and probably Bruce Forsyth, I mean, just look at him, he must be in on it, right?  Now I recognise the name, but I&#8217;m not entirely sure where from.  I&#8217;ve googled for pictures of him, and the face isn&#8217;t ringing any bells, although there are lots of pictures of Jimmy Saville there, proving that he must be a paedophile.  I&#8217;m guessing it&#8217;s from listening to Radio Four, which is something I&#8217;m not supposed to admit to doing, but used to quite enjoy&nbsp;anyway.</p>
+<p>To be honest, every time this Operation Yewtree thing comes around, I feel less inclined to be outraged.  It&#8217;s quite clear that there was a culture at the time in certain organisations that just ignored sexual harassment as a thing.  It&#8217;s great that we&#8217;re finally getting the perpetrators of these crimes to own up to the things they&#8217;ve done, but, apart from simply providing justice to those that deserve it, the ultimate question it raises is whether that sort of thing could happen again.  Is today&#8217;s lad culture really that far removed from Saville&#8217;s big-shot world, where fame and a cocky attitude could get you out of almost&nbsp;anything?</p>
+<p>It&#8217;s at this point that I turn to the more important news stories, those contained within the science/technology/environment sections, and it turns out the news is actually genuinely exciting.  Not just one, but <em>two</em> fusion stories!  Firstly, America&#8217;s National Ignition Facility (<span class="caps">NIF</span>) has <a href="http://www.bbc.co.uk/news/science-environment-24429621">done the impossible</a>, and got more energy out of a fusion event than it has put in, for a given value of putting energy in.  <span class="caps">NIF</span> have been attempting to do fusion by shining lasers at pellets of hydrogen, and waiting for them to explode.  Now, or at least in late September, they&#8217;ve finally managed to get more energy out of the pellet than they&#8217;ve put into the pellet, although due to inefficiencies everywhere, this doesn&#8217;t account for the energy they put into the laser.  So we&#8217;re not quite there yet, but we might be in 20-30 years&#8217; time.&nbsp;Maybe.</p>
+<p>The second fusion story is of course the more important one, because it involves the One True Path to fusion, the &#8220;tokamak&#8221; reactor.  Now I&#8217;m quite biased in this area, having grown up not too far from the current European experiment, known as <span class="caps">JET</span>.  However, as I&#8217;ve already described the American attempt in a pithy and unscientific manner, I feel I should do the same for tokamaks.  Essentially, the idea is to get a load of very hot hydrogen, and spin it in a circle until it does something exciting.  So what have these people been doing that&#8217;s so newsworthy?  Well, they&#8217;ve finally got round to <a href="http://www.bbc.co.uk/news/science-environment-23408073">receiving the inital components with which they can build the new <span class="caps">ITER</span> reactor</a>.  Yes, that&#8217;s right, the Europeans are almost about to start building a the outline of a new reactor,&nbsp;maybe.</p>
+<p>Fusion is really cool.  Well, it isn&#8217;t, it requires ridiculously high temperatures and pressures, but you know what I mean.  The problem is that fusion just isn&#8217;t happening any time soon.  It will work, eventually, it&#8217;s just that realistically scientists aren&#8217;t in a position to promise anything at any sensible timescale, so they make overconfident claims, and the phrase &#8220;twenty years&#8221; becomes synonymous with &#8220;never&#8221;.  However, we really need to keep on pushing for it, because it&#8217;s&nbsp;awesome.</p>
+<p>And finally, we come to a lovely local news story that not only includes a baby and an animal, but also manages to make you disgusted with your neighbours, and utterly amazed at the goodness of humanity.  Yes, that&#8217;s right, <a href="http://www.bbc.co.uk/news/uk-england-birmingham-24770596">an abandoned baby has been named after the dog owned by the walker who found her</a>.  Doesn&#8217;t the story feels so&#8230;  <em>local</em>?  It&#8217;s the way that a single sentence can neatly sum up almost every facet of this simple and easy-to-digest piece of news.  It&#8217;s the way that this doesn&#8217;t actually affect your life, or the life of the country in any significant way, but manages to brighten your day, and make you reflect on all the horrible things in the world at the same time.  It&#8217;s the way there&#8217;s interviews with people whose only relevant job description is &#8220;dog walker&#8221;.  It&#8217;s the sort of thing local news was made&nbsp;for.</p>
+<p>So thank you, reader, for allowing me to take this journey through the world&#8217;s current state of affairs.  I&#8217;ve almost enjoyed it, actually.  It&#8217;s nice to once again be able to pass comment in a sarcastic way, get excited about small things that don&#8217;t massively make a difference to my life, and generally attempt to appear knowledgeable despite my utter absence of authority on the subject.  In fact, I might think about following the news slightly more now.  In fact, I might even shout angrily at you about it, if you&#8217;ll be so kind as to let&nbsp;me&#8230;</p>
+      </div>
+
+
+    </article>
+
+    <p class="paginator">
+            &laquo;
+        Page 1 / 1
+            &raquo;
+    </p>
+</section>
+
+
+      <div id="theme-switcher">
+        Change Theme <br />
+      </div>
+      <script>
+        themeSwitcher.addSwitcher('theme-switcher');
+        themeSwitcher.addCycleButtons();
+      </script>
+
+    <footer id="footer">
+      <p>This blog is built using <a href="http://getpelican.com">Pelican</a>, <a href="http://python.org">Python</a>, and the Pillbox theme.</p>
+      <p>
+<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/" class="no-hilite">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" />
+</a>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" class="no-hilite">
+    <img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+</a><br />
+Unless otherwise specified, content on this blog is available under the
+<a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons
+Attribution 4.0 International License</a>.  Likewise, unless otherwise
+specified, code samples are in the
+<a href="http://creativecommons.org/publicdomain/zero/1.0/">public domain</a>.
+The blog's theme (pillbox) is available under the MIT license on
+<a href="https://github.com/MrJohz/pillbox-theme">Github</a>.
+</p>
+    </footer>
+
+
+
+  </body>
+
+</html>

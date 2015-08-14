@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <script type="text/javascript">
+  themes = [
+    'dark',
+    'light',
+  ];
+      themeDefault = "dark";
+  </script>
+
+  <script type="text/javascript">
+    window.themeSwitcher=new function(e,t){"use strict";var n=function(e,t,n){if(Array.prototype.indexOf){return Array.prototype.indexOf.apply(e,Array.prototype.slice.call(arguments,1))}var r,i=n?n:0,s;s=e.length;if(s===0||i>=s){return-1}if(i<0){i=s-Math.abs(i)}for(r=i;r<s;r++){if(e[r]==t){return r}}return-1};var r="pillbox-theme-tester-value";var i="pillbox-theme";var s=this;s.lsExists=false;s.themes=e;s.defaultTheme=n(e,t);s.currentTheme=s.defaultTheme;try{localStorage.setItem(r,r);if(localStorage.getItem(r)===r){localStorage.removeItem(r);s.lsExists=true}}catch(o){}var u=function(e){if(e>=0&&e<s.themes.length){return{s:s.themes[e],i:e}}else{return{s:s.themes[s.currentTheme],i:s.currentTheme}}};var a;if(s.lsExists){var f=localStorage.getItem(i);s.currentTheme=n(e,f);if(s.currentTheme<0){s.currentTheme=s.defaultTheme}a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");localStorage.setItem(i,t.s);s.currentTheme=t.i}}else{a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");s.currentTheme=t.i}}s.writeStyle=function(){var e=s.themes[s.currentTheme];document.write('<link id="main-theme" href="http://johz.me/theme/css/');document.write(e+'.min.css" rel="stylesheet" />')};s.getStyle=function(e){if(e==null||typeof e==="undefined"){return s.currentTheme}else if(typeof e==="number"&&e===Math.floor(e)){return u(t).s}else{var t=n(s.themes,e);if(t>-1){return t}else{return s.currentTheme}}};s.setStyle=function(e){var t=s.getStyle(e);if(t==s.currentTheme){return}a(t)};s.cycleStyle=function(){console.log(s.currentTheme);a((s.currentTheme+1)%s.themes.length)};s.addSwitcher=function(e){var t=document.getElementById(e);var n=document.createElement("select");n.id="theme-switcher-select";for(var r=0;r<s.themes.length;r++){var i=s.themes[r];var o=document.createElement("option");o.value=i;o.appendChild(document.createTextNode(i));if(r==s.currentTheme){o.selected=true}n.appendChild(o)}n.onchange=function(){var e=this.options[this.selectedIndex].value;themeSwitcher.setStyle(e)};t.appendChild(n)};s.addCycleButtons=function(){var e=document.querySelectorAll("a[href='#cycle-themes']");for(var t=0;t<e.length;t++){var n=e[t];n.addEventListener("click",function(e){e.preventDefault();s.cycleStyle()})}}}(themes,themeDefault)
+
+    themeSwitcher.writeStyle();
+  </script>
+  <noscript>
+    <link id="main-theme" href="http://johz.me/theme/css/dark.min.css" rel="stylesheet" />
+  </noscript>
+
+      <title>Johz</title>
+
+  <link href="http://johz.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Johz Full Atom Feed" />
+  <link href="http://johz.me/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="Johz Categories Atom Feed" />
+
+
+
+
+
+    <meta name="tags" contents="humour" />
+    <meta name="tags" contents="christmas" />
+
+  </head>
+
+  <body>
+    <header id="header">
+      <h1 id="header-title"><a class="no-hilite" href="http://johz.me/">
+        <div id="sitename">Johz</div>
+      </a></h1>
+    </header>
+
+      <nav id="menu"><ul>
+
+
+          <li><a href="#cycle-themes">Change Theme</a></li>
+
+            <li  ><a href="http://johz.me/pages/about-me.html">About&nbsp;Me</a></li>
+
+
+
+      </ul></nav>
+
+
+<section id="content">
+  <article class="article blog-article">
+    <header class="article-header">
+      <h2 class="entry-title">
+        <a href="http://johz.me/drafts/bah-humbug.html" class="no-hilite" rel="bookmark" title="Permalink to Christmas Carols and Cheerfulness.">
+          Christmas Carols and&nbsp;Cheerfulness.
+        </a>
+      </h2>
+    </header>
+    <footer class="article-footer">
+        Published <abbr class="published" title="2014-12-24T23:55:00+00:00"> Wed 24 December 2014 </abbr>
+          by <a href="http://johz.me/author/johz.html">Johz</a>
+      </footer>
+    <div class="article-text">
+      <p>As everyone knows, Christmas is a time for cheerfulness and thanksgiving, for celebrating the birth of our Lord Jesus Christ, and for knowing the friendly and familial love of others.  In this post, I would like to take part in these festivities by shouting angrily, ripping apart your favourite carols, and marching out the door shouting &#8220;Bah humbug&#8221;, leaving nothing but a trail of mince pie crumbs (it was in fact I who ate all of the pies, and now you can&#8217;t have&nbsp;any).</p>
+<h2>We Three&nbsp;Kings</h2>
+<p>Let&#8217;s start with the good old basics here.  Three?  Sure, yes, there were three gifts.  I&#8217;ve just wrapped up three gifts for my father.  I mean, none of them are quite as expensive and meaningful as gold, frankincense or myrrh (although I did feel especially generous adding in that extra bar of Toblerone), but it still doesn&#8217;t make me three people, right?  It&#8217;s very easy to imagine these magi (I haven&#8217;t started on &#8220;kings&#8221; yet&#8230;) as three guys who got invited to someone&#8217;s party, but didn&#8217;t really want to seem rude, so went out and got a present each from the local&nbsp;off-license.</p>
+<blockquote>
+<p><span class="dquo">&#8220;</span>Eh, Balthazar!&#8221;
+&#8220;Yeah, Melchior, what is it?&#8221;
+&#8220;I was going to grab a bottle of wine, but they literally have nothing.  Have you found anything decent?&#8221;
+&#8220;Well, there&#8217;s this fragrance stuff, &#8216;frankincense&#8217;, sounds&nbsp;okay&#8230;&#8221;</p>
+</blockquote>
+<p>They could well have been kings as well.  Or they could be just a few dusty old scholars who happened to realise what was up.  We&#8217;re told they&#8217;re wise men.  Specifically, we&#8217;re told that they&#8217;re &#8220;magi&#8221;, which <em>could</em> mean that they were Zoroastrians, or it could mean that they were very knowledgeable about the stars.  It doesn&#8217;t mean that they are kings.  It <em>especially</em> doesn&#8217;t mean that their three (see above) names were Balthazar Melchior, and Caspar.  (This bit isn&#8217;t specifically in the song, at least not in the versions that I know, but I distinctly remember the slides on the old overhead projector my church used to use noting the name of each person by their corresponding&nbsp;verse.)</p>
+<h2>Once In Royal David&#8217;s&nbsp;City</h2>
+<p>Specifically here I have trouble with &#8220;Christian children all must be // Mild, obedient, good as He&#8221;.  I guess Jesus is pretty much the definition of &#8220;good&#8221;, although, as the <a href="https://www.biblegateway.com/passage/?search=Mark+10%3A17-18&amp;version=ESV">story of the rich young man</a> reminds us, He&#8217;d quite like us to remember what &#8220;good&#8221; actually means in this.  And certainly, He was obedient, even to death on the cross, although running away from His parents at the age of eleven suggests that He may not always have been entirely obedient to His earthly parents all of the time.  (Although I suspect He was very much respectful of them.  I&#8217;m <em>not</em> saying Jesus sinned!)  On the other hand, I can&#8217;t really fit &#8220;meek&#8221; into the story of a rabble-rouser who sacked temples, raised mobs, could control the very wind and sea, and ultimately needed to be killed in order to keep the&nbsp;peace.</p>
+<p>But I&#8217;m sure He was much more meek as a child.  I&#8217;m sure He never cried, and I&#8217;m sure Mary didn&#8217;t have any trouble looking after Him.  You know what?  I bet Mary didn&#8217;t even swear whilst giving birth.  Not even <em>once</em>.</p>
+<h2>God Rest Ye Merry&nbsp;Gentlemen</h2>
+<p>But forget women.  You should not be merry ever.  And don&#8217;t be restful either.  Damnable&nbsp;women&#8230;</p>
+<h2>Deck the&nbsp;Halls</h2>
+<p>Since when was this a <em>carol</em>?  Aren&#8217;t carols meant to be all about Jesus?  Why on earth was Jesus hanging up branches of holly as a kid?  What is this&nbsp;madness?</p>
+<p>Hmm.  Well apparently the Wikipedia definition of &#8220;carol&#8221; suggests that it also includes festive dancing songs, which this is, but I think we can all agree that this isn&#8217;t factually accurate.  I&#8217;ve never once decked a hall in anything.  I did once deck a man<sup id="fnref:deck"><a class="footnote-ref" href="#fn:deck" rel="footnote">1</a></sup>, but that appears to be a completely different thing&nbsp;altogether.</p>
+<h2>Little&nbsp;Donkey</h2>
+<p>Everyone knows Mary got to Bethlehem on a donkey.  They also know the donkey was little.  This much is evident from that famous Bible verse that can presumably be found in the same book of the Bible where Santa turns up.  That said, Mary and Joseph may well have got to Nazareth by donkey, as it was a useful beast of burden for poorer folk at that time.  Additionally, it&#8217;s a lovely and fitting reference to Jesus&#8217; triumphant entrance into Jerusalem on a donkey.  I also managed to find a very lovely (if horrendously formatted) tract that goes from the donkey carrying Mary to Jesus carrying the weight of our sins in <a href="http://www.hayespress.org/pdf/T1070%20Little%20Donkey%20content.pdf">just three paragraphs</a>.  I&#8217;m not a monster.  I shall take back my ire for this woefully inaccurate&nbsp;carol.</p>
+<h2>Little Drummer&nbsp;Boy</h2>
+<p>Wikipedia calls this a carol, and I&#8217;m too lazy to find any better lists of carols, so&#8230;  (Sure, this is the same attitude as the writers of all those famous click-bait websites, but at least I&#8217;m <em>honest</em> about it - and that&#8217;s the real message of Christmas,&nbsp;right?)</p>
+<p>Anyway, famous character that goes entirely unmentioned throughout the Bible?  Check.
+Perpetrating the &#8220;born in a stable alongside the animals&#8221; myth?  Check.
+Jesus being meek and mild and perfect from the offset?  Check.  (I mean, seriously, smiling?  I distinctly remember at that age I could barely manage to keep my eyes fixed on the unfocussed blur that they told me was my&nbsp;mother.)</p>
+<p>I&#8217;m also going to take marks off this for just being bad and annoying.  I mean, what&#8217;s with that whole &#8220;pa rum pum pum pum&#8221; thing?  Are you playing the drum or singing it?  And why is it so incessant and repetitive, and irritating?  I guess there&#8217;s some accuracy in that.  Children are noted for their fantastic inability to actually play the musical instruments they are bought for&nbsp;Christmas.</p>
+<h2>O Come, All ye&nbsp;Faithful</h2>
+<p>There&#8217;s nothing particularly <em>inaccurate</em> about this carol, but I do have an image of Mary turning to Joseph and saying &#8220;Oh, Joseph, look how He was begotten, and not created.  Don&#8217;t you think that&#8217;s so very <em>God</em>?&#8221;</p>
+<h2>In the Bleak&nbsp;Midwinter</h2>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:deck">
+<p>I <em>think</em> this is a general British phrase, although it might just be a Birmingham thing, or it might be from a different country altogether.  I&#8217;m attempting to imply that I punched another man, and he fell over.  It&#8217;s like literary slapstick.&#160;<a class="footnote-backref" href="#fnref:deck" rev="footnote" title="Jump back to footnote 1 in the text">[back]</a></p>
+</li>
+</ol>
+</div>
+    </div>
+  </article>
+
+  <p class="paginator">
+    Christmas Carols and&nbsp;Cheerfulness.
+  </p>
+
+  <div id="disqus-comments-container"></div>
+</section>
+
+
+      <div id="theme-switcher">
+        Change Theme <br />
+      </div>
+      <script>
+        themeSwitcher.addSwitcher('theme-switcher');
+        themeSwitcher.addCycleButtons();
+      </script>
+
+    <footer id="footer">
+      <p>This blog is built using <a href="http://getpelican.com">Pelican</a>, <a href="http://python.org">Python</a>, and the Pillbox theme.</p>
+      <p>
+<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/" class="no-hilite">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" />
+</a>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" class="no-hilite">
+    <img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+</a><br />
+Unless otherwise specified, content on this blog is available under the
+<a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons
+Attribution 4.0 International License</a>.  Likewise, unless otherwise
+specified, code samples are in the
+<a href="http://creativecommons.org/publicdomain/zero/1.0/">public domain</a>.
+The blog's theme (pillbox) is available under the MIT license on
+<a href="https://github.com/MrJohz/pillbox-theme">Github</a>.
+</p>
+    </footer>
+
+
+
+  </body>
+
+</html>

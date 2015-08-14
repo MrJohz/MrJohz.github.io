@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <script type="text/javascript">
+  themes = [
+    'dark',
+    'light',
+  ];
+      themeDefault = "dark";
+  </script>
+
+  <script type="text/javascript">
+    window.themeSwitcher=new function(e,t){"use strict";var n=function(e,t,n){if(Array.prototype.indexOf){return Array.prototype.indexOf.apply(e,Array.prototype.slice.call(arguments,1))}var r,i=n?n:0,s;s=e.length;if(s===0||i>=s){return-1}if(i<0){i=s-Math.abs(i)}for(r=i;r<s;r++){if(e[r]==t){return r}}return-1};var r="pillbox-theme-tester-value";var i="pillbox-theme";var s=this;s.lsExists=false;s.themes=e;s.defaultTheme=n(e,t);s.currentTheme=s.defaultTheme;try{localStorage.setItem(r,r);if(localStorage.getItem(r)===r){localStorage.removeItem(r);s.lsExists=true}}catch(o){}var u=function(e){if(e>=0&&e<s.themes.length){return{s:s.themes[e],i:e}}else{return{s:s.themes[s.currentTheme],i:s.currentTheme}}};var a;if(s.lsExists){var f=localStorage.getItem(i);s.currentTheme=n(e,f);if(s.currentTheme<0){s.currentTheme=s.defaultTheme}a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");localStorage.setItem(i,t.s);s.currentTheme=t.i}}else{a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");s.currentTheme=t.i}}s.writeStyle=function(){var e=s.themes[s.currentTheme];document.write('<link id="main-theme" href="http://johz.me/theme/css/');document.write(e+'.min.css" rel="stylesheet" />')};s.getStyle=function(e){if(e==null||typeof e==="undefined"){return s.currentTheme}else if(typeof e==="number"&&e===Math.floor(e)){return u(t).s}else{var t=n(s.themes,e);if(t>-1){return t}else{return s.currentTheme}}};s.setStyle=function(e){var t=s.getStyle(e);if(t==s.currentTheme){return}a(t)};s.cycleStyle=function(){console.log(s.currentTheme);a((s.currentTheme+1)%s.themes.length)};s.addSwitcher=function(e){var t=document.getElementById(e);var n=document.createElement("select");n.id="theme-switcher-select";for(var r=0;r<s.themes.length;r++){var i=s.themes[r];var o=document.createElement("option");o.value=i;o.appendChild(document.createTextNode(i));if(r==s.currentTheme){o.selected=true}n.appendChild(o)}n.onchange=function(){var e=this.options[this.selectedIndex].value;themeSwitcher.setStyle(e)};t.appendChild(n)};s.addCycleButtons=function(){var e=document.querySelectorAll("a[href='#cycle-themes']");for(var t=0;t<e.length;t++){var n=e[t];n.addEventListener("click",function(e){e.preventDefault();s.cycleStyle()})}}}(themes,themeDefault)
+
+    themeSwitcher.writeStyle();
+  </script>
+  <noscript>
+    <link id="main-theme" href="http://johz.me/theme/css/dark.min.css" rel="stylesheet" />
+  </noscript>
+
+      <title>Johz</title>
+
+  <link href="http://johz.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Johz Full Atom Feed" />
+  <link href="http://johz.me/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="Johz Categories Atom Feed" />
+
+
+
+
+
+    <meta name="tags" contents="coding" />
+    <meta name="tags" contents="elixir" />
+
+  </head>
+
+  <body>
+    <header id="header">
+      <h1 id="header-title"><a class="no-hilite" href="http://johz.me/">
+        <div id="sitename">Johz</div>
+      </a></h1>
+    </header>
+
+      <nav id="menu"><ul>
+
+
+          <li><a href="#cycle-themes">Change Theme</a></li>
+
+            <li  ><a href="http://johz.me/pages/about-me.html">About&nbsp;Me</a></li>
+
+
+
+      </ul></nav>
+
+
+<section id="content">
+  <article class="article blog-article">
+    <header class="article-header">
+      <h2 class="entry-title">
+        <a href="http://johz.me/posts/2013/Oct/02/omg-elixir/" class="no-hilite" rel="bookmark" title="Permalink to “OMG Elixir: Functional Ruby with the Power of Erlang”">
+          <span class="dquo">&#8220;</span><span class="caps">OMG</span> Elixir: Functional Ruby with the Power of&nbsp;Erlang&#8221;
+        </a>
+      </h2>
+    </header>
+    <footer class="article-footer">
+        Published <abbr class="published" title="2013-10-02T23:49:00+00:00"> Wed 02 October 2013 </abbr>
+          by <a href="http://johz.me/author/johz.html">Johz</a>
+      </footer>
+    <div class="article-text">
+      <p>Recently, I found Elixir.  It just appeared in front of me.  Specifically, <a href="http://learnxinyminutes.com/" title="Learn X in Y Minutes">Learn X in Y Minutes</a> appeared before me, and so I read.  About a quarter of the way down lay a link to a short page entitled &#8220;Elixir&#8221;.  This should have been a horrible language.  It was functional, and I have always been an object-oriented programmer before.  It was based on Erlang, a language with <a href="http://damienkatz.net/2008/03/what_sucks_abou.html" title="What Sucks About Erlang">syntax as bad as Lisp&#8217;s, but without the redeeming powers of Lisp</a>.  It had a syntax based on Ruby, which I hate<sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>.  All in all, I should have switched off&nbsp;there.</p>
+<p>But I didn&#8217;t.  I carried on reading.  I found a handful of blog posts.  I started to read into Erlang and the <span class="caps">OTP</span>.  I found Elixir at the start of a week-long camping holiday.  By the end of the week, before I had had the chance to write a single line of code, I was hooked.  Why?  Well, I still don&#8217;t know, but I might as well try and explain my reasoning to&nbsp;you.</p>
+<p>Firstly, Elixir is functional, and this is cool.  Sure, <span class="caps">OOP</span> is awesome, and I love it when it&#8217;s around, but functional programming has an elegence to it that just isn&#8217;t matched by building up big objects.  Indeed, there are many programs where object-oriented programming just doesn&#8217;t make much sense.  Take a module designed to read json.  In Python, the standard way would be to have a class, say the JSONDecoder class, and let that do all the work.  Indeed, in Python this is a remarkably sensible system.  The module&#8217;s user is normally presented with simple functions for most of their needs, but they can also subclass JSONDecoder whenever they need to, and add onto it as they please.  It&#8217;s how you&#8217;d do it in Python, but is it really how you do it&nbsp;conceptually?</p>
+<p>My mental image of decoding <span class="caps">JSON</span> is definitely a function.  I give it <span class="caps">JSON</span> string input, and it comes out with a structure I can use in my code.  This function then needs to tokenise my input, which is a job for a function.  Each set of tokens needs to be recompiled back into a native data structure.  Each step is a function, taking an input, returning an output.  Decoding <span class="caps">JSON</span>, along with a large number of other tasks, is a functional&nbsp;task.</p>
+<p>Sure, there are other tasks for which the object-oriented structure is perfect.  When I want to model a real-life object then it&#8217;s natural to have an object with attributes and methods, but knowing a functional language will definitely give you the tools to use when you need a different&nbsp;system.</p>
+<p>Secondly, Elixir is Erlang, and this is powerful.  A brief history lesson that you should <a href="http://www.erlang.org/" title="The Erlang Homepage">follow</a> <a href="http://learnyousomeerlang.com/" title="Learn You Some Erlang (For Great Good)">up</a> <a href="http://en.wikipedia.org/wiki/Erlang_(programming_language)" title="Erlang (programming language) - Wikipedia">on</a> because it&#8217;s so interesting:  Erlang was designed by Erricson, the Swedish telecommunications company, as a language that would be suitable for their telephony systems.  It needed to be able to fix itself when it broke, update itself without breaking, be able to handle concurrency with ease and, because programmers should be able to program efficiently, it was designed to be a functional program, on the basis that functional programming would be easier for the&nbsp;programmers.</p>
+<p>Erlang is an amazingly nifty language because of these things.  While benchmarks are useless, <a href="https://gist.github.com/josevalim/1582864" title="Dynamo Benchmark">this one</a> demonstrates one of the benefits of an Erlang background.  It&#8217;s a test of various similar web frameworks, and it shows how the Elixir/Erlang-based one (Dynamo) is able to deal with concurrency straight out of the box.  As the writer<sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup> notes, the other options almost certainly support concurrency, but immediately, straight out of the box, and with such ease that it&#8217;s sometimes said that processes are an Erlang developer&#8217;s&nbsp;objects.</p>
+<p>So Elixir builds on Erlang, and in a really nice way, too.  Leaving aside the syntax, which is by-and-large friendly and intuitive to use, there&#8217;s all sorts of extras.  Take the standard libraries.  Erlang libraries are useful, but woefully inconsistent.  Some use zero-indexing, others start their indexing at 1.  When performing operations on structures such as lists, some functions will put the structure as the first argument, others as the structure.  Elixir&#8217;s library is designed to standardise this.  Not only that, but when you do need an Erlang library, it&#8217;s as easily accessible as any Elixir library, just using a slightly different&nbsp;syntax.</p>
+<p>Thirdly, Elixir isn&#8217;t Erlang, and this is a relief.  As I&#8217;ve just said, Erlang did make mistakes, but Elixir has done a brilliant job of avoiding them.  Just one small example: Elixir comes with dictionaries built-in, as a list of tuples that can be accessed using the near-univeraslly standard bracket notation.  It&#8217;s not all-powerful, but it&#8217;s damn&nbsp;useful.</p>
+<p>Or take records, which are the missing link between simple mappings and full-blown objects.  When you want to know exactly what types of data you&#8217;re passing around, define yourself a record and use it.  Indeed, you can use it as if it were a built-in type by adding protocols, which allow for a very basic duck-typing system to form.  For a functional program, Elixir is very&nbsp;object-oriented.</p>
+<p>And then there&#8217;s the most powerful part of Elixir, the fact that it is written, by-and-large, in itself, using macros.  If Erlang is as painful to write as Lisp without the benefits of using macros, then Elixir is as powerful as Lisp with all her macro-based glory, but with all of the benefits of a syntax you want to write in.  Macros are designed to be used for anything, ranging from simple domain-specific languages (imagine the <code>get "url/route" do</code> style used in Ruby-on-Rails or the task-specification format in a Rakefile) to directly adding your own constructs into the library.  One of the popular examples is the unit-testing system that&#8217;s been included.  A macro is able to examine the code that&#8217;s passed into it, allowing ExUnit to look at&nbsp;this:</p>
+<div class="highlight"><pre><span class="n">test</span> <span class="s2">&quot;a simple assertion&quot;</span> <span class="k">do</span>
+  <span class="n">assert</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">4</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>And interpret it in such a way as to be able to respond like&nbsp;this:</p>
+<div class="highlight"><pre><span class="mi">1</span><span class="p">)</span> <span class="n">test</span> <span class="n">adding</span> <span class="n">two</span> <span class="n">numbers</span> <span class="p">(</span><span class="nc">MathTest</span><span class="p">)</span>
+   <span class="o">**</span> <span class="p">(</span><span class="nc">ExUnit.ExpectationError</span><span class="p">)</span>
+                <span class="ss">expected</span><span class="p">:</span> <span class="mi">3</span>
+     <span class="n">to</span> <span class="n">be</span> <span class="n">equal</span> <span class="n">to</span> <span class="p">(</span><span class="o">==</span><span class="p">):</span> <span class="mi">4</span>
+   <span class="n">at</span> <span class="n">test</span><span class="o">.</span><span class="n">exs</span><span class="p">:</span><span class="mi">7</span>
+</pre></div>
+
+
+<p>It&#8217;s not desperately showy or flashy, and you&#8217;d be forgiven for wondering why this example gets mentioned so much, but it&#8217;s actually a lot more involved than it seems.  The simple assertion macro is passed a length of code as a syntax tree, and it gets to evaluate it and understand it as it sees fit.  That&#8217;s&nbsp;powerful.</p>
+<p>This has been but a brief look at Elixir, and I&#8217;d encourage you to try it out yourself sometime.  It&#8217;s a language built entirely for developers, right down to the extensive build-tools that come packaged with it from the off.  A good starting point would be the <a href="http://elixir-lang.org/getting_started/1.html" title="Elixir - Getting Started">getting started guide</a> that you can see on the <a href="http://elixir-lang.org/" title="Elixir Home">main website</a>.  Of course you should always peruse the <a href="http://elixir-lang.org/docs/master/" title="Elixir Docs">documentation</a>.  There aren&#8217;t many good tutorials on Elixir at the moment (it&#8217;s not even four years&#8217; old, and hasn&#8217;t currently done a 1.0 release) but I&#8217;d recommend <a href="http://learnyousomeerlang.com/" title="Learn You Some Erlang (For Great Good)">Learn You Some Erlang (For Great Good)</a> as a start, and, if you&#8217;re willing to splash the cash, the <a href="http://pragprog.com/book/elixir/programming-elixir" title="Programming Elixir - Pragmatic Programming">Pragmatic Programmers</a> are putting together a book, and you can buy the beta-edition ebook and learn as it gets continually&nbsp;updated.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>To be honest, I fully recognise that Ruby has some awesome things, and it&#8217;s definitely a good and powerful language to know, but you know how there are some languages that, right down in your gut, you just <em>hate</em>?  Yeah, I hate Ruby.  I love rubyists, though.  Hate the sin, love the sinner, right?&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">[back]</a></p>
+</li>
+<li id="fn:2">
+<p>Who admittedly just happens to be José Valim, the creator of Elixir, but shhhh, I&#8217;ve already mentioned that benchmarks are rubbish, I&#8217;m just demonstrating what this one actually tells us&#8230;&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">[back]</a></p>
+</li>
+</ol>
+</div>
+    </div>
+  </article>
+
+  <p class="paginator">
+      <a href="http://johz.me/posts/2013/Oct/18/the-truth-of-the-matter/">&laquo;</a>
+    <span class="dquo">&#8220;</span><span class="caps">OMG</span> Elixir: Functional Ruby with the Power of&nbsp;Erlang&#8221;
+      <a href="http://johz.me/posts/2013/Sep/30/hello-world-2-dot-0/">&raquo;</a>
+  </p>
+
+  <div id="disqus-comments-container"></div>
+</section>
+
+
+      <div id="theme-switcher">
+        Change Theme <br />
+      </div>
+      <script>
+        themeSwitcher.addSwitcher('theme-switcher');
+        themeSwitcher.addCycleButtons();
+      </script>
+
+    <footer id="footer">
+      <p>This blog is built using <a href="http://getpelican.com">Pelican</a>, <a href="http://python.org">Python</a>, and the Pillbox theme.</p>
+      <p>
+<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/" class="no-hilite">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" />
+</a>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" class="no-hilite">
+    <img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+</a><br />
+Unless otherwise specified, content on this blog is available under the
+<a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons
+Attribution 4.0 International License</a>.  Likewise, unless otherwise
+specified, code samples are in the
+<a href="http://creativecommons.org/publicdomain/zero/1.0/">public domain</a>.
+The blog's theme (pillbox) is available under the MIT license on
+<a href="https://github.com/MrJohz/pillbox-theme">Github</a>.
+</p>
+    </footer>
+
+
+
+  </body>
+
+</html>

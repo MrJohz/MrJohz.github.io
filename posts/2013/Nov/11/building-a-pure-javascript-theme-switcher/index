@@ -1,0 +1,398 @@
+Title: Building a Pure-Javascript Theme Switcher
+Slug: building-a-pure-javascript-theme-switcher
+Date: 2013-11-11 18:16:29
+Tags: coding, javascript
+
+
+You might have noticed that you can change the theme of my blog.  I'm quite sure I've told you before that you can do this, but I'm going to tell you again, because I'm really proud of working out how to add this functionality, especially making it either work or fail gracefully on pretty much all browsers, and making it persist across sessions.  The exciting part for me is that this is entirely client-side, so it works on a static blog or website, which mine is.  I recognise that it's simple, easy, and my pride is entirely unwarranted, but dammit it makes me feel good.
+
+I've spent today rewriting the code that does this to make it prettier, and more reusable.  For example, if you click on <a href="javascript:void(0)" onclick="themeSwitcher.setStyle(-1);">this link</a>, the entire theme will change to a different one.  It's also much easier to add new themes now, as there's only one place that they're specified.
+
+So how does this all work?  Well, assuming you've already got a document and a couple of stylesheets that you want to switch between, we'll start by defining a themeSwitcher object.
+
+    :::javascript
+    window.themeSwitcher = new (function(themes, defaultTheme) {
+      this.themes = themes;
+      this.defaultTheme = indexOf(themes, defaultTheme);
+      this.currentTheme = this.defaultTheme;
+    })(['stylesheet1.css', 'stylesheet2.css'], 'stylesheet1.css')
+
+Here, we're simply creating a single object with an anonymous constructor function.  The constructor takes two arguments, the list of themes, and the default theme.  We store the list of themes directly, but instead of storing the defaultTheme as is (in a string format) we store it internally as an index.  We also need to set the currentTheme, which of course is the default theme by default.
+
+Next we need to find out if there are any stylesheets already saved.  For this we need some sort of peristent storage.  I used localStorage, but there are other storage alternatives out there.  The other big contender that you might think about using is cookie storage.  There are three big differences between the two of these, for our uses at least.
+
+Firstly, cookies are a pain to handle, whereas working with localStorage is a dream.  For me, this was the biggest reason for turning to localStorage.  Secondly, localStorage isn't entirely cross-browser.  While localStorage is available for about [90%][localstorage-usage] of your users, if you think you're going to get a lot of traffic from older browsers that might be a consideration for you.  Thirdly, cookies are sent to the server.  This particular theme switcher is entirely client-side, so that's not necessary, but if you wanted to add some sort of server-side code that deals with the theme, you might want to think about using cookies.
+
+[localstorage-usage]: <http://caniuse.com/#feat=namevalue-storage> "Can I Use: name-value Storage"
+
+However, for me localStorage seemed to be the best answer.  Of course, if we're using localStorage, we're going to need to ensure that localStorage exists.  If you've already got [Modernizr][] installed, you should use that.  However, I didn't, and I didn't want to include a whole new library just to find out if I could use one feature, so I [used the source][localstorage-test], and borrowed the test that Modernizr used.  This is what it looks like:
+
+[Modernizr]: <http://modernizr.com/> "Modernizr - Feature detection"
+[localstorage-test]: <https://github.com/Modernizr/Modernizr/blob/master/feature-detects/storage/localstorage.js> "The localStorage test in Modernizr's source"
+
+    :::javascript
+    window.themeSwitcher = new (function(themes, defaultTheme) {
+      this.lsExists = false; // Assume that localStorage doesn't
+                             // work until proven otherwise
+
+      this.themes = themes;
+      this.defaultTheme = indexOf(themes, defaultTheme);
+      this.currentTheme = this.defaultTheme;
+
+      try {
+        // Do a test
+        localStorage.setItem('test', 'test');
+        localStorage.removeItem('test');
+        this.lsExists = true;
+
+      } catch(e) {
+        // Test failed
+        this.lsExists = false;
+      }
+    })(['stylesheet1.css', 'stylesheet2.css'], 'stylesheet1.css')
+
+Beautiful.
+
+Now if localStorage exists, that still doesn't mean that there's anything saved there.  The stuff that's saved there could also be complete gobbledygook.  If you can, have a look at what localStorage saves on this site.  (On Chrome, press Ctrl-Shift-i, go to "Resources", and "Local Storage".)  Edit it to something that isn't "dark" or "lite", reload the page, and you'll see that the site automatically uses the "dark" theme.  That's because the alternative would be to load no stylesheet at all, and I really don't want that to happen.
+
+To check if the value saved is an acceptable value, the easiest thing we can do is find out if it's in the array of themes that was passed into the constructor.  The best way to do this is `Array.prototype.indexOf`, which works on most browsers, but not all.  Unfortunately, there are browsers that implement localStorage and not indexOf, so we need to write our own indexOf function for those cases.  I based mine on the [Mozilla sample implementation][indexof-compat], minified it because it was useless and ugly, and added it to the top of the script.  Note that this implementation doesn't modify the Array prototype.
+
+[indexof-compat]: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf#Compatibility> "Array.prototype - Mozilla docs"
+
+    :::javascript
+    window.themeSwitcher = new (function(themes, defaultTheme) {
+      indexOf = function(e,t,n){if(Array.prototype.indexOf){
+        return Array.prototype.indexOf.apply(e,Array.prototype.slice.call(
+        arguments,1))}var r,i=n?n:0,s;s=e.length;if(s===0||i>=s){return-1}
+        if(i<0){i=s-Math.abs(i)}for(r=i;r<s;r++){if(e[r]==t){return r}}
+        return-1}
+
+      this.lsExists = false;
+
+      this.themes = themes;
+      this.defaultTheme = indexOf(themes, defaultTheme);
+      this.currentTheme = this.defaultTheme;
+
+      try {
+        localStorage.setItem('test', 'test');
+        localStorage.removeItem('test');
+        this.lsExists = true;
+
+        // Get the theme stylesheet, and check that it exists
+        stylesheet = localStorage.getItem('theme-stylesheet');
+        this.currentTheme = indexOf(themes, stylesheet); // Note shim!
+
+        if (this.currentTheme < 0) {
+          this.currentTheme = this.defaultTheme;
+        }
+
+      } catch(e) {
+        this.lsExists = false;
+      }
+    })(['stylesheet1.css', 'stylesheet2.css'], 'stylesheet1.css')
+
+So now themeSwitcher is an object that contains a list of all possible themes, the current theme, the default theme, and a flag that tells us if localStorage exists or not.  That's all very useful, but none of it actually changes the theme.  Indeed, we haven't even installed a theme on the page.  This theme switching system still requires a bit of work.
+
+Firstly, let's add a function that writes the current theme to the document.  There are multiple ways of doing this, and some are more idiomatic and beautiful than others, but since all we're actually doing is writing a single line of HTML, I've opted for `document.write`.  Sure, you should probably build an element, and append it somewhere to the DOM, but I'm lazy, and that feels like way too many lines of code.
+
+    :::javascript
+    window.themeSwitcher = new (function(themes, defaultTheme) {
+      /*
+      indexOf function
+        ...
+      constructor statements & test for localStorage
+      */
+
+      this.writeStyle = function() {
+        // remember that currentTheme is an index, not a theme name
+        var styleName = this.themes[this.currentTheme];
+        // Modify the html here as you please.
+        document.write('<link id="main-theme" href="/static/css/');
+        document.write(styleName + '.css" rel="stylesheet" />');
+      }
+    })(['stylesheet1.css', 'stylesheet2.css'], 'stylesheet1.css')
+
+I'm creating a function to do this, because that's the way that feels most idiomatic to me.  (This is probably ironic, considering the previous paragraph.)  You could just do the `document.write` as a statement within the constructor, but this means that later you'll have less control over when and where you place the link.
+
+The other thing that we need is a way to change the themes once the document is loaded.  After all, expecting the user to reload the page every time they change the theme is a bit much to ask, don't you think?  The way I chose to do this was by writing two private `_setStyle` function, and then defining one of them based on whether localStorage existed.  You could use an if-statement, and test on the `lsExists` attribute, but why bother when the try/catch statement already divides flow into two sections for you to use?
+
+    :::javascript
+    window.themeSwitcher = new (function(themes, defaultTheme) {
+      /*
+      indexOf function
+        ...
+      constructor statements
+      */
+
+      try {
+        /* get theme stylesheet */
+
+        // _setStyle if localStorage exists
+        this._setStyle = function(index) {
+          // check that the theme really does exist
+          if (index >= 0 && index < this.themes.length) {
+            var styleName = this.themes[index];
+          } else {
+            var styleName = this.themes[this.currentTheme];
+            index = this.currentTheme;
+          }
+
+          // Get the URL of the link, and change it to the URL
+          // of the new link.  This assumes that all the css
+          // sheets are sitting in the same directory.  It also
+          // assumes that only one css sheet is needed to define
+          // a theme.  You can modify this if that isn't the case.
+          var link = document.getElementById('main-theme');
+          var splits = link.href.split('/');
+          splits[splits.length - 1] = styleName + '.css';
+          link.href = splits.join('/');
+
+          // Make sure we save the new theme name so that
+          // the choice persists across sessions.
+          localStorage.setItem('pillbox-theme', styleName);
+          this.currentTheme = index;
+        }
+      } catch (e) {
+        this.lsExists = false;
+
+        // _setStyle if localStorage does not exists
+        this._setStyle = function(index) {
+          // the style will always be the current theme,
+          // which will always be the default theme.
+          var styleName = this.themes[this.currentTheme];
+
+          // Still write the new theme into the document,
+          // just in case something has gone horribly wrong.
+          var link = document.getElementById('main-theme');
+          var splits = link.href.split('/');
+          splits[splits.length - 1] = styleName + '.css';
+          link.href = splits.join('/');
+        }
+      }
+
+
+      /* writeStyle function */
+    })(['stylesheet1.css', 'stylesheet2.css'], 'stylesheet1.css')
+
+You can now start playing with things in your browser.  Assuming you've got all your stylesheets in the right place, and a basic HTML layout, insert this code at the top of the `<head>` brackets.  Then open up a development console and start calling `themeSwitcher._setStyle` with various values.  Notice that you can only use indices to specify which theme you want.  Let's change that.  When we make our public setStyle function, we want to also be able to specify the string name of the css file.  I also want there to be a way to call it without specifying the theme, and let it toggle between themes.
+
+To do this, we're going to need an algorithm that can take a string, integer, or null input, and return the index of the theme that best matches the description.  Now that sounds like a fairly useful algorithm to use, so in the interests of DRY, let's implement it as a new function, `themeSwitcher.getStyle`, then add `themeSwitcher.setStyle` on top of it.
+
+    :::javascript
+    window.themeSwitcher = new (function(themes, defaultTheme) {
+      /*
+      indexOf function
+        ...
+      constructor statements
+      */
+
+      try {
+        /* localStorage exists _setStyle implementation */
+      } catch (e) {
+        /* localStorage doesn't exist _setStyle implementation */
+      }
+
+      /* writeStyle function */
+
+      // public getStyle method
+      this.getStyle = function(stylesheet) {
+        // Firstly, check if stylesheet is undefined or null.
+        // In this case we'll return the current theme.
+        // This allows us to use themeSwitcher.themes[themeSwitcher.getStyle()]
+        // to find out the current theme.
+        if (typeof stylesheet === "undefined" || stylesheet === null) {
+          return this.currentTheme;
+        }
+
+        // Next, stylesheet could be an index.  Return either the index,
+        // or if index is invalid, the current theme.
+        else if (typeof stylesheet === "number"
+                   &&   stylesheet === Math.floor(stylesheet)) {
+          if (stylesheet >= 0 && stylesheet < this.themes.length) {
+            return stylesheet;
+          } else {
+            return this.currentTheme;
+          }
+        }
+
+        // Otherwise, assume stylesheet is the name of a style.
+        // If it isn't, then it won't be in the list of themes,
+        // so just return the current theme.
+        else {
+          var index = indexOf(this.themes, stylesheet);
+          if (index > -1) {
+            return index
+          } else {
+            return this.currentTheme
+          }
+        }
+      }
+
+      // public setStyle method
+      this.setStyle = function(stylesheet) {
+        // get the style index using getStyle
+        var index = this.getStyle(stylesheet);
+
+        // if the stylesheet is the same as the current
+        // stylesheet, toggle the stylesheet to the next one
+        // in the list of themes.
+        if (index === this.currentTheme) {
+          index = (this.currentTheme + 1) % this.themes.length;
+        }
+
+        // Use whichever private _setStyle function was defined
+        // to set the style of the page.
+        this._setStyle(index);
+      }
+    })(['stylesheet1.css', 'stylesheet2.css'], 'stylesheet1.css')
+
+The main theme switching mechanism is now pretty much almost done.  Unfortunately, unless the user plays around with their development console, they're not going to be able to change much.  This is where we need to add an element on the page that actually allows the user interface to work.  I've implemented this here in the form of a `select` drop-down choice form element, but of course you can edit and play with this code as much as you want.
+
+    :::javascript
+    window.themeSwitcher = new (function(themes, defaultTheme) {
+      /* initialisation, writeStyle, getStyle and setStyle definitions */
+
+      this.addSwitcher = function(elementID) {
+        // Append our switcher to #elementID
+        elem = document.getElementById(elementID);
+
+        // We're using a select element
+        switcher = document.createElement('select');
+        switcher.id = "theme-switcher-select";
+
+        // Iterate through the themes, and append them as options
+        for (var i = 0; i < this.themes.length; i++) {
+          var theme = this.themes[i];
+          option = document.createElement('option');
+          option.value = theme
+          option.appendChild(document.createTextNode(theme))
+
+          // The current theme should be selected
+          if (i = this.currentTheme) {
+            option.selected = true;
+          }
+          switcher.appendChild(option);
+        };
+
+        // When a new option is selected, call our setStyle function
+        switcher.onchange = function(){
+          var theme = this.options[this.selectedIndex].value;
+          this.setStyle(theme);
+        }
+
+        // Append to the document
+        elem.appendChild(switcher);
+      }
+    })(['stylesheet1.css', 'stylesheet2.css'], 'stylesheet1.css')
+
+And voila, a complete client-side theme switching solution.  How do you use this?  Well, the above definition should go in your `<head>` section in a `<script>` tag.  Then, immediately afterwards, you should call `themeSwitcher.writeStyle()`.  Now the rest of your page can load, with the correct stylesheet enabled.  In the place where you want the theme-switching interface, create a container element with an id, then immediately below that, in script tags, call `themeSwitcher.addSwitcher(elementID)`, where elementID is of course the id of the container element.  Check out the source code of this page to see it in action.  I've minified the function definition, but it works exactly the same.
+
+Here's the complete listing.
+
+    :::javascript
+    window.themeSwitcher = new (function(themes, defaultTheme) {
+      indexOf = function(e,t,n){if(Array.prototype.indexOf){return Array.prototype.indexOf.apply(e,Array.prototype.slice.call(arguments,1))}var r,i=n?n:0,s;s=e.length;if(s===0||i>=s){return-1}if(i<0){i=s-Math.abs(i)}for(r=i;r<s;r++){if(e[r]==t){return r}}return-1}
+
+      this.lsExists = false;
+
+      this.themes = themes;
+      this.defaultTheme = indexOf(themes, defaultTheme);
+      this.currentTheme = this.defaultTheme;
+
+      try {
+        localStorage.setItem('test', 'test');
+        localStorage.removeItem('test');
+        this.lsExists = true;
+
+        stylesheet = localStorage.getItem('theme-stylesheet');
+        this.currentTheme = indexOf(themes, stylesheet);
+
+        if (this.currentTheme < 0) {
+          this.currentTheme = this.defaultTheme;
+        }
+
+        this._setStyle = function(index) {
+          if (index >= 0 && index < this.themes.length) {
+            var styleName = this.themes[index];
+          } else {
+            var styleName = this.themes[this.currentTheme];
+            index = this.currentTheme;
+          }
+
+          var link = document.getElementById('main-theme');
+          var splits = link.href.split('/');
+          splits[splits.length - 1] = styleName + '.css';
+          link.href = splits.join('/')
+
+          localStorage.setItem('pillbox-theme', styleName);
+          this.currentTheme = index;
+        }
+
+      } catch (e) {
+        this.lsExists = false;
+
+        this._setStyle = function(index) {
+          var styleName = this.themes[this.currentTheme];
+          var link = document.getElementById('main-theme');
+          var splits = link.href.split('/');
+          splits[splits.length - 1] = styleName + '.css';
+          link.href = splits.join('/');
+        }
+      }
+
+      this.writeStyle = function() {
+        var styleName = this.themes[this.currentTheme];
+        document.write('<link id="main-theme" href="/static/css');
+        document.write(styleName + '.css" rel="stylesheet" />');
+      }
+
+      this.getStyle = function(stylesheet) {
+        if (stylesheet === null || typeof stylesheet == "undefined") {
+          return this.currentTheme;
+        } else if (typeof stylesheet === "number"
+                     &&   stylesheet === Math.floor(stylesheet)) {
+          if (stylesheet >= 0 && stylesheet < this.themes.length) {
+            return stylesheet;
+          } else {
+            return this.currentTheme;
+          }
+        } else {
+          var index = indexOf(this.themes, stylesheet);
+          if (index > -1) {
+            return index;
+          } else {
+            return this.currentTheme;
+          }
+        }
+      }
+
+      this.setStyle = function(stylesheet) {
+        var index = this.getStyle(stylesheet);
+        if (index === this.currentTheme) {
+          index = (this.currentTheme + 1) % this.themes.length;
+        }
+        this._setStyle(index);
+      }
+
+      this.addSwitcher = function(elementID) {
+        elem = document.getElementById(elementID);
+        switcher = document.createElement('select');
+        switcher.id = "theme-switcher-select";
+        for (var i = 0; i < this.themes.length; i++) {
+          var theme = this.themes[i];
+          option = document.createElement('option');
+          option.value = theme
+          option.appendChild(document.createTextNode(theme))
+          if (i == this.currentTheme) {
+            option.selected = true;
+          }
+          switcher.appendChild(option);
+        };
+        switcher.onchange = function(){
+          var e = this.options[this.selectedIndex].value;
+          themeSwitcher.setStyle(e);
+        }
+        elem.appendChild(switcher);
+      }
+
+    })(['stylesheet1.css', 'stylesheet2.css'], 'stylesheet1.css');

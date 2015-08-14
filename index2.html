@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <script type="text/javascript">
+  themes = [
+    'dark',
+    'light',
+  ];
+      themeDefault = "dark";
+  </script>
+
+  <script type="text/javascript">
+    window.themeSwitcher=new function(e,t){"use strict";var n=function(e,t,n){if(Array.prototype.indexOf){return Array.prototype.indexOf.apply(e,Array.prototype.slice.call(arguments,1))}var r,i=n?n:0,s;s=e.length;if(s===0||i>=s){return-1}if(i<0){i=s-Math.abs(i)}for(r=i;r<s;r++){if(e[r]==t){return r}}return-1};var r="pillbox-theme-tester-value";var i="pillbox-theme";var s=this;s.lsExists=false;s.themes=e;s.defaultTheme=n(e,t);s.currentTheme=s.defaultTheme;try{localStorage.setItem(r,r);if(localStorage.getItem(r)===r){localStorage.removeItem(r);s.lsExists=true}}catch(o){}var u=function(e){if(e>=0&&e<s.themes.length){return{s:s.themes[e],i:e}}else{return{s:s.themes[s.currentTheme],i:s.currentTheme}}};var a;if(s.lsExists){var f=localStorage.getItem(i);s.currentTheme=n(e,f);if(s.currentTheme<0){s.currentTheme=s.defaultTheme}a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");localStorage.setItem(i,t.s);s.currentTheme=t.i}}else{a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");s.currentTheme=t.i}}s.writeStyle=function(){var e=s.themes[s.currentTheme];document.write('<link id="main-theme" href="http://johz.me/theme/css/');document.write(e+'.min.css" rel="stylesheet" />')};s.getStyle=function(e){if(e==null||typeof e==="undefined"){return s.currentTheme}else if(typeof e==="number"&&e===Math.floor(e)){return u(t).s}else{var t=n(s.themes,e);if(t>-1){return t}else{return s.currentTheme}}};s.setStyle=function(e){var t=s.getStyle(e);if(t==s.currentTheme){return}a(t)};s.cycleStyle=function(){console.log(s.currentTheme);a((s.currentTheme+1)%s.themes.length)};s.addSwitcher=function(e){var t=document.getElementById(e);var n=document.createElement("select");n.id="theme-switcher-select";for(var r=0;r<s.themes.length;r++){var i=s.themes[r];var o=document.createElement("option");o.value=i;o.appendChild(document.createTextNode(i));if(r==s.currentTheme){o.selected=true}n.appendChild(o)}n.onchange=function(){var e=this.options[this.selectedIndex].value;themeSwitcher.setStyle(e)};t.appendChild(n)};s.addCycleButtons=function(){var e=document.querySelectorAll("a[href='#cycle-themes']");for(var t=0;t<e.length;t++){var n=e[t];n.addEventListener("click",function(e){e.preventDefault();s.cycleStyle()})}}}(themes,themeDefault)
+
+    themeSwitcher.writeStyle();
+  </script>
+  <noscript>
+    <link id="main-theme" href="http://johz.me/theme/css/dark.min.css" rel="stylesheet" />
+  </noscript>
+
+      <title>Johz</title>
+
+  <link href="http://johz.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Johz Full Atom Feed" />
+
+  </head>
+
+  <body>
+    <header id="header">
+      <h1 id="header-title"><a class="no-hilite" href="http://johz.me/">
+        <div id="sitename">Johz</div>
+      </a></h1>
+    </header>
+
+      <nav id="menu"><ul>
+
+
+          <li><a href="#cycle-themes">Change Theme</a></li>
+
+            <li  ><a href="http://johz.me/pages/about-me.html">About&nbsp;Me</a></li>
+
+
+
+      </ul></nav>
+
+
+<!-- Random quote on index page -->
+  <script>
+    quotes = [
+        "The blog that's always right, for an entirely arbitrary value of 'right'.",
+        "Disclaimer: I have no idea what I'm doing']&lt;&amp;#47;div&gt;); DROP TABLE *;",
+        "Currently working towards being 100% <a href='http://xkcd.com/1271'>XKCD/1271</a> compliant.",
+        "More than just a blog, it's a way of life.",
+        "- zen -",
+        "This div container is left deliberately blank.",
+        "<a href='https://github.com/MrJohz'>Fork me on GitHub!</a>  Fix an issue with Johz today!",
+        "Proud Fenda Scum",
+        "Try this site in a <a href='#theme-switcher'>different theme</a>.",
+        "Built with the three 'P's, <a href='http://getpelican.com/'>Pelican</a>, <a href='http://python.org/'>Python</a>, and <a href='https://github.com/MrJohz/pillbox-theme'>Pillbox</a>.",
+    ]
+
+    index = Math.floor(Math.random() * quotes.length);
+    document.writeln("<div id='quote'>")
+    document.writeln("    " + quotes[index])
+    document.writeln("</div>")
+  </script>
+
+<section id="content">
+      <article class="blog-article">
+
+      <header class="article-header">
+        <h2 class="entry-title">
+          <a href="http://johz.me/posts/2014/Jan/03/on-special-snowflakes-and-rethinking-conclusions/" class="no-hilite" rel="bookmark" title="Permalink to On Special Snowflakes and Rethinking Conclusions">
+            On Special Snowflakes and Rethinking&nbsp;Conclusions
+          </a>
+        </h2>
+      </header>
+      <footer class="article-footer">
+        Published <abbr class="published" title="2014-01-03T12:59:34+00:00"> Fri 03 January 2014 </abbr>
+          by <a href="http://johz.me/author/johz.html">Johz</a>
+      </footer>
+
+      <div class="article-text">
+        <p>My brother is a Special&nbsp;Snowflake.</p>
+<p>Now before you complain (especially you, dear brother), please read this whole blog.  It may well get worse later on, but it will get better eventually.  Probably, at&nbsp;least.</p>
+<p>The thing is, my brother has dyslexia.  How does he spell?  He doesn&#8217;t.  That joke&#8217;s funnier if you imagine I&#8217;m telling the one about the dog with no nose, but unfortunately still not very funny at all.  As a family, we&#8217;ve been aware that he&#8217;s had dyslexia for a while now, and he has recieved support for it in many of his exams, but recently he&#8217;s had an official assessment (a few hundred pound&#8217;s worth of it, no less) and has been been given the official designation &#8220;dyslexic&#8221;.  My brother is officially a Special&nbsp;Snowflake.</p>
+<p>I honestly didn&#8217;t realise I had a problem with this until I found myself listening to the story for the hundredth time.  My brother is not a fantastic story teller (although certainly better at it than I am - I continue to feel sorry for anyone who is forced out of courtesy to be entertained by the pair of us) and the story tends to go on for a bit, which allows me some alone time with my thoughts.  (At least when I&#8217;m not interupting him to destroy the story in my own special way.)  And I think I do have a problem&nbsp;here.</p>
+<p>The issue is fundamentally with me (of course), and it lies in the fact that I like conformity.  I&#8217;m not a fan of special snowflakes.  There are certain limitations on this.  I mean, when it comes to opinion, I firmly disagree with everything that anyone popular says by default, because I am a grumpy old (almost 20!) man.  However, in most other things, I am very keen on everyone staying the same.  I don&#8217;t go around being special, why should&nbsp;you?</p>
+<p>And let&#8217;s face it, this kind of thinking seems harmless.  Conforming to a societal norm is something that we as social animals are good at, and something that presumably aids our survival as a species, or at least did once upon a time.  It gives us those unwritten laws like &#8220;don&#8217;t urinate in public&#8221; and &#8220;hitting people isn&#8217;t nice, mkay?&#8221;  The advice that our urge for conformancy offers tends to be extremely&nbsp;helpful.</p>
+<p>Unfortunately, it isn&#8217;t always quite as helpful as we want.  Right now I am doing something that I regularly enjoy doing, which is procrastinating.  This particular piece of procrastination is about an email I need to write to my university to inform them that I need to take a few days off.  Why is this so hard for me?  Because it feels like I&#8217;m singling myself out as someone requiring different treatment.  Essentially, I would be someone who doesn&#8217;t conform to societal norms - or at least the societal norms that I see around&nbsp;me.</p>
+<p>I will resolve this issue momentarily - I really need to sort this email out tonight, and the threat of a deadline is a surefire way to motivate me - but it&#8217;s still things like it that require a surprising amount of courage.  And this is simply to send an email the main point of which is to cover certain&nbsp;bases.</p>
+<p>To put this in perspective, let&#8217;s examine my brother&#8217;s case.  He had to speak to a member of staff at his college, face-to-face, and request a ~£300 exam.  Based on previous, more informal tests, he was well aware that the result of his talk would be something along the lines of permanent support throughout his education at the college.  As it turned out, he has a scribe who will take down notes for him, and write down his answers in exams.  Not only did he single himself out to the Powers That Be, but he also marked himself differently amongst his peers.  And my brother did this because he knew that if he worried more about fitting in with society&#8217;s mould, he would be unable to do the course he wanted to&nbsp;do.</p>
+<p>Of course, when there are higher stakes, we take bigger risks, but I feel like it really puts me to shame.  I worry about being the odd one out.  I struggle in conversations with friends who don&#8217;t know the finer points of the etiquette of discourse.  I am &#8220;all things to all men&#8221; simply to fit in and be like everyone&nbsp;else.</p>
+<p>You may notice that I&#8217;ve stayed away from some of the real battles against society&#8217;s views, in the form of various civil rights campaigns that have taken place through the ages.  I certainly agree that we should be taking heart from the courage of those people, and I don&#8217;t disagree that there are many issues that we need to face as a global society.  However, I&#8217;m not very good at being inspired by famous people, because I find it so easy to classify them as &#8220;superhumans&#8221;, whose very feet I am not worthy to lick, if only because they&#8217;d probably have me arrested.  (Another societal norm you should be glad we have.)  My brother, on the other hand?  I can definitely assure you that he&#8217;s not a superhuman, lovely though he may be, and that makes it a lot easier to learn from him when he does something&nbsp;awesome.</p>
+<p>I guess the upshot of this is that I&#8217;m very proud of him.  I&#8217;d tell him this, but he&#8217;d stare at me blankly before hitting me, or stealing my seat in the car, or some other expression of the mutual bond of fraternal love and friendship that we share.  So instead, you all get to read this, which I&#8217;m sure had opened up your eyes considerably, or your money back.  And hopefully I&#8217;ll be a bit bolder when it comes to doing things that don&#8217;t necessarily fit in with my societal&nbsp;norms.</p>
+      </div>
+
+        <hr class="article-divider">
+
+    </article>
+    <article class="blog-article">
+
+      <header class="article-header">
+        <h2 class="entry-title">
+          <a href="http://johz.me/posts/2013/Nov/25/on-doctor-who-and-cosmic-harmony/" class="no-hilite" rel="bookmark" title="Permalink to On Doctor Who and Cosmic Harmony">
+            On Doctor Who and Cosmic&nbsp;Harmony
+          </a>
+        </h2>
+      </header>
+      <footer class="article-footer">
+        Published <abbr class="published" title="2013-11-25T11:01:51+00:00"> Mon 25 November 2013 </abbr>
+          by <a href="http://johz.me/author/johz.html">Johz</a>
+      </footer>
+
+      <div class="article-text">
+        <p>Doctor Who is 50 years old as of two days ago, and the celebrations have been going strong.  From documentaries on the life of the First Doctor, William Hartnell, to guest lectures on time travelling science by Brian Cox, and of course the grand event, the 50th Anniversary Special Episode.  All very exciting,&nbsp;really.</p>
+<p>And, as with any big celebration, it is natural for people to be rather profuse in their congratulations of the show.  As a vast array of celebrities from the most minor to the most major, including a worrying number of teen boy bands, queued up to express admiration for Matt Smith&#8217;s hair, it was perhaps expected that some people would push the boundaries of tripe to truly unimaginable&nbsp;levels.</p>
+<p>As a fairly committed fan of Doctor Who, and a much, much more committed fan of my own voice, I thought I should take a quick look at some of this tripe.  After all, a lot of it was spouted by Americans, who just don&#8217;t understand the British way of absolute stoicism in the face of all emotion.  When discussing such British classics as Doctor Who, any sense of feeling or passion should have been drained away a long time ago.  Really, the amount of meaning in many comments on the show would disappointment to my eyes, if disappointment were not too emotive a feeling to actually&nbsp;feel.</p>
+<p>However, in my attempt to overanalyse these overanalyses, I realised something worryingly deep and meaningful about myself.  Well, I didn&#8217;t, I just say that.  But I did realise that Doctor Who is a damn good television show.  Sure there&#8217;s some stuff that&#8217;s really rather over the top.  I direct this particularly at the 12-year-old American featured on the Doctor Who Afterparty who was about to get married.  His comments were really worryingly over the top.  Ultimately, though, I think we can all forgive those who get slightly carried away.  It is after all a relatively auspicious occasion: only a month and two days until&nbsp;Christmas.</p>
+<p>So I&#8217;m going to ignore these transgressions, and merely present to you a proper, emotionless congratulation of this long-running&nbsp;show:</p>
+<p>Eh, it&#8217;s done quite well to get this&nbsp;far.</p>
+      </div>
+
+        <hr class="article-divider">
+
+    </article>
+    <article class="blog-article">
+
+      <header class="article-header">
+        <h2 class="entry-title">
+          <a href="http://johz.me/posts/2013/Nov/11/building-a-pure-javascript-theme-switcher/" class="no-hilite" rel="bookmark" title="Permalink to Building a Pure-Javascript Theme Switcher">
+            Building a Pure-Javascript Theme&nbsp;Switcher
+          </a>
+        </h2>
+      </header>
+      <footer class="article-footer">
+        Published <abbr class="published" title="2013-11-11T18:16:29+00:00"> Mon 11 November 2013 </abbr>
+          by <a href="http://johz.me/author/johz.html">Johz</a>
+      </footer>
+
+      <div class="article-text">
+        <p>You might have noticed that you can change the theme of my blog.  I&#8217;m quite sure I&#8217;ve told you before that you can do this, but I&#8217;m going to tell you again, because I&#8217;m really proud of working out how to add this functionality, especially making it either work or fail gracefully on pretty much all browsers, and making it persist across sessions.  The exciting part for me is that this is entirely client-side, so it works on a static blog or website, which mine is.  I recognise that it&#8217;s simple, easy, and my pride is entirely unwarranted, but dammit it makes me feel&nbsp;good.</p>
+<p>I&#8217;ve spent today rewriting the code that does this to make it prettier, and more reusable.  For example, if you click on <a href="javascript:void(0)" onclick="themeSwitcher.setStyle(-1);">this link</a>, the entire theme will change to a different one.  It&#8217;s also much easier to add new themes now, as there&#8217;s only one place that they&#8217;re&nbsp;specified.</p>
+<p>So how does this all work?  Well, assuming you&#8217;ve already got a document and a couple of stylesheets that you want to switch between, we&#8217;ll start by defining a themeSwitcher&nbsp;object.</p>
+<div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">themeSwitcher</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">defaultTheme</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">themes</span> <span class="o">=</span> <span class="nx">themes</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">defaultTheme</span> <span class="o">=</span> <span class="nx">indexOf</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">defaultTheme</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">defaultTheme</span><span class="p">;</span>
+<span class="p">})([</span><span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">,</span> <span class="s1">&#39;stylesheet2.css&#39;</span><span class="p">],</span> <span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Here, we&#8217;re simply creating a single object with an anonymous constructor function.  The constructor takes two arguments, the list of themes, and the default theme.  We store the list of themes directly, but instead of storing the defaultTheme as is (in a string format) we store it internally as an index.  We also need to set the currentTheme, which of course is the default theme by&nbsp;default.</p>
+<p>Next we need to find out if there are any stylesheets already saved.  For this we need some sort of peristent storage.  I used localStorage, but there are other storage alternatives out there.  The other big contender that you might think about using is cookie storage.  There are three big differences between the two of these, for our uses at&nbsp;least.</p>
+<p>Firstly, cookies are a pain to handle, whereas working with localStorage is a dream.  For me, this was the biggest reason for turning to localStorage.  Secondly, localStorage isn&#8217;t entirely cross-browser.  While localStorage is available for about <a href="http://caniuse.com/#feat=namevalue-storage" title="Can I Use: name-value Storage">90%</a> of your users, if you think you&#8217;re going to get a lot of traffic from older browsers that might be a consideration for you.  Thirdly, cookies are sent to the server.  This particular theme switcher is entirely client-side, so that&#8217;s not necessary, but if you wanted to add some sort of server-side code that deals with the theme, you might want to think about using&nbsp;cookies.</p>
+<p>However, for me localStorage seemed to be the best answer.  Of course, if we&#8217;re using localStorage, we&#8217;re going to need to ensure that localStorage exists.  If you&#8217;ve already got <a href="http://modernizr.com/" title="Modernizr - Feature detection">Modernizr</a> installed, you should use that.  However, I didn&#8217;t, and I didn&#8217;t want to include a whole new library just to find out if I could use one feature, so I <a href="https://github.com/Modernizr/Modernizr/blob/master/feature-detects/storage/localstorage.js" title="The localStorage test in Modernizr's source">used the source</a>, and borrowed the test that Modernizr used.  This is what it looks&nbsp;like:</p>
+<div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">themeSwitcher</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">defaultTheme</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">lsExists</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// Assume that localStorage doesn&#39;t</span>
+                         <span class="c1">// work until proven otherwise</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">themes</span> <span class="o">=</span> <span class="nx">themes</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">defaultTheme</span> <span class="o">=</span> <span class="nx">indexOf</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">defaultTheme</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">defaultTheme</span><span class="p">;</span>
+
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="c1">// Do a test</span>
+    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span>
+    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lsExists</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+  <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Test failed</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lsExists</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">})([</span><span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">,</span> <span class="s1">&#39;stylesheet2.css&#39;</span><span class="p">],</span> <span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Beautiful.</p>
+<p>Now if localStorage exists, that still doesn&#8217;t mean that there&#8217;s anything saved there.  The stuff that&#8217;s saved there could also be complete gobbledygook.  If you can, have a look at what localStorage saves on this site.  (On Chrome, press Ctrl-Shift-i, go to &#8220;Resources&#8221;, and &#8220;Local Storage&#8221;.)  Edit it to something that isn&#8217;t &#8220;dark&#8221; or &#8220;lite&#8221;, reload the page, and you&#8217;ll see that the site automatically uses the &#8220;dark&#8221; theme.  That&#8217;s because the alternative would be to load no stylesheet at all, and I really don&#8217;t want that to&nbsp;happen.</p>
+<p>To check if the value saved is an acceptable value, the easiest thing we can do is find out if it&#8217;s in the array of themes that was passed into the constructor.  The best way to do this is <code>Array.prototype.indexOf</code>, which works on most browsers, but not all.  Unfortunately, there are browsers that implement localStorage and not indexOf, so we need to write our own indexOf function for those cases.  I based mine on the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf#Compatibility" title="Array.prototype - Mozilla docs">Mozilla sample implementation</a>, minified it because it was useless and ugly, and added it to the top of the script.  Note that this implementation doesn&#8217;t modify the Array&nbsp;prototype.</p>
+<div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">themeSwitcher</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">defaultTheme</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">indexOf</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span><span class="nx">t</span><span class="p">,</span><span class="nx">n</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span>
+    <span class="nx">arguments</span><span class="p">,</span><span class="mi">1</span><span class="p">))}</span><span class="kd">var</span> <span class="nx">r</span><span class="p">,</span><span class="nx">i</span><span class="o">=</span><span class="nx">n</span><span class="o">?</span><span class="nx">n</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="nx">s</span><span class="p">;</span><span class="nx">s</span><span class="o">=</span><span class="nx">e</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="k">if</span><span class="p">(</span><span class="nx">s</span><span class="o">===</span><span class="mi">0</span><span class="o">||</span><span class="nx">i</span><span class="o">&gt;=</span><span class="nx">s</span><span class="p">){</span><span class="k">return</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">i</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span><span class="nx">i</span><span class="o">=</span><span class="nx">s</span><span class="o">-</span><span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">i</span><span class="p">)}</span><span class="k">for</span><span class="p">(</span><span class="nx">r</span><span class="o">=</span><span class="nx">i</span><span class="p">;</span><span class="nx">r</span><span class="o">&lt;</span><span class="nx">s</span><span class="p">;</span><span class="nx">r</span><span class="o">++</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="nx">e</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">==</span><span class="nx">t</span><span class="p">){</span><span class="k">return</span> <span class="nx">r</span><span class="p">}}</span>
+    <span class="k">return</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">lsExists</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">themes</span> <span class="o">=</span> <span class="nx">themes</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">defaultTheme</span> <span class="o">=</span> <span class="nx">indexOf</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">defaultTheme</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">defaultTheme</span><span class="p">;</span>
+
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span>
+    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lsExists</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+    <span class="c1">// Get the theme stylesheet, and check that it exists</span>
+    <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;theme-stylesheet&#39;</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">=</span> <span class="nx">indexOf</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">stylesheet</span><span class="p">);</span> <span class="c1">// Note shim!</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">defaultTheme</span><span class="p">;</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lsExists</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">})([</span><span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">,</span> <span class="s1">&#39;stylesheet2.css&#39;</span><span class="p">],</span> <span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>So now themeSwitcher is an object that contains a list of all possible themes, the current theme, the default theme, and a flag that tells us if localStorage exists or not.  That&#8217;s all very useful, but none of it actually changes the theme.  Indeed, we haven&#8217;t even installed a theme on the page.  This theme switching system still requires a bit of&nbsp;work.</p>
+<p>Firstly, let&#8217;s add a function that writes the current theme to the document.  There are multiple ways of doing this, and some are more idiomatic and beautiful than others, but since all we&#8217;re actually doing is writing a single line of <span class="caps">HTML</span>, I&#8217;ve opted for <code>document.write</code>.  Sure, you should probably build an element, and append it somewhere to the <span class="caps">DOM</span>, but I&#8217;m lazy, and that feels like way too many lines of&nbsp;code.</p>
+<div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">themeSwitcher</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">defaultTheme</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/*</span>
+<span class="cm">  indexOf function</span>
+<span class="cm">    ...</span>
+<span class="cm">  constructor statements &amp; test for localStorage</span>
+<span class="cm">  */</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">writeStyle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// remember that currentTheme is an index, not a theme name</span>
+    <span class="kd">var</span> <span class="nx">styleName</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">];</span>
+    <span class="c1">// Modify the html here as you please.</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;&lt;link id=&quot;main-theme&quot; href=&quot;/static/css/&#39;</span><span class="p">);</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">styleName</span> <span class="o">+</span> <span class="s1">&#39;.css&quot; rel=&quot;stylesheet&quot; /&gt;&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">})([</span><span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">,</span> <span class="s1">&#39;stylesheet2.css&#39;</span><span class="p">],</span> <span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>I&#8217;m creating a function to do this, because that&#8217;s the way that feels most idiomatic to me.  (This is probably ironic, considering the previous paragraph.)  You could just do the <code>document.write</code> as a statement within the constructor, but this means that later you&#8217;ll have less control over when and where you place the&nbsp;link.</p>
+<p>The other thing that we need is a way to change the themes once the document is loaded.  After all, expecting the user to reload the page every time they change the theme is a bit much to ask, don&#8217;t you think?  The way I chose to do this was by writing two private <code>_setStyle</code> function, and then defining one of them based on whether localStorage existed.  You could use an if-statement, and test on the <code>lsExists</code> attribute, but why bother when the try/catch statement already divides flow into two sections for you to&nbsp;use?</p>
+<div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">themeSwitcher</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">defaultTheme</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/*</span>
+<span class="cm">  indexOf function</span>
+<span class="cm">    ...</span>
+<span class="cm">  constructor statements</span>
+<span class="cm">  */</span>
+
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="cm">/* get theme stylesheet */</span>
+
+    <span class="c1">// _setStyle if localStorage exists</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_setStyle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// check that the theme really does exist</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">index</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">styleName</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">[</span><span class="nx">index</span><span class="p">];</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">styleName</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">];</span>
+        <span class="nx">index</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Get the URL of the link, and change it to the URL</span>
+      <span class="c1">// of the new link.  This assumes that all the css</span>
+      <span class="c1">// sheets are sitting in the same directory.  It also</span>
+      <span class="c1">// assumes that only one css sheet is needed to define</span>
+      <span class="c1">// a theme.  You can modify this if that isn&#39;t the case.</span>
+      <span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;main-theme&#39;</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">splits</span> <span class="o">=</span> <span class="nx">link</span><span class="p">.</span><span class="nx">href</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+      <span class="nx">splits</span><span class="p">[</span><span class="nx">splits</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">styleName</span> <span class="o">+</span> <span class="s1">&#39;.css&#39;</span><span class="p">;</span>
+      <span class="nx">link</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">splits</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+
+      <span class="c1">// Make sure we save the new theme name so that</span>
+      <span class="c1">// the choice persists across sessions.</span>
+      <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;pillbox-theme&#39;</span><span class="p">,</span> <span class="nx">styleName</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">=</span> <span class="nx">index</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lsExists</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+    <span class="c1">// _setStyle if localStorage does not exists</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_setStyle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// the style will always be the current theme,</span>
+      <span class="c1">// which will always be the default theme.</span>
+      <span class="kd">var</span> <span class="nx">styleName</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">];</span>
+
+      <span class="c1">// Still write the new theme into the document,</span>
+      <span class="c1">// just in case something has gone horribly wrong.</span>
+      <span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;main-theme&#39;</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">splits</span> <span class="o">=</span> <span class="nx">link</span><span class="p">.</span><span class="nx">href</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+      <span class="nx">splits</span><span class="p">[</span><span class="nx">splits</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">styleName</span> <span class="o">+</span> <span class="s1">&#39;.css&#39;</span><span class="p">;</span>
+      <span class="nx">link</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">splits</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+
+  <span class="cm">/* writeStyle function */</span>
+<span class="p">})([</span><span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">,</span> <span class="s1">&#39;stylesheet2.css&#39;</span><span class="p">],</span> <span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>You can now start playing with things in your browser.  Assuming you&#8217;ve got all your stylesheets in the right place, and a basic <span class="caps">HTML</span> layout, insert this code at the top of the <code>&lt;head&gt;</code> brackets.  Then open up a development console and start calling <code>themeSwitcher._setStyle</code> with various values.  Notice that you can only use indices to specify which theme you want.  Let&#8217;s change that.  When we make our public setStyle function, we want to also be able to specify the string name of the css file.  I also want there to be a way to call it without specifying the theme, and let it toggle between&nbsp;themes.</p>
+<p>To do this, we&#8217;re going to need an algorithm that can take a string, integer, or null input, and return the index of the theme that best matches the description.  Now that sounds like a fairly useful algorithm to use, so in the interests of <span class="caps">DRY</span>, let&#8217;s implement it as a new function, <code>themeSwitcher.getStyle</code>, then add <code>themeSwitcher.setStyle</code> on top of&nbsp;it.</p>
+<div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">themeSwitcher</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">defaultTheme</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/*</span>
+<span class="cm">  indexOf function</span>
+<span class="cm">    ...</span>
+<span class="cm">  constructor statements</span>
+<span class="cm">  */</span>
+
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="cm">/* localStorage exists _setStyle implementation */</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* localStorage doesn&#39;t exist _setStyle implementation */</span>
+  <span class="p">}</span>
+
+  <span class="cm">/* writeStyle function */</span>
+
+  <span class="c1">// public getStyle method</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">getStyle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Firstly, check if stylesheet is undefined or null.</span>
+    <span class="c1">// In this case we&#39;ll return the current theme.</span>
+    <span class="c1">// This allows us to use themeSwitcher.themes[themeSwitcher.getStyle()]</span>
+    <span class="c1">// to find out the current theme.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">stylesheet</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span> <span class="o">||</span> <span class="nx">stylesheet</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Next, stylesheet could be an index.  Return either the index,</span>
+    <span class="c1">// or if index is invalid, the current theme.</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">stylesheet</span> <span class="o">===</span> <span class="s2">&quot;number&quot;</span>
+               <span class="o">&amp;&amp;</span>   <span class="nx">stylesheet</span> <span class="o">===</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">stylesheet</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">stylesheet</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">stylesheet</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Otherwise, assume stylesheet is the name of a style.</span>
+    <span class="c1">// If it isn&#39;t, then it won&#39;t be in the list of themes,</span>
+    <span class="c1">// so just return the current theme.</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">indexOf</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">stylesheet</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">index</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// public setStyle method</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">setStyle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// get the style index using getStyle</span>
+    <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getStyle</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">);</span>
+
+    <span class="c1">// if the stylesheet is the same as the current</span>
+    <span class="c1">// stylesheet, toggle the stylesheet to the next one</span>
+    <span class="c1">// in the list of themes.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">===</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">index</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Use whichever private _setStyle function was defined</span>
+    <span class="c1">// to set the style of the page.</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_setStyle</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">})([</span><span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">,</span> <span class="s1">&#39;stylesheet2.css&#39;</span><span class="p">],</span> <span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The main theme switching mechanism is now pretty much almost done.  Unfortunately, unless the user plays around with their development console, they&#8217;re not going to be able to change much.  This is where we need to add an element on the page that actually allows the user interface to work.  I&#8217;ve implemented this here in the form of a <code>select</code> drop-down choice form element, but of course you can edit and play with this code as much as you&nbsp;want.</p>
+<div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">themeSwitcher</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">defaultTheme</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/* initialisation, writeStyle, getStyle and setStyle definitions */</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addSwitcher</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">elementID</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Append our switcher to #elementID</span>
+    <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">elementID</span><span class="p">);</span>
+
+    <span class="c1">// We&#39;re using a select element</span>
+    <span class="nx">switcher</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;select&#39;</span><span class="p">);</span>
+    <span class="nx">switcher</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;theme-switcher-select&quot;</span><span class="p">;</span>
+
+    <span class="c1">// Iterate through the themes, and append them as options</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">theme</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+      <span class="nx">option</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">);</span>
+      <span class="nx">option</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">theme</span>
+      <span class="nx">option</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span><span class="nx">theme</span><span class="p">))</span>
+
+      <span class="c1">// The current theme should be selected</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">option</span><span class="p">.</span><span class="nx">selected</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nx">switcher</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">option</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="c1">// When a new option is selected, call our setStyle function</span>
+    <span class="nx">switcher</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="kd">var</span> <span class="nx">theme</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">selectedIndex</span><span class="p">].</span><span class="nx">value</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">theme</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Append to the document</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">switcher</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">})([</span><span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">,</span> <span class="s1">&#39;stylesheet2.css&#39;</span><span class="p">],</span> <span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>And voila, a complete client-side theme switching solution.  How do you use this?  Well, the above definition should go in your <code>&lt;head&gt;</code> section in a <code>&lt;script&gt;</code> tag.  Then, immediately afterwards, you should call <code>themeSwitcher.writeStyle()</code>.  Now the rest of your page can load, with the correct stylesheet enabled.  In the place where you want the theme-switching interface, create a container element with an id, then immediately below that, in script tags, call <code>themeSwitcher.addSwitcher(elementID)</code>, where elementID is of course the id of the container element.  Check out the source code of this page to see it in action.  I&#8217;ve minified the function definition, but it works exactly the&nbsp;same.</p>
+<p>Here&#8217;s the complete&nbsp;listing.</p>
+<div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">themeSwitcher</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">defaultTheme</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">indexOf</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span><span class="nx">t</span><span class="p">,</span><span class="nx">n</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">){</span><span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span><span class="mi">1</span><span class="p">))}</span><span class="kd">var</span> <span class="nx">r</span><span class="p">,</span><span class="nx">i</span><span class="o">=</span><span class="nx">n</span><span class="o">?</span><span class="nx">n</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="nx">s</span><span class="p">;</span><span class="nx">s</span><span class="o">=</span><span class="nx">e</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="k">if</span><span class="p">(</span><span class="nx">s</span><span class="o">===</span><span class="mi">0</span><span class="o">||</span><span class="nx">i</span><span class="o">&gt;=</span><span class="nx">s</span><span class="p">){</span><span class="k">return</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span><span class="k">if</span><span class="p">(</span><span class="nx">i</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span><span class="nx">i</span><span class="o">=</span><span class="nx">s</span><span class="o">-</span><span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">i</span><span class="p">)}</span><span class="k">for</span><span class="p">(</span><span class="nx">r</span><span class="o">=</span><span class="nx">i</span><span class="p">;</span><span class="nx">r</span><span class="o">&lt;</span><span class="nx">s</span><span class="p">;</span><span class="nx">r</span><span class="o">++</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="nx">e</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">==</span><span class="nx">t</span><span class="p">){</span><span class="k">return</span> <span class="nx">r</span><span class="p">}}</span><span class="k">return</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">lsExists</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">themes</span> <span class="o">=</span> <span class="nx">themes</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">defaultTheme</span> <span class="o">=</span> <span class="nx">indexOf</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">defaultTheme</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">defaultTheme</span><span class="p">;</span>
+
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">);</span>
+    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lsExists</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+    <span class="nx">stylesheet</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;theme-stylesheet&#39;</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">=</span> <span class="nx">indexOf</span><span class="p">(</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">stylesheet</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">defaultTheme</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">_setStyle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">index</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">styleName</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">[</span><span class="nx">index</span><span class="p">];</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">styleName</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">];</span>
+        <span class="nx">index</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;main-theme&#39;</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">splits</span> <span class="o">=</span> <span class="nx">link</span><span class="p">.</span><span class="nx">href</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+      <span class="nx">splits</span><span class="p">[</span><span class="nx">splits</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">styleName</span> <span class="o">+</span> <span class="s1">&#39;.css&#39;</span><span class="p">;</span>
+      <span class="nx">link</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">splits</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+
+      <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;pillbox-theme&#39;</span><span class="p">,</span> <span class="nx">styleName</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">=</span> <span class="nx">index</span><span class="p">;</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lsExists</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">_setStyle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">styleName</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">];</span>
+      <span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;main-theme&#39;</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">splits</span> <span class="o">=</span> <span class="nx">link</span><span class="p">.</span><span class="nx">href</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+      <span class="nx">splits</span><span class="p">[</span><span class="nx">splits</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">styleName</span> <span class="o">+</span> <span class="s1">&#39;.css&#39;</span><span class="p">;</span>
+      <span class="nx">link</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">splits</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">writeStyle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">styleName</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">];</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;&lt;link id=&quot;main-theme&quot; href=&quot;/static/css&#39;</span><span class="p">);</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">styleName</span> <span class="o">+</span> <span class="s1">&#39;.css&quot; rel=&quot;stylesheet&quot; /&gt;&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">getStyle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">stylesheet</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">||</span> <span class="k">typeof</span> <span class="nx">stylesheet</span> <span class="o">==</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">stylesheet</span> <span class="o">===</span> <span class="s2">&quot;number&quot;</span>
+                 <span class="o">&amp;&amp;</span>   <span class="nx">stylesheet</span> <span class="o">===</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">stylesheet</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">stylesheet</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">stylesheet</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">indexOf</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">,</span> <span class="nx">stylesheet</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">index</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">setStyle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getStyle</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">===</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">index</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_setStyle</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">addSwitcher</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">elementID</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">elementID</span><span class="p">);</span>
+    <span class="nx">switcher</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;select&#39;</span><span class="p">);</span>
+    <span class="nx">switcher</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;theme-switcher-select&quot;</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">theme</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">themes</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+      <span class="nx">option</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">);</span>
+      <span class="nx">option</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">theme</span>
+      <span class="nx">option</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span><span class="nx">theme</span><span class="p">))</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">==</span> <span class="k">this</span><span class="p">.</span><span class="nx">currentTheme</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">option</span><span class="p">.</span><span class="nx">selected</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nx">switcher</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">option</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="nx">switcher</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">selectedIndex</span><span class="p">].</span><span class="nx">value</span><span class="p">;</span>
+      <span class="nx">themeSwitcher</span><span class="p">.</span><span class="nx">setStyle</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">switcher</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="p">})([</span><span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">,</span> <span class="s1">&#39;stylesheet2.css&#39;</span><span class="p">],</span> <span class="s1">&#39;stylesheet1.css&#39;</span><span class="p">);</span>
+</pre></div>
+      </div>
+
+        <hr class="article-divider">
+
+    </article>
+    <article class="blog-article">
+
+      <header class="article-header">
+        <h2 class="entry-title">
+          <a href="http://johz.me/posts/2013/Nov/02/old-news/" class="no-hilite" rel="bookmark" title="Permalink to Old News">
+            Old&nbsp;News
+          </a>
+        </h2>
+      </header>
+      <footer class="article-footer">
+        Published <abbr class="published" title="2013-11-02T13:32:03+00:00"> Sat 02 November 2013 </abbr>
+          by <a href="http://johz.me/author/johz.html">Johz</a>
+      </footer>
+
+      <div class="article-text">
+        <p>It has come to my attention recently that I am very much out of the loop when it comes to the news.  As someone who used to obsessively spend their lunch hour shouting excitedly about the latest national policies at anyone who would listen, and a number of people who really wished they didn&#8217;t have to listen, this is all a bit weird, and I&#8217;m honestly slightly worried about it.  Even the things that should excite me beyond words have failed to catch my interest recently.  I&#8217;m vaguely aware of nuclear power coming back to the <span class="caps">UK</span>.  There&#8217;s something weird happening to GCSEs.  I can feel some remnants of old enthusiasm stirring up in me, but if I&#8217;m honest it&#8217;s not stirring up very&nbsp;far.</p>
+<p>So, to rectify this, I have decided to run my expert eye over some of the recent news, and really find out what&#8217;s happening.  And, because my entirely uninformed commentary will almost certainly be amazingly insightful, I thought I probably ought to share it with you, because that&#8217;s what good friends and narcissistic bloggers&nbsp;do.</p>
+<p>I started this post thinking that the <a href="http://www.bbc.co.uk/news/world-us-canada-24773025"><span class="caps">LA</span> airport shooting</a> would be the biggest piece of news for today, but on the <span class="caps">BBC</span> it&#8217;s been relegated to first primary article in the &#8220;and in other news&#8221; section, with a bit of footage making the &#8220;Watch/Listen&#8221; section, so apparently that&#8217;s not all that interesting.  After all, only one person died, and they&#8217;ve already caught the killer, so is it much more than just another &#8220;Only in America&#8221; story?  I mean, I could go on a bit of a rant about how terrible the gun culture is in America, but a foreigner can&#8217;t tell Americans how to live their lives, even if they are living them wrong, so I guess we&#8217;ll just skip this&nbsp;altogether.</p>
+<p>In fact, the <span class="caps">BBC</span>&#8217;s top story is that <a href="http://www.bbc.co.uk/news/world-asia-24776363">Hakimullah Mehsud has been killed by a drone</a>.  That name doesn&#8217;t actually ring any bells, but I will assume this is because of how out of the loop I am.  This is somewhat of an important development, as this man is apparently leader of the Pakistani Taliban, and the power vacuum may lead to the rise of a leader who will more readily submit to negotiations.  I seem to remember that my old, news-reading self would have seen this as another sign that the war on organised terror is over, and that we now need to turn to our own homes to sort out the problems of hate-crime and racial tension, rather than continually blame an &#8220;enemy out there&#8221;.  Unfortunately, my new self feels rather apathetic to this sort of stuff.  After all, this is a war that America is fighting, not the <span class="caps">UK</span>.  And it&#8217;s happening in Pakistan, which also isn&#8217;t the <span class="caps">UK</span>.  And this &#8220;Taliban&#8221; place doesn&#8217;t sound like it&#8217;s in the <span class="caps">UK</span> either, so why are we so excited about&nbsp;it?</p>
+<p>The second story is about a <a href="http://www.bbc.co.uk/news/uk-24779908">Mr Paul Gambaccini</a>, and how he&#8217;s clearly an evil paedophile like that nasty Saville bloke, and Rolf Harris, and probably Bruce Forsyth, I mean, just look at him, he must be in on it, right?  Now I recognise the name, but I&#8217;m not entirely sure where from.  I&#8217;ve googled for pictures of him, and the face isn&#8217;t ringing any bells, although there are lots of pictures of Jimmy Saville there, proving that he must be a paedophile.  I&#8217;m guessing it&#8217;s from listening to Radio Four, which is something I&#8217;m not supposed to admit to doing, but used to quite enjoy&nbsp;anyway.</p>
+<p>To be honest, every time this Operation Yewtree thing comes around, I feel less inclined to be outraged.  It&#8217;s quite clear that there was a culture at the time in certain organisations that just ignored sexual harassment as a thing.  It&#8217;s great that we&#8217;re finally getting the perpetrators of these crimes to own up to the things they&#8217;ve done, but, apart from simply providing justice to those that deserve it, the ultimate question it raises is whether that sort of thing could happen again.  Is today&#8217;s lad culture really that far removed from Saville&#8217;s big-shot world, where fame and a cocky attitude could get you out of almost&nbsp;anything?</p>
+<p>It&#8217;s at this point that I turn to the more important news stories, those contained within the science/technology/environment sections, and it turns out the news is actually genuinely exciting.  Not just one, but <em>two</em> fusion stories!  Firstly, America&#8217;s National Ignition Facility (<span class="caps">NIF</span>) has <a href="http://www.bbc.co.uk/news/science-environment-24429621">done the impossible</a>, and got more energy out of a fusion event than it has put in, for a given value of putting energy in.  <span class="caps">NIF</span> have been attempting to do fusion by shining lasers at pellets of hydrogen, and waiting for them to explode.  Now, or at least in late September, they&#8217;ve finally managed to get more energy out of the pellet than they&#8217;ve put into the pellet, although due to inefficiencies everywhere, this doesn&#8217;t account for the energy they put into the laser.  So we&#8217;re not quite there yet, but we might be in 20-30 years&#8217; time.&nbsp;Maybe.</p>
+<p>The second fusion story is of course the more important one, because it involves the One True Path to fusion, the &#8220;tokamak&#8221; reactor.  Now I&#8217;m quite biased in this area, having grown up not too far from the current European experiment, known as <span class="caps">JET</span>.  However, as I&#8217;ve already described the American attempt in a pithy and unscientific manner, I feel I should do the same for tokamaks.  Essentially, the idea is to get a load of very hot hydrogen, and spin it in a circle until it does something exciting.  So what have these people been doing that&#8217;s so newsworthy?  Well, they&#8217;ve finally got round to <a href="http://www.bbc.co.uk/news/science-environment-23408073">receiving the inital components with which they can build the new <span class="caps">ITER</span> reactor</a>.  Yes, that&#8217;s right, the Europeans are almost about to start building a the outline of a new reactor,&nbsp;maybe.</p>
+<p>Fusion is really cool.  Well, it isn&#8217;t, it requires ridiculously high temperatures and pressures, but you know what I mean.  The problem is that fusion just isn&#8217;t happening any time soon.  It will work, eventually, it&#8217;s just that realistically scientists aren&#8217;t in a position to promise anything at any sensible timescale, so they make overconfident claims, and the phrase &#8220;twenty years&#8221; becomes synonymous with &#8220;never&#8221;.  However, we really need to keep on pushing for it, because it&#8217;s&nbsp;awesome.</p>
+<p>And finally, we come to a lovely local news story that not only includes a baby and an animal, but also manages to make you disgusted with your neighbours, and utterly amazed at the goodness of humanity.  Yes, that&#8217;s right, <a href="http://www.bbc.co.uk/news/uk-england-birmingham-24770596">an abandoned baby has been named after the dog owned by the walker who found her</a>.  Doesn&#8217;t the story feels so&#8230;  <em>local</em>?  It&#8217;s the way that a single sentence can neatly sum up almost every facet of this simple and easy-to-digest piece of news.  It&#8217;s the way that this doesn&#8217;t actually affect your life, or the life of the country in any significant way, but manages to brighten your day, and make you reflect on all the horrible things in the world at the same time.  It&#8217;s the way there&#8217;s interviews with people whose only relevant job description is &#8220;dog walker&#8221;.  It&#8217;s the sort of thing local news was made&nbsp;for.</p>
+<p>So thank you, reader, for allowing me to take this journey through the world&#8217;s current state of affairs.  I&#8217;ve almost enjoyed it, actually.  It&#8217;s nice to once again be able to pass comment in a sarcastic way, get excited about small things that don&#8217;t massively make a difference to my life, and generally attempt to appear knowledgeable despite my utter absence of authority on the subject.  In fact, I might think about following the news slightly more now.  In fact, I might even shout angrily at you about it, if you&#8217;ll be so kind as to let&nbsp;me&#8230;</p>
+      </div>
+
+        <hr class="article-divider">
+
+    </article>
+    <article class="blog-article">
+
+      <header class="article-header">
+        <h2 class="entry-title">
+          <a href="http://johz.me/posts/2013/Oct/20/a-splash-of-colour/" class="no-hilite" rel="bookmark" title="Permalink to A Splash of Colour">
+            A Splash of&nbsp;Colour
+          </a>
+        </h2>
+      </header>
+      <footer class="article-footer">
+        Published <abbr class="published" title="2013-10-20T13:12:44+00:00"> Sun 20 October 2013 </abbr>
+          by <a href="http://johz.me/author/johz.html">Johz</a>
+      </footer>
+
+      <div class="article-text">
+        <p>The aim is that this will be my last post about my blog for a while, but I just wanted to point out some of the interesting features, because I think that&#8217;s what one does on technology-related blogs, and really I just want to fit in an be like the other cool guys.  Dammit, I&#8217;m a terrible&nbsp;person.</p>
+<p>As mentioned before, this is a <a href="http://blog.getpelican.com/">Pelican</a> blog.  Excuse the mild ideosyncracies of the documentation (particularly that if you click on a link, you will <em>never</em> be able to get back to the main page), it&#8217;s actually quite a nice system.  Pelican is a static-site generator, in the style of all the other static-site generators that I&#8217;m sure we could name between us, but with a few nice touches of it&#8217;s own.  For example, unlike Jekyll and associated software, it only requires a directory of posts and pages, as opposed to a directory containing all the parts of a blog.  It&#8217;s relatively well supported, particularly among the French-speaking community.  It&#8217;s also written in Python, which, as a Pythonista first and foremost, means I can read the code and actually understand most of what it&#8217;s&nbsp;doing.</p>
+<p>Secondly, you&#8217;ll notice the theme.  The theme is custom-built.  This is amazing.  My knowledge of <span class="caps">CSS</span> is approximately equal to my knowledge on the dietary habits of pregnant sperm whales.  Seriously, any good impressions you have of the styling of this site are more an indication of the power and ease-of-use of <a href="http://lesscss.org/">less</a> than my own ability.  Some interesting and exciting&nbsp;things:</p>
+<ul>
+<li>
+<p>You can change the colour-scheme!  I know a number of people who have really strong preferences over light vs dark, so if you scroll to the bottom, you&#8217;ll find a switcher that allows you to switch between light and dark.  Everything is entirely client-side, and the preference is saved in localStorage so your theme-choice will persist between sessions.  If you don&#8217;t have either localStorage, or javascript in general, the page will load the dark theme by default, because dark is clearly the cooler&nbsp;choice.</p>
+</li>
+<li>
+<p>The theme includes a random quote of the page load.  This is the second &#8216;bubble&#8217; that appears on the main page.  The quotes are taken from the <span class="caps">RANDOMQUOTES</span> pelican option, and then every time the page loads, a javascript function writes out a div containing a random quote.  Obviously, if there is no javascript, the div never gets written at all, and so the page still runs&nbsp;beautifully.</p>
+</li>
+<li>
+<p>The theme is largely <span class="caps">XKCD</span>/1271 compliant.  For those that don&#8217;t obsessively follow the famous webcomic, <a href="http://xkcd.com/1271">comic #1271</a> recently described the habit of highlighting text while browsing websites, and then feeling good when the highlighted text makes a beautiful shape.  As someone who suffers from a similar compulsion (for reference, I consider option 4 of Randall&#8217;s list to be the only viable option) I spent last night redesigning parts of the article layout so that when one highlights text in Chrome, there are no longer any horrible&nbsp;overhangs.</p>
+</li>
+</ul>
+<p>There are still a few things that I haven&#8217;t quite sorted, that I still need to work on.  I&#8217;ve only really been concentrating on the index template and the pages template, so it might be that other pages look slightly more broken.  When I get comments, you can tell me about those pages.  Although first I really need to get a comments system in&nbsp;place.</p>
+<p>The theme is open source, obviously, and is available <a href="https://github.com/MrJohz/pillbox-theme">on GitHub</a> as the Pillbox theme.  Feel free to fork&nbsp;away.</p>
+      </div>
+
+
+    </article>
+
+    <p class="paginator">
+            <a href="http://johz.me/index.html">&laquo;</a>
+        Page 2 / 3
+            <a href="http://johz.me/index3.html">&raquo;</a>
+    </p>
+</section>
+
+
+      <div id="theme-switcher">
+        Change Theme <br />
+      </div>
+      <script>
+        themeSwitcher.addSwitcher('theme-switcher');
+        themeSwitcher.addCycleButtons();
+      </script>
+
+    <footer id="footer">
+      <p>This blog is built using <a href="http://getpelican.com">Pelican</a>, <a href="http://python.org">Python</a>, and the Pillbox theme.</p>
+      <p>
+<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/" class="no-hilite">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" />
+</a>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" class="no-hilite">
+    <img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+</a><br />
+Unless otherwise specified, content on this blog is available under the
+<a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons
+Attribution 4.0 International License</a>.  Likewise, unless otherwise
+specified, code samples are in the
+<a href="http://creativecommons.org/publicdomain/zero/1.0/">public domain</a>.
+The blog's theme (pillbox) is available under the MIT license on
+<a href="https://github.com/MrJohz/pillbox-theme">Github</a>.
+</p>
+    </footer>
+
+
+
+  </body>
+
+</html>

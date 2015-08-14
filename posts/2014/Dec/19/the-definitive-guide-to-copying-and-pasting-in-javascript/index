@@ -1,0 +1,128 @@
+Title: The Definitive Guide to Copying and Pasting in JavaScript (the other kind...)
+Slug: the-definitive-guide-to-copying-and-pasting-in-javascript
+Date: 2014-12-19 20:54:32
+Tags: coding, javascript
+
+
+## Step 1: Don't.
+
+Stop.  You don't want flashing lights.  You don't want snowflake all over your page.  You don't want a trail of happy faces that will follow your cursor all around your page.  We left these things in decades past for a reason, dammit!  Keep them there, for all our sakes.  No copy and paste!  Ever!  No, no, no, no, no!
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+Well, yes, sometimes there is a reason to copy and paste text from the internet, particularly if you're learning.  Sometimes you're looking for a bit of advice on the perfect way to memoize some functions, or a quick and easy method to merge two objects, or even just a couple of basic string functions that you really wish had appeared in earlier EMCAScript specs.  In these cases, finding a quick "cookbook recipe" on the internet can be a great convenience.  Often, it's a really good way for newer developers to expand their understanding of some of the language shortcuts.  The question then is "how should I best learn from this recipe?"  For you, then, comes step two.
+
+## Step 2: Do it well.
+
+### Never copy-and-paste, always rewrite.
+
+I remember a book I once got given called *"Hello, World!"*, written by Sande & Sande (a father and son duo).  It was a Python programming introduction for "Kids and other beginners".  Fairly near the start, they gave a listing for a program that was certainly larger than anything that I'd seen up until that point that would let you play the classic skiing game where you have to ski down the mountain without hitting into things.  Of course, this being the technical age, they also provided a download for all the programs featured in the book, but this one came with a special note.
+
+> The code for listing 10.1 is in the `\examples\skier` folder, so if you get stuck or just don't want to type it all in, you can use that file.  But believe it or not, you'll learn more by typing it in than by just opening and looking at the listing.
+
+So of course I typed the whole file in, and it came up with an error, because I wasn't very good at coding, and didn't understand what most of it actually did or meant[^pythonfailure].  However, I did start to piece together what the thing was actually meant to do.  I could read the names and the comments in the sidebar, and together I could get a feel for what sort of magic a line like `pygame.image.load(image_file)` might actually do.  (For the unitiated: it loads an image from an image file.  It's part of the pygame system.  This is not hard stuff, but when you're beginning it feels amazing...)
+
+What *"Hello, World!"* had taught me in that small example was how to read code.  The way you read code is to go through each line individually.  This is probably not surprising for most well-practised developers, but in my various experiences of learning programming, reading code (and the sister-skill of thinking like a computer whilst doing so) are extremely under-taught.
+
+This is the same when you are trying to use that useful function from the internet.  You *could* just copy and paste it.  That will work, and get you developing quickly, and you can go home, have a delicious dinner, watch some superb television, have the most beautiful dream, and then wake up next morning with everything going wrong because you didn't quite understand that function you used, and it turns out it's caught on an edge case that - as the case may be - is actually quite common in your circumstances.
+
+Of course, that's probably a rare example.  A lot of the functions that you paste are probably quite good, and will work quite well.  After all, StackOverflow is known for never ever being wrong ever.  However, it should always be on your mind that if you don't understand the code you're writing, it will always run the risk of jumping back at you and biting you.  When you write the function out, line-by-line, you'll quickly start to understand what cases this will deal with, and what cases this won't cope with.  You'll be able to see what guards exist, what format the function will return, and whatever other features the original creator put in but didn't document.
+
+[^pythonfailure]: If I remember correctly, I got really irritated at that point, angrily turned the computer off, stormed off to my room, and didn't come down for the rest of the day.  My poor father who'd been trying to please my yearning to become a programmer must've been really quite worried - thankfully that didn't deter me significantly, and while I never got that code to work, I did continue learning Python.
+
+### Always change at least one thing.
+
+For me, this idea followed on quite easily from the previous piece of advice.  When you write out a piece of code, I find it relatively easy to just find little things that I want to change.  With JavaScript it's usually something as simple as turning snippets that extend an object's prototype into normal functions, as per [best practice][best-practice].  With other languages, it might be something more complex, such as generalising a function designed for one case into a function designed for many cases.  You might dislike the specific formatting style that the example uses - change it.  Think you can use better variable names?  Use them.  Hell, if you're just copying in an algorithm that you're not entirely sure you grasp, try covering it in comments until you can see exactly what each line is there for.  (Admittedly, overuse of this particular example is probably a particularly bad idea, so if you find yourself doing this a lot, try finding less complex algorithms to do the same thing.  Alternatively, this might be the time you start looking for a well-maintained third-party library where someone else is doing all the legwork.)
+
+Take for example, this beautiful JavaScript function that returns a repeated string:
+
+```javascript
+// This version will actually work thanks to
+// http://www.reddit.com/r/javascript/comments/2pwz7l/the_definitive_guide_to_copying_and_pasting_in/cn0z7lm
+// Modified from http://stackoverflow.com/questions/1235179/simple-way-to-repeat-a-string-in-java
+function (times) {
+    if (times <= 0) return "";
+    else if (times % 2 == 0) return (this + this).repeat(times / 2);
+    else return this + (this + this).repeat(Math.floor(times / 2));
+}
+```
+
+Some things I can easily do.  For example, this is using prototypes, and it isn't even using them well.  It's also using the fact that `if` can take a statement rather than a brace of statements.  Personally, I don't like that, except for rare cases, and I'm not of the opinion that this is a rare enough case.  If I want to make it a stand-alone function, I'll also need to change the name to make it clear that this is repeating a string.  Let's see what it looks like now:
+
+```javascript
+function repeatStr(str, times) {
+    if (times <= 0) {
+        return "";
+    } else if (times % 2 == 0) {
+        return repeatStr(str + str, times / 2);
+    } else {
+        return this + repeatStr(this + this, times / 2);
+    }
+}
+```
+
+To me, that looks a bit better.  But I'm still not sure what this function actually does.  I know it repeats strings, but what sort of magic is there under the hood?[^obtuse]  This is the best time to start adding comments in.  Let's smother that function.  We'll also re-add the most important part of any copy-and-paste code: the attribution.  This is partly because your source clearly deserves the recognition, but mainly because - as with the rest of your code - you'll probably come back later and wonder why you were so stupid as to write that.  At least when you can attribute parts of your code to others, it's not your fault.  (We'll discuss attribution slightly more properly a bit later on.)
+
+```javascript
+// Modified from http://stackoverflow.com/questions/1235179/simple-way-to-repeat-a-string-in-java
+function repeatStr(str, times) {
+    if (times <= 0) {  // if no times needed
+        return "";     // return empty string
+    } else if (times % 2 == 0) {                 // if times is even
+        return repeatStr(str + str, times / 2);  // divide time by two, double str
+    } else {                                                          // if times is odd
+        return this + repeatStr(this + this, Math.floor(times / 2));  // divide time by two, double str, add str for remainder
+    }
+}
+```
+
+Do you begin to understand how it works a bit now?
+
+[best-practice]: <http://www.nczonline.net/blog/2010/03/02/maintainable-javascript-dont-modify-objects-you-down-own/>
+
+[^obtuse]: You might think this is me being obtuse.  This is a real snippet that I copied recently in Java.  I could see why it would be efficient (it doubles the length each time, rather than adding each string individually), but it took a while to connect in my head how exactly it worked, particular for cases that weren't multiples of two.  By putting comments everywhere, I started to understand very clearly what each line was doing.
+
+### Always find an alternative.
+
+StackOverflow is a beautiful thing.  However, it is also a relatively fractured thing, and the sum of knowledge within it is built from many different parts, with opinions that can often appear to contradict each other.  This is the wonder of any system where opinions are crowd-sourced, and is why you should never trust the word of random blogs posted on link aggregation sites that claim to have all the answers.  There are always alternatives.
+
+This is a good thing, because it means you've got to think for a bit.  Say you find a function on the internet that claims to repeat a string.  Say you find two, or three, or many functions.  At some point you're going to need to decide between them.  And at that point you're going to need to understand how they work, and more specifically, why they may or may not be appropriate to you.
+
+The best example here is probably a for loop, not because it's something that people regularly need to copy into their code, but because it's something that's so ubiquitous when it comes to optimization.  The standard mantra is that reverse for loops are the fastest loops, because back when programming required intimate knowledge of how a computer would spend each clock cycle, it was possible to implement a number of tricks in the computer hardware that could decrease the number of instructions used in each loop.  When you're writing code that requires every last drop of performance from the CPU, and touching the bones of the computer to do so, each extra clock cycle can be a beautiful and valuable gift.
+
+Of course, none of this applies to JavaScript.  Despite this, there are a plethora of ways of looping available to budding web developers, each claiming to be the best, the fastest, the most optimised, and each providing their own set of benchmarks to back this up.  The question then becomes how to choose between them - which in turn becomes a question of what you're actually looking for in your for loops.
+
+Of course, this will depend on what you need your for loop for.  Most of the time it will be fairly simple.  Perhaps you don't need absolute blazing speed, but you do need the code to look clear and concise.  In that case, your solution might be a `for x in xs` loop, or perhaps `xs.forEach`.  Or perhaps you need backwards compatibility across all browsers currently in use, and all browsers not in use that your boss still demands compatibility for.  In that case, the humble `for (...) { }` loop is probably your best bet, and may god have mercy on your soul.  Maybe you're developing an application that demands absolute blazing speed of a kind never before seen in an interpreted scripting language.  In that case, I have no idea what the perfect solution is, but it's probably the sort of thing you'll find out after a long time spent with a huge number of benchmarking suites.
+
+This in turn has parallels for finding recipes on the internet.  You want to use the best tool for the job, and to do that you need to understand what jobs any snippets you find are.  In my experience the best way to do that is to find alternatives, and to compare and contrast.  You won't be able to tell why snippet *a* is so good unless you know about its direct competitor *b*.  This way you'll be able to expand your knowledge, and understand more easily what the text you're copying into your code will actually do.
+
+## Step 3: ...Profit?
+
+Of course, all this advice is given with the aim of learning how to be a better programmer.  Over time, if you are repeatedly copying the same pieces of code into your project, that there's probably a greater issue somewhere.  In some languages it might well be that you're using the wrong idioms (creating a map where an enum-type would be more helpful, or complex case statements where a map would be more useful).  In other languages where the problem is more the lack of a standard library, the solution might be to find a third-party library that you can use consistently.  With JavaScript, the latter case is often true, and it may well be that learning how to effectively use tools such as [lodash][] and [underscore][] will help you a lot.  However, for those who are taking early steps in a language, I'd argue that copying and pasting is not wrong - as long as you do it properly.
+
+[underscore]: <http://underscorejs.org/>
+[lodash]: <https://lodash.com/>
+
+## Step 4 and Step 0: Attributions!
+
+[/u/jimschubert][jimschubert] reminded me in the discussion on this post on Reddit that one important thing to do that I didn't properly emphasise is to attribute your stuff properly (and even determine if you're allowed to use it).  I did briefly mention when I talked about changing the code that it's always good to put a comment saying where you got the code from, but proper attribution is an interesting legal issue.  For many things (particularly in web-development and Java applications), you'll probably find your snippets from Stack Overflow.  Stack Overflow puts everything it hosts under the Creative Commons [CC BY-SA 3.0][ccbysa] license.  Generally, this allows you to do with the content what you like, as long as you give "appropriate credit" (indicating if you changed it), and distribute any modifications under the same (or a compatible) license.
+
+The other big source of snippets is blog posts and technical articles.  If the article is an "official source" (for example examples on the Mozilla JS docs), or a large enough software organisation they will probably have a note at the bottom of the page that gives you the official state of licensing for any information on that site.  (In the case of the MDN pages, code samples are either under the MIT license, or in public domain, while the rest of the text is under the CC BY-SA 2.5 license.)  For smaller blogs that haven't thought about this issue, the issues are slightly more complex.  There are generally two schools of thought, one stating that if there's no license, it's in the public domain, and the other stating that in the absence of a license, it should be assumed that all rights are reserved.  It's probably a good rule of thumb that someone releasing unlicensed code into the world does consider it public domain (this has always been my assumption, although having researched this little section, I realise it would probably be wise for me to think about licensing code snippets on my blog more carefully).  However, if you're writing code on behalf of a company with concerns about being sued, the general feeling is usually that unlicensed code isn't really worth it.
+
+This, then would be my advice, partly built on trying to abide by the complicated legal issues, and partly built on just trying to be as nice as possible to the original authors:
+
+- Always provide attributions and the source.  I don't know of any license that forbids them, and it's polite to do so.  Plus, as I said earlier, you can always blame other people.
+- Always say if you've modified the original.  (Of course, if you were following Step 2 properly, you'll always be modifying it anyway!)
+- If you can see a license, obey any further stipulations in that license.  Note that some "viral" licenses may affect how you license your own work.  If you can't abide by those licenses, you should not use the code.
+
+Again, I am not in any way, shape, or form a lawyer.  This is not legal advice.  But it's my opinion, and probably some decent practical advice that might work for you.
+
+[jimschubert]: <http://www.reddit.com/user/jimschubert>
+[ccbysa]: <http://creativecommons.org/licenses/by-sa/3.0/>
+
+## Side note about the title:
+
+It's based on [this][cutandpaste] article submitted to the [`/r/javascript`][rjavascript] sub on Reddit.  That article is a very interesting one about how to use the clipboard from a JavaScript application in a cross-browser way, and is very interesting, but it did confuse me for a while as I did manage to get the wrong impression from the title.  For those people like me, who are easily confused by these simple matters, I submit this blog post, which might not help.
+
+[cutandpaste]: <https://www.lucidchart.com/techblog/2014/12/02/definitive-guide-copying-pasting-javascript/>
+[rjavascript]: <http://www.reddit.com/r/javascript>

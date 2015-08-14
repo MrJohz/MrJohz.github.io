@@ -1,0 +1,40 @@
+# www. is deprecated!
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^johz\.me
+RewriteRule (.*) http://johz.me/$1 [R=301,L]
+
+# Cache *all* the things!
+  # Come back in 2020!
+  <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|swf)$">
+    Header set Expires "Wed, 15 Jan 2020 20:00:00 GMT"
+  </FilesMatch>
+  
+  # Cache-control, mofos!
+  <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+    Header set Cache-Control "max-age=31449600, public"
+  </FilesMatch>
+
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "max-age=604800, public, must-revalidate"
+  </FilesMatch>
+  
+  <FilesMatch "\.(xml|txt)$">
+    Header set Cache-Control "max-age=172800, public, must-revalidate"
+  </FilesMatch>
+  
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "max-age=14400, must-revalidate"
+  </FilesMatch>
+  
+  # No more ETags!
+  Header unset Etag
+  FileETag None
+
+# Don't touch my .ht* files!
+<FilesMatch "^\.ht">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# Custom headers ZOMG!
+Header set X-Johz-Header "*waves*"

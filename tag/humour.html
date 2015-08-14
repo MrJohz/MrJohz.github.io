@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <script type="text/javascript">
+  themes = [
+    'dark',
+    'light',
+  ];
+      themeDefault = "dark";
+  </script>
+
+  <script type="text/javascript">
+    window.themeSwitcher=new function(e,t){"use strict";var n=function(e,t,n){if(Array.prototype.indexOf){return Array.prototype.indexOf.apply(e,Array.prototype.slice.call(arguments,1))}var r,i=n?n:0,s;s=e.length;if(s===0||i>=s){return-1}if(i<0){i=s-Math.abs(i)}for(r=i;r<s;r++){if(e[r]==t){return r}}return-1};var r="pillbox-theme-tester-value";var i="pillbox-theme";var s=this;s.lsExists=false;s.themes=e;s.defaultTheme=n(e,t);s.currentTheme=s.defaultTheme;try{localStorage.setItem(r,r);if(localStorage.getItem(r)===r){localStorage.removeItem(r);s.lsExists=true}}catch(o){}var u=function(e){if(e>=0&&e<s.themes.length){return{s:s.themes[e],i:e}}else{return{s:s.themes[s.currentTheme],i:s.currentTheme}}};var a;if(s.lsExists){var f=localStorage.getItem(i);s.currentTheme=n(e,f);if(s.currentTheme<0){s.currentTheme=s.defaultTheme}a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");localStorage.setItem(i,t.s);s.currentTheme=t.i}}else{a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");s.currentTheme=t.i}}s.writeStyle=function(){var e=s.themes[s.currentTheme];document.write('<link id="main-theme" href="http://johz.me/theme/css/');document.write(e+'.min.css" rel="stylesheet" />')};s.getStyle=function(e){if(e==null||typeof e==="undefined"){return s.currentTheme}else if(typeof e==="number"&&e===Math.floor(e)){return u(t).s}else{var t=n(s.themes,e);if(t>-1){return t}else{return s.currentTheme}}};s.setStyle=function(e){var t=s.getStyle(e);if(t==s.currentTheme){return}a(t)};s.cycleStyle=function(){console.log(s.currentTheme);a((s.currentTheme+1)%s.themes.length)};s.addSwitcher=function(e){var t=document.getElementById(e);var n=document.createElement("select");n.id="theme-switcher-select";for(var r=0;r<s.themes.length;r++){var i=s.themes[r];var o=document.createElement("option");o.value=i;o.appendChild(document.createTextNode(i));if(r==s.currentTheme){o.selected=true}n.appendChild(o)}n.onchange=function(){var e=this.options[this.selectedIndex].value;themeSwitcher.setStyle(e)};t.appendChild(n)};s.addCycleButtons=function(){var e=document.querySelectorAll("a[href='#cycle-themes']");for(var t=0;t<e.length;t++){var n=e[t];n.addEventListener("click",function(e){e.preventDefault();s.cycleStyle()})}}}(themes,themeDefault)
+
+    themeSwitcher.writeStyle();
+  </script>
+  <noscript>
+    <link id="main-theme" href="http://johz.me/theme/css/dark.min.css" rel="stylesheet" />
+  </noscript>
+
+      <title>  Johz - humour
+</title>
+
+  <link href="http://johz.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Johz Full Atom Feed" />
+
+  </head>
+
+  <body>
+    <header id="header">
+      <h1 id="header-title"><a class="no-hilite" href="http://johz.me/">
+        <div id="sitename">Johz</div>
+      </a></h1>
+    </header>
+
+      <nav id="menu"><ul>
+
+
+          <li><a href="#cycle-themes">Change Theme</a></li>
+
+            <li  ><a href="http://johz.me/pages/about-me.html">About&nbsp;Me</a></li>
+
+
+
+      </ul></nav>
+
+
+<!-- Random quote on index page -->
+  <script>
+    quotes = [
+        "The blog that's always right, for an entirely arbitrary value of 'right'.",
+        "Disclaimer: I have no idea what I'm doing']&lt;&amp;#47;div&gt;); DROP TABLE *;",
+        "Currently working towards being 100% <a href='http://xkcd.com/1271'>XKCD/1271</a> compliant.",
+        "More than just a blog, it's a way of life.",
+        "- zen -",
+        "This div container is left deliberately blank.",
+        "<a href='https://github.com/MrJohz'>Fork me on GitHub!</a>  Fix an issue with Johz today!",
+        "Proud Fenda Scum",
+        "Try this site in a <a href='#theme-switcher'>different theme</a>.",
+        "Built with the three 'P's, <a href='http://getpelican.com/'>Pelican</a>, <a href='http://python.org/'>Python</a>, and <a href='https://github.com/MrJohz/pillbox-theme'>Pillbox</a>.",
+    ]
+
+    index = Math.floor(Math.random() * quotes.length);
+    document.writeln("<div id='quote'>")
+    document.writeln("    " + quotes[index])
+    document.writeln("</div>")
+  </script>
+
+<section id="content">
+  <h2 id="content-title">Articles with the humour tag</h2>
+    <article class="blog-article">
+
+      <header class="article-header">
+        <h2 class="entry-title">
+          <a href="http://johz.me/posts/2015/Jan/17/get-benched/" class="no-hilite" rel="bookmark" title="Permalink to A Collection of Benchmarks that I Found Useful">
+            A Collection of Benchmarks that I Found&nbsp;Useful
+          </a>
+        </h2>
+      </header>
+      <footer class="article-footer">
+        Published <abbr class="published" title="2015-01-17T12:02:32+00:00"> Sat 17 January 2015 </abbr>
+          by <a href="http://johz.me/author/johz.html">Johz</a>
+      </footer>
+
+      <div class="article-text">
+        <p>As Donald Knuth once explained, 97% of a programmer&#8217;s time should be spent making their code as fast as possible.  (The other 3% is waiting for the code to compile.)  Most programmers have a host of shortcuts, tricks, and clever codes up their sleeves to ensure that their code runs as fast as it possibly can.  For example, in JavaScript, many developers have spent years studying the secret arts of the for-loop to determine how to loop through arbitrary numbers most quickly.  (The answer to this particular question is actually an inverse-backwards while-never-done-loop, where the first character on each line is an &#8216;a&#8217;, and where the programmer chants hymns worshipping Azathoth.)  The faster their code works, the more web-scale their <del>node.js</del> io.js programs will&nbsp;be.</p>
+<p>There are lots of myths, legends, and rumours about optimization, and it&#8217;s often very difficult to sort out the truth from the lies.  However, to help us in our quest for absolute speed, good programmers should always use benchmarks.  Benchmarks are a way of comparing like-for-like speeds of two programs, each containing different ways of doing the same thing, to determine which method is the quickest, and should therefore be used in all circumstances.  Of course, true benchmarks are often extremely difficult, and so programmers are often forced to compare unlike-for-unlike.  However, the major differences between like-for-like and unlike-for-unlike are usually negligible, and so a good programmer can almost always simplify a complex comparison into a very straight race between two arbitrary pieces of code, and interpret the results correctly.  This simplification is done in much the same way that a physicist simplifies complex problems to simple ones using spherical cows in a&nbsp;vacuum.</p>
+<h3>The Importance of&nbsp;Whitespace</h3>
+<p>The first misconception that many programmers have is that whitespace makes no difference.  While in most cases, good compilers can optimize away whitespace, and sometimes even remove it entirely from the resulting binary, it can still make a large difference to compile-times, and as programmers need to spend at least 97% of their time optimising, decreasing the length of time that a programmer needs to wait to compile a program is always a good thing.  Of course, this is to say nothing of interpreted programs, where there is no compilation stage, and so the whitespace cannot ever be optimized away, and must remain during the final execution of the&nbsp;program.</p>
+<p>The best way to demonstrate this is with a benchmark.  Consider the programs fast.c and slow.c (these are available on Github <a href="https://github.com/MrJohz/benchmarks/tree/master/whitespace">here</a>, although I would encourage you not to actually open slow.c unless you like dealing with very large text files).  They both do the same thing - print out &#8220;Hello, World!&#8221;.  However, they have radically different compile times because of the amount of whitespace involved.  If we run the <code>make</code> command, we can get the output, which includes timings of individual portions as performed by <code>gcc</code>.</p>
+<div class="highlight"><pre><span class="gp">$</span> make
+<span class="go">Fast implementation (no whitespace)</span>
+<span class="go">wc -c fast.c</span>
+<span class="go">104 fast.c</span>
+<span class="go">gcc -time fast.c</span>
+<span class="gp">#</span> cc1 0.02 0.00
+<span class="gp">#</span> collect2 0.02 0.00
+
+<span class="go">Slow implementation (some whitespace)</span>
+<span class="go">wc -c slow.c</span>
+<span class="go">86124463 slow.c</span>
+<span class="go">gcc -time slow.c</span>
+<span class="gp">#</span> cc1 0.18 0.04
+<span class="gp">#</span> collect2 0.02 0.00
+</pre></div>
+
+
+<p>Here it is very easy to see that having to parse 83 thousand times the amount of bytes actually made the second implementation slightly slower to compile!  This is of huge importance in our files.  While we may not always notice the speed difference in our day-to-day programming experience, it is always good practice to use as little whitespace as possible when writing programs.  As I mentioned earlier, this applies to both compiled programs and interpreted programs, although the difference for the latter is much greater, as the performance hit will actually occur during runtime.  What you may not know (and what hasn&#8217;t been demonstrated here, but is left as an exercise to the reader) is that this also applies to comments as well - this is in fact the main reason for the &#8220;self-documenting code&#8221; movement, as repeating the documentation both in the code itself, and in comments alongside the code, is known to slow down character-by-character file input by as much as 200% (for perfectly balanced code/comment&nbsp;combinations).</p>
+<h3>Interpreted vs&nbsp;Compiled</h3>
+<p>Another important area of concern for programmers is the debate between interpreted languages and compiled languages.  Essentially, interpreted programming languages do all of the work when they are run, whilst compiled programming languages do some work at compile-time, and some work at runtime.  This would suggest that compiled programming languages are generally faster when being run, as they have to do less work at runtime.  The issue with this naive understanding of programming is that it doesn&#8217;t take into account the amount of work done at compile-time.  Proper benchmarking should include all stages of a program&#8217;s execution, even the stages before it&#8217;s actually started to&nbsp;execute.</p>
+<p>There is also a middle ground between compiling a programming and directly interpreting a program.  Many modern interpreters are actually &#8220;<span class="caps">JIT</span>&#8221; compilers, which do both compilation and interpretation at the same time, at runtime.  While they still have to do all of the work at runtime, they are able to do extra work making other parts of the program take less work.  The aim is that eventually the amount of work that is saved will be greater than the amount of extra work that is required, but it is doubtful if this will ever happen.  Many computer experts believe that <span class="caps">JIT</span> compilers will remain in the realm of fantasy and academia for many years to come.  However, in the interests of fairness, we will also use a <span class="caps">JIT</span> compiler in our&nbsp;benchmarking.</p>
+<p>Our test will be a simple &#8220;Hello, World!&#8221; example - that is, all three programs (compiled, interpreted and <span class="caps">JIT</span>-interpreted) should simply print out the phrase &#8220;Hello, World!&#8221;.  While this is generally an extremely simple task, we will easily be able to extrapolate from the results any conclusion that we would like to draw.  The programming languages that we shall use will be C++ (compiled using &#8220;g++ (Ubuntu 4.8.2-19ubuntu1) 4.8.2&#8221;, whatever that means); Python (interpreted using &#8220;CPython 3.4.2&#8221;); and Python again (this time <span class="caps">JIT</span> compiled using &#8220;Python 3.2.5&#8221;).  As we said previously, a good benchmark should compare all parts of a program&#8217;s lifetime, so we will measure the length of time it takes the C++ program to compile, as well as the execution time for all the programs.  As in the previous test, the test-code is available on <a href="https://github.com/MrJohz/benchmarks/tree/master/int-comp">GitHub</a>.</p>
+<div class="highlight"><pre><span class="gp">$</span> make
+<span class="go">C++ version</span>
+<span class="go">../benchmarker.py -n20 &quot;g++ helloworld.c -ohelloworld &amp;&amp; ./helloworld&quot;</span>
+
+<span class="go">------------------------------ </span>
+<span class="go">   g++ helloworld.c -ohelloworld &amp;&amp; ./helloworld</span>
+<span class="go"> max/min:    0.07519780099755735     0.053425493999384344</span>
+<span class="go"> mean ave:   0.06308976999989682</span>
+<span class="go"> median ave:     0.06266852850058058</span>
+<span class="go">------------------------------</span>
+<span class="go">CPython version</span>
+<span class="go">../benchmarker.py -n20 &#39;python -c &quot;print(\&quot;Hello, World\&quot;)&quot;&#39;</span>
+
+<span class="go">------------------------------ </span>
+<span class="go">   python -c &quot;print(\&quot;Hello, World\&quot;)&quot;</span>
+<span class="go"> max/min:    0.0267868869996164      0.023469741001463262</span>
+<span class="go"> mean ave:   0.02465028059996257</span>
+<span class="go"> median ave:     0.02490398199915944</span>
+<span class="go">------------------------------</span>
+<span class="go">PyPy version</span>
+<span class="go">../benchmarker.py -n20 &#39;pypy -c &quot;print(\&quot;Hello, World\&quot;)&quot;&#39;</span>
+
+<span class="go">------------------------------ </span>
+<span class="go">   pypy -c &quot;print(\&quot;Hello, World\&quot;)&quot;</span>
+<span class="go"> max/min:    0.22487263600123697     0.16340099499939242</span>
+<span class="go"> mean ave:   0.20837249334999797</span>
+<span class="go"> median ave:     0.21045488100025977</span>
+<span class="go">------------------------------</span>
+</pre></div>
+
+
+<p>The statistics here are extremely clear - interpreted programs actually run faster than compiled programs, if you include the compilation time.  What is interesting - albeit not necessarily unexpected - to note is that the pypy attempt took on average nearly ten times as long as the CPython attempt.  As I said earlier, <span class="caps">JIT</span> compilers are very much in the realm of academia currently, and we are unlikely to see one of these outperform a proper programming language implementation in the next&nbsp;decade.</p>
+<p>While not specifically tested in this particular test, it&#8217;s also important to note that both of the Python programs were significantly shorter than the C++ program, and could indeed be sent to the interpreter as a single line.  On the other hand, the C++ program had to be written in a separate file, and even the command itself had more text on it.  The upshot of this is that the C++ program contains more whitespace - of course, in this benchmark that probably isn&#8217;t a huge factor, but experience programmers should be wise to the fact that Python&#8217;s terseness often offers a not insignificant speed&nbsp;bonus.</p>
+<h3>Direct&nbsp;Comparison</h3>
+<p>Of course, these are just specific features of individual programming languages that we have been comparing so far.  In many cases, we want to know how the overall program would perform in a real-life situation.  This will often require large and extensive benchmarks that compare a number of different programming languages.  One of the big pitfalls that many of these benchmarks fail to avoid is the use of idiomatic programming features.  In most languages, there is a &#8220;right&#8221; way to do things and a &#8220;wrong&#8221; way to do things.  For example, the Java <span class="caps">JVM</span> is extremely versatile when it comes to loops, as it can make these run as efficiently as possible.  However, many Java users fail to realise this, and there is a lot of lost potential in many Java programs.  For example, most naive Java users would write a method that adds two numbers like&nbsp;so:</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">slowAdd</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>In actual fact, idiomatic Java would look much more like&nbsp;this.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">fastAdd</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">a</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">result</span><span class="o">++;</span>
+    <span class="o">}</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">result</span><span class="o">++;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>This will work much faster, due to the <span class="caps">JVM</span>&#8217;s affinity for looping&nbsp;constructs.</p>
+<p>Of course, the differences between programming languages often goes a lot further than the best way to add different numbers together.  Most programming languages were designed for completely different purposes, and as a result testing them all in exactly the same way is usually the wrong way to do benchmarks.  Instead, the challenges given to each programming languages (and the method used to complete the challenge) should be specifically designed for each programming language.  Of course, to maintain independence, each programming language should be measured in exactly the same way, otherwise the results would be&nbsp;incomparable.</p>
+<p>In our comparison, we&#8217;ll test Python, Java, and Perl, attempting to write the most idiomatic code possible to ensure that each language has the best possible chance.  The source code for this test will not be on GitHub, as anyone fluent in these languages should be writing these things every day, and there really is no need to bombard you with thing that I&#8217;m sure you already&nbsp;know.</p>
+<p>In our Python program, we will be attempting to write the most commonly written Python program, <code>print("Hello, World!")</code>.  Many people would question the use of such a basic test, but the huge number of people who demonstrate this piece of code as evidence of Python&#8217;s simplicity and versatility in all things cannot be called into question.  Ultimately, if you can write the Hello, World! Python program, you can write any piece of Python code at all, as long as it solely involve printing out a string.  As a result, this is the benchmark code I will&nbsp;use.</p>
+<p>On the other hand, very serious people use Java to do very serious things, and so to trivialise the language to simply printing out a string would be to do the Java community a huge disservice.  Instead, our benchmark Java code will create a server, and wait indefinitely for a response.  This is basically the code that most Java experts write every day.  Unfortunately it will not be <em>truly</em> idiomatic Java, as that would require a huge number of Java classes that I honestly can&#8217;t be bothered to write just for the sake of a cheap shot, especially as it&#8217;s been done <a href="https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition">before</a>.  It is arguable that the Java code will be unable to stop, as it will hang forever until it receives a quit signal at the terminal.  To be honest, I think this just makes it more and more clear how slow idiomatic Java code is.  Also buggy.  Java code is probably buggy too.  It&#8217;s still cool to hate Java,&nbsp;right?</p>
+<p>Finally, we have our Perl program.  Perl is designed to be as quick as possible, by omitting any extraneous necessities like readability.  No-one is quite sure what idiomatic Perl programs should actually do, as it is difficult to remember the exact invocation syntax for that Perl script you wrote several years ago that you&#8217;re quite sure did something with <span class="caps">XML</span> files, but you&#8217;re not really sure <em>what</em>.  Of course, you could just read the source, but to be honest it would probably be easier to rewrite the whole thing rather than dabble in that sort of black magic and&nbsp;wizardry.</p>
+<p>It turns out that the idiomatic Perl program doesn&#8217;t actually work.  I&#8217;m 90% certain I wrote everything write, so I&#8217;m going to blame the Perl interpreter.  Perl is, after all, notoriously difficult to read, and everyone knows that computers are fairly&nbsp;stupid.</p>
+<p><img alt="Basically, Python won.  Also Dumbledore dies at the end.  Spoiler." src="http://i.imgur.com/1kccxn5.png" /></p>
+<p>In the end, it appears that Python won both of the benchmarks that it was involved in, compared to C, and also compared to Java and Perl.  A basic interpretation of these results would suggest that, when writing programs that print out &#8220;Hello, World!&#8221;, Python is extremely strong.  We can also quickly extrapolate from this that Python is probably the best language in the world for most of the world&#8217;s problems.  Thankfully, as a Python programmer, I have basically just proved exactly what I knew already - I mean, it would be a bit shocking if it suddenly turned out I&#8217;d been wrong,&nbsp;eh?</p>
+<p>Thanks for reading this short, humble, but extremely accurate blog on proper benchmarking practice.  There are a lot of people on the internet who are producing very dangerous and misleading benchmarks, that encourage people down dangerous paths, such as trying silly languages, just because they appear to beat certain things on certain benchmarks.  As I have clearly shown here, there is a right way to interpret benchmark results, and a wrong way.  I encourage you to share this with your friends, family, and strangers that you meet on the street, and particularly with those who persist in producing irrelevant and silly benchmarks simply for the sake of&nbsp;comparison.</p>
+<p>Python for&nbsp;life!</p>
+      </div>
+
+        <hr class="article-divider">
+
+    </article>
+    <article class="blog-article">
+
+      <header class="article-header">
+        <h2 class="entry-title">
+          <a href="http://johz.me/posts/2013/Nov/25/on-doctor-who-and-cosmic-harmony/" class="no-hilite" rel="bookmark" title="Permalink to On Doctor Who and Cosmic Harmony">
+            On Doctor Who and Cosmic&nbsp;Harmony
+          </a>
+        </h2>
+      </header>
+      <footer class="article-footer">
+        Published <abbr class="published" title="2013-11-25T11:01:51+00:00"> Mon 25 November 2013 </abbr>
+          by <a href="http://johz.me/author/johz.html">Johz</a>
+      </footer>
+
+      <div class="article-text">
+        <p>Doctor Who is 50 years old as of two days ago, and the celebrations have been going strong.  From documentaries on the life of the First Doctor, William Hartnell, to guest lectures on time travelling science by Brian Cox, and of course the grand event, the 50th Anniversary Special Episode.  All very exciting,&nbsp;really.</p>
+<p>And, as with any big celebration, it is natural for people to be rather profuse in their congratulations of the show.  As a vast array of celebrities from the most minor to the most major, including a worrying number of teen boy bands, queued up to express admiration for Matt Smith&#8217;s hair, it was perhaps expected that some people would push the boundaries of tripe to truly unimaginable&nbsp;levels.</p>
+<p>As a fairly committed fan of Doctor Who, and a much, much more committed fan of my own voice, I thought I should take a quick look at some of this tripe.  After all, a lot of it was spouted by Americans, who just don&#8217;t understand the British way of absolute stoicism in the face of all emotion.  When discussing such British classics as Doctor Who, any sense of feeling or passion should have been drained away a long time ago.  Really, the amount of meaning in many comments on the show would disappointment to my eyes, if disappointment were not too emotive a feeling to actually&nbsp;feel.</p>
+<p>However, in my attempt to overanalyse these overanalyses, I realised something worryingly deep and meaningful about myself.  Well, I didn&#8217;t, I just say that.  But I did realise that Doctor Who is a damn good television show.  Sure there&#8217;s some stuff that&#8217;s really rather over the top.  I direct this particularly at the 12-year-old American featured on the Doctor Who Afterparty who was about to get married.  His comments were really worryingly over the top.  Ultimately, though, I think we can all forgive those who get slightly carried away.  It is after all a relatively auspicious occasion: only a month and two days until&nbsp;Christmas.</p>
+<p>So I&#8217;m going to ignore these transgressions, and merely present to you a proper, emotionless congratulation of this long-running&nbsp;show:</p>
+<p>Eh, it&#8217;s done quite well to get this&nbsp;far.</p>
+      </div>
+
+
+    </article>
+
+    <p class="paginator">
+            &laquo;
+        Page 1 / 1
+            &raquo;
+    </p>
+</section>
+
+
+      <div id="theme-switcher">
+        Change Theme <br />
+      </div>
+      <script>
+        themeSwitcher.addSwitcher('theme-switcher');
+        themeSwitcher.addCycleButtons();
+      </script>
+
+    <footer id="footer">
+      <p>This blog is built using <a href="http://getpelican.com">Pelican</a>, <a href="http://python.org">Python</a>, and the Pillbox theme.</p>
+      <p>
+<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/" class="no-hilite">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" />
+</a>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" class="no-hilite">
+    <img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+</a><br />
+Unless otherwise specified, content on this blog is available under the
+<a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons
+Attribution 4.0 International License</a>.  Likewise, unless otherwise
+specified, code samples are in the
+<a href="http://creativecommons.org/publicdomain/zero/1.0/">public domain</a>.
+The blog's theme (pillbox) is available under the MIT license on
+<a href="https://github.com/MrJohz/pillbox-theme">Github</a>.
+</p>
+    </footer>
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,26 @@
+Title: The Truth of the Matter
+Slug: the-truth-of-the-matter
+Date: 2013-10-18 01:10:00Z
+Tags: meta, pelican, octopress
+
+
+You may have noticed something about my blog over the past few days, and that is that I have been lying.  Lying over the internet is truly one of the most heinous of crimes, and yet it has been committed right in front of your eyes.  And now I can only do the rightful thing and admit to the hideous falsity that I have constructed.
+
+This site was not built with Octopress.
+
+I can imagine your shock, but I hope you will at least grant me time to explain myself.  When I started putting together my new, exciting blog, I had originally planned for it to be a Wordpress blog.  I'd find some nice plugins, get myself a nice theme, and, hey presto, a beautiful, dynamic blog that would not only be simple to browse, but easy to edit and modify.  But then I actually got Wordpress, and somehow it didn't feel right.  There wasn't a nice syntax highlighting module, and the markdown abilities weren't the impressive beasts that I have become accustomed to.  Additionally, it just lacked the customisability I wanted.  I guess if I knew PHP I'd be able to play a lot more with it, but in the end, I said no to Wordpress.
+
+Of course, this lead me on a search through the wilderness to find Octopress, that bastion of cool, Ruby-esque hip-ness.  I got on relatively well with Octopress, despite the fact that it didn't get on very well with me.  In the end, however, I was driven away by the fact that my posts were in some oddly-named folder hidden in a directory that I didn't know or care about.  The tribulations of making an Octopress post eventually outweighed the power and cool nature of Octopress.  This, however, was the point that I left you at, the point at which I left you with the now-erroneous impression that I use Octopress.
+
+What do I use now, then?  Well, I wanted something written in a language I could understand.  Ruby was good, but Python was better.  I liked the idea of a static blog, but I didn't want to hunt down posts in odd folders, I wanted it to all look fairly obvious.  I wanted something that was simple enough that all I needed was a simple script to build, test, serve, and upload to my server, yet actually quite powerful underneath.  Thus, this blog is now hosted with [Pelican][pelican].
+
+Pelican is quite cool.  It does most of the things that Jekyll/Octopress do, but with a very heavy emphasis on "articles" or blog posts.  Like Octopress, it provides a quickstart script that sets most of your default settings, and builds your Makefiles/Fabfiles for you.  It should be noted that, for me at least, the Fabfile is broken in ways that confuse me completely, but the Makefile has worked like a dream.  It's based on markdown *and* reStructedText.  It comes with an array of themes and plugins.  It's generally quite impressive.
+
+Speaking of themes, you might have noticed that this blog has a new theme.  Sure, it should be obvious that getting new blogging software almost always precipitates getting a new theme, but this theme is special, because I built it.  Personally I am amazed.  I ask dearly that no-one who knows anything about web design look at the css files, as they are a hideous mess put together using less, random snippets from stackoverflow, and moments of frenzied inspiration.  I might minify them just so that people can't see how bad my CSS-fu is.
+
+However, it seems to work, both here on my laptop, and also on my all-important phone.  It's pretty much all simple css, so it should run pretty quickly.  I have a vague plan to add extra colour-schemes, and then allow the user to select different themes, and then save preferences client-side, and all sorts of exciting things like that, but apart from that I've tried to limit my excitement for overly-complex javascript scripts to the random-quote generator at the top of the main page.  (Scroll up and refresh the page to see the exciting quotes!  I spent, like, thirty seconds on them!  They're my best work!)
+
+Anyway, to conclude: Welcome to what will almost certainly hopefully maybe my new blog!  Perhaps.
+
+[jinja2]: <http://jinja.pocoo.org/docs/>
+[pelican]: <http://getpelican.com/>

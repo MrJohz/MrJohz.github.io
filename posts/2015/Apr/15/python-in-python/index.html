@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <script type="text/javascript">
+  themes = [
+    'dark',
+    'light',
+  ];
+      themeDefault = "dark";
+  </script>
+
+  <script type="text/javascript">
+    window.themeSwitcher=new function(e,t){"use strict";var n=function(e,t,n){if(Array.prototype.indexOf){return Array.prototype.indexOf.apply(e,Array.prototype.slice.call(arguments,1))}var r,i=n?n:0,s;s=e.length;if(s===0||i>=s){return-1}if(i<0){i=s-Math.abs(i)}for(r=i;r<s;r++){if(e[r]==t){return r}}return-1};var r="pillbox-theme-tester-value";var i="pillbox-theme";var s=this;s.lsExists=false;s.themes=e;s.defaultTheme=n(e,t);s.currentTheme=s.defaultTheme;try{localStorage.setItem(r,r);if(localStorage.getItem(r)===r){localStorage.removeItem(r);s.lsExists=true}}catch(o){}var u=function(e){if(e>=0&&e<s.themes.length){return{s:s.themes[e],i:e}}else{return{s:s.themes[s.currentTheme],i:s.currentTheme}}};var a;if(s.lsExists){var f=localStorage.getItem(i);s.currentTheme=n(e,f);if(s.currentTheme<0){s.currentTheme=s.defaultTheme}a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");localStorage.setItem(i,t.s);s.currentTheme=t.i}}else{a=function(e){var t=u(e);var n=document.getElementById("main-theme");var r=n.href.split("/");r[r.length-1]=t.s+".min.css";n.href=r.join("/");s.currentTheme=t.i}}s.writeStyle=function(){var e=s.themes[s.currentTheme];document.write('<link id="main-theme" href="http://johz.me/theme/css/');document.write(e+'.min.css" rel="stylesheet" />')};s.getStyle=function(e){if(e==null||typeof e==="undefined"){return s.currentTheme}else if(typeof e==="number"&&e===Math.floor(e)){return u(t).s}else{var t=n(s.themes,e);if(t>-1){return t}else{return s.currentTheme}}};s.setStyle=function(e){var t=s.getStyle(e);if(t==s.currentTheme){return}a(t)};s.cycleStyle=function(){console.log(s.currentTheme);a((s.currentTheme+1)%s.themes.length)};s.addSwitcher=function(e){var t=document.getElementById(e);var n=document.createElement("select");n.id="theme-switcher-select";for(var r=0;r<s.themes.length;r++){var i=s.themes[r];var o=document.createElement("option");o.value=i;o.appendChild(document.createTextNode(i));if(r==s.currentTheme){o.selected=true}n.appendChild(o)}n.onchange=function(){var e=this.options[this.selectedIndex].value;themeSwitcher.setStyle(e)};t.appendChild(n)};s.addCycleButtons=function(){var e=document.querySelectorAll("a[href='#cycle-themes']");for(var t=0;t<e.length;t++){var n=e[t];n.addEventListener("click",function(e){e.preventDefault();s.cycleStyle()})}}}(themes,themeDefault)
+
+    themeSwitcher.writeStyle();
+  </script>
+  <noscript>
+    <link id="main-theme" href="http://johz.me/theme/css/dark.min.css" rel="stylesheet" />
+  </noscript>
+
+      <title>Johz</title>
+
+  <link href="http://johz.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Johz Full Atom Feed" />
+  <link href="http://johz.me/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="Johz Categories Atom Feed" />
+
+
+
+
+
+    <meta name="tags" contents="python" />
+    <meta name="tags" contents="coding" />
+
+  </head>
+
+  <body>
+    <header id="header">
+      <h1 id="header-title"><a class="no-hilite" href="http://johz.me/">
+        <div id="sitename">Johz</div>
+      </a></h1>
+    </header>
+
+      <nav id="menu"><ul>
+
+
+          <li><a href="#cycle-themes">Change Theme</a></li>
+
+            <li  ><a href="http://johz.me/pages/about-me.html">About&nbsp;Me</a></li>
+
+
+
+      </ul></nav>
+
+
+<section id="content">
+  <article class="article blog-article">
+    <header class="article-header">
+      <h2 class="entry-title">
+        <a href="http://johz.me/posts/2015/Apr/15/python-in-python/" class="no-hilite" rel="bookmark" title="Permalink to Writing Python in Python">
+          Writing Python in&nbsp;Python
+        </a>
+      </h2>
+    </header>
+    <footer class="article-footer">
+        Published <abbr class="published" title="2015-04-15T11:50:00+01:00"> Wed 15 April 2015 </abbr>
+          by <a href="http://johz.me/author/johz.html">Johz</a>
+      </footer>
+    <div class="article-text">
+      <p>Python was my first programming language.  Some time around the age of sixteen or
+seventeen, I got it into my head that I should learn a programming language, and one thing
+lead to another, and I ended up working through Swaroop&#8217;s <a href="http://www.swaroopch.com/notes/python/">A Byte of Python</a>, and
+then Sande <span class="amp">&amp;</span> Sande&#8217;s <a href="http://www.manning.com/sande/">Hello World</a>.  The latter was particularly good,
+and I learned a lot of stuff, and, alongside most new programmers, I loved getting my
+computer to do things that I&#8217;d told it to&nbsp;do.</p>
+<p>That said, Python didn&#8217;t excite me.  Programming was cool, and new, and fun, but Python
+itself was, well, the tool I used.  And a fairly standard tool at that.  What changed
+was <a href="http://corepython.com/">Core Python Programming</a>.  (Yes, this is basically book review corner,
+I&#8217;ll get to the more interesting stuff in a minute&#8230;)  Core Python, despite being
+somewhat out-of-date at this point (although it does include notes on pre-announced 2.6
+features, and a couple of paragraphs on how Python will slowly be transitioning to
+&#8220;Python 3000&#8221;, which I&#8217;m sure if very exciting news for all of us!) was a particularly
+good book at describing Python, rather than just programming.  Which finally brings us
+on to the first bit of code that made me feel really excited about <em>Python</em>.</p>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">MyNumber</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">my_num</span> <span class="o">=</span> <span class="n">num</span>
+
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MyNumber</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">my_num</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">my_num</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;MyNumber(&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">my_num</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;)&quot;</span>
+</pre></div>
+
+
+<p>What&#8217;s so special about these two lines?  Well, this is a method inside a user-defined
+class in Python.  More specifically, it&#8217;s a &#8220;magic method&#8221;, or dunder method (dunder as
+in double underscore) that is called when the addition operator is used on the defined
+class.  It allows the user of this class to write code that looks like&nbsp;this:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MyNumber</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">MyNumber</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>  <span class="c"># MAGIC!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">my_num</span>
+<span class="go">15</span>
+</pre></div>
+
+
+<p>To me, however, this was my first chance to break open Python and write&nbsp;inside.</p>
+<p>You see, Python is written in Python.  This is an almost entirely untrue statement, so I
+probably ought to explain myself first.  I&#8217;m not talking about the interpreter, which for
+most people is written in C.  No, I&#8217;m talking about the language itself.  The language
+&#8220;Python&#8221; is written in&nbsp;Python.</p>
+<p>This statement is only somewhat untrue.  That&#8217;s a start!  Here&#8217;s an&nbsp;example.</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">MyNumber</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">__add__</span>
+<span class="go">&lt;method-wrapper &#39;__add__&#39; of int object at 0x829c1c0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">__add__</span>
+<span class="go">&lt;bound method MyNumber.__add__ of MyNumber(3)&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">__add__</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">+</span> <span class="mi">7</span>
+<span class="go">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">__add__</span><span class="p">(</span><span class="n">MyNumber</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<span class="go">MyNumber(10)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">+</span> <span class="n">MyNumber</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">MyNumber(10)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">+</span> <span class="s">&quot;string&quot;</span>  <span class="c"># Python doesn&#39;t do automatic coercion, remember!</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">__add__</span><span class="p">(</span><span class="s">&quot;string&quot;</span><span class="p">)</span>  <span class="c"># Surely this should do the same thing?</span>
+<span class="go">NotImplemented</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">+</span> <span class="s">&quot;string&quot;</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">5</span>, in <span class="n">__add__</span>
+<span class="gr">AttributeError</span>: <span class="n">&#39;str&#39; object has no attribute &#39;my_num&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">__add__</span><span class="p">(</span><span class="s">&quot;string&quot;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">5</span>, in <span class="n">__add__</span>
+<span class="gr">AttributeError</span>: <span class="n">&#39;str&#39; object has no attribute &#39;my_num&#39;</span>
+</pre></div>
+
+
+<p>The most interesting bits here are the differences between the built-in int operations,
+and the custom MyNumber class operations.  Here&#8217;s each one in&nbsp;turn:</p>
+<p>Firstly, in Python 3, classes have functions attached to them.&nbsp;Instances</p>
+    </div>
+  </article>
+
+  <p class="paginator">
+    Writing Python in&nbsp;Python
+      <a href="http://johz.me/posts/2015/Jan/17/get-benched/">&raquo;</a>
+  </p>
+
+  <div id="disqus-comments-container"></div>
+</section>
+
+
+      <div id="theme-switcher">
+        Change Theme <br />
+      </div>
+      <script>
+        themeSwitcher.addSwitcher('theme-switcher');
+        themeSwitcher.addCycleButtons();
+      </script>
+
+    <footer id="footer">
+      <p>This blog is built using <a href="http://getpelican.com">Pelican</a>, <a href="http://python.org">Python</a>, and the Pillbox theme.</p>
+      <p>
+<a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/" class="no-hilite">
+    <img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" />
+</a>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" class="no-hilite">
+    <img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+</a><br />
+Unless otherwise specified, content on this blog is available under the
+<a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons
+Attribution 4.0 International License</a>.  Likewise, unless otherwise
+specified, code samples are in the
+<a href="http://creativecommons.org/publicdomain/zero/1.0/">public domain</a>.
+The blog's theme (pillbox) is available under the MIT license on
+<a href="https://github.com/MrJohz/pillbox-theme">Github</a>.
+</p>
+    </footer>
+
+
+
+  </body>
+
+</html>

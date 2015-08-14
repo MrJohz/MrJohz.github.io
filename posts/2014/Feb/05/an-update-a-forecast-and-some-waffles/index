@@ -1,0 +1,32 @@
+Title: An Update, A Forecast, and some Waffles
+Slug: an-update-a-forecast-and-some-waffles
+Date: 2014-02-05 22:02:39
+Tags: meta, working
+
+
+I lied about the waffles.
+
+What you're actually going to get is me waffling on for a bit.  It's almost the same thing, except not as edible, not very tasty, and it can't be smothered in chocolate sauce.  Like I said, I completely lied about the waffles, I just couldn't come up with a snappy sounding title.
+
+So an update.  Update might be the wrong word, it's more a sort of reflective moody thing, where I pretend I've regressed five years and am living in a pokey black-painted bedroom with heavy metal posters on all the walls and a general feeling of internal self-loathing.  That's right, I'm taking a second adolescence, on the principle that it works for politicians and second homes.
+
+To talk about updates, I'd like to initially introduce my housemate, who we'll call Elgar because I really wish I knew someone who was called Elgar.  Despite being about as good at programming as I am at most athletics-based sports, he has this magic ability to come in and debug my code for me, often while scarcely understanding what it is that I'm trying to do.  I like to call this the "new eyes syndrome", because I'm in a pretentious mood.  To give you an example, I spent a good hour trying to work out a where a segfault was coming from in some C++ code, when he walked in, took one look at my code, and told me that I was using the wrong input file.  It's a very helpful skill to have around as a coder, because when you get onto a particular coding path, you tend to forget the other ways of solving the problem.  Or at least that's how it works for me.
+
+Anyway, earlier this afternoon, Elgar walked in and debugged my life, which was a slightly unsettling experience.  I can't quote you the exact words he said, because I have a memory like a sieve, but it was something along the lines of "Why aren't you coding anymore?"
+
+That's a very good question, Elgar.  Why am I not coding anymore?  Also, should "anymore" be "anymore", or "any more"?
+
+With respect to the former (the latter is as of yet unsolved, please send a postcard if you think you know the answer), I think it's because I've become a consumer, rather than a producer.  Most things operate on a simple principle: One person (or group of people) will produce, while other people (or person) will consume.  Take code.  I like to believe that most of my code is for an eventual consumer, who invevitable turns out to be either myself, or the hard drive as I forget all about the project and leave it rotting.  Or more generally, television is made by a producer (quite literally in this case, although a number of other people also take part in that role), and we as consumers consume it.
+
+Once upon a time, I think I had a good grasp of the two sides of the story.  I consumed a handful of television shows, YouTube channels, comical blogs, and the Grand World of IRC, and I also enjoyed a bit of flash gaming on the side.  Yet I also wrote code and blog posts, and I actively took part in NationStates, which could be considered producing activity, but I'm really just shoehorning it in there to make this rough, overextended analogy work.  On top of this, once upon a time, I actually did work.
+
+These days, I play Minecraft and watch videos.
+
+So what is this update?  Well, this update is to say that I've started to begin to recognise this, and I'd like to get back to actually doing some producing now.  It also leads directly into the forecast.
+
+First off in my grand forecast of things to come in the next few weeks/months/years/millenia, I need to poke around with my WFE archive system, which is a NationStates thing but may or may not have some quite cool stuff in it.  Secondly, as I said, I've been playing Minecraft, and the Exciting World of Modding has appeared before my eyes, and I am very tempted to start diving in, in no small part due to the fact that I really would like to get some java experience under my belt before I leave university, even if it is akin to drowning my eyeballs in vats of sulphur.  Thirdly, I want to blog more.  I was talking to someone on IRC about this recently, and it's a really fun and helpful thing to do.  It gets you used to writing large amounts of stuff consistently.  It gets you used to thinking about things properly.  Essentially, go and get a blog.  That will solve all the world's problems.
+
+I would like to briefly say something about my own circumstances.  Next week, if all goes to plan, I shall be donating my stem cells to someone with leukemia.  It's quite scary, but it's quite exciting.  I get to go down to London, which despite being a city-boy myself, is still extremely exciting.  It won't be terribly painful, as these days most people donate via PBSC, which is essentially a prolongued blood donation, but where you get the blood back at about the same rate that you donate it.  I'd like to encourage you, my dear reader (that's a very deliberate singular, there's definitely only one of you, hello Mum!) to think about joining the registry.  Eventually, I'll write up everything that happened to me, add a page on the blog, and offer round links to the bone marrow registry, but for now, here are two sites that you ought to explore:  [The UK NHS site on bone marrow donation][nhs], and the [Anthony Nolan Foundation homepage][anthony], Anthony Nolan being the organisation that I'm donating with.  I'd really recommend checking those out, because it's one of those relatively small things you can do that will drastically improve - hell, let's be blunt, the word here is *save* - someone's life.  Anyway, that's happening Monday 'til Wednesday, depending on how everything works out, so wish me luck, and/or pray for me.
+
+[nhs]: <http://www.nhsbt.nhs.uk/bonemarrow/>
+[anthony]: <http://www.anthonynolan.org/>

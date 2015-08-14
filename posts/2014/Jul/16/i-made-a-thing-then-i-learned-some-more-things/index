@@ -1,0 +1,70 @@
+Title: I Made A Thing.  Then I Learned Some More Things.
+Slug: i-made-a-thing-then-i-learned-some-more-things
+Date: 2014-07-16 10:35:18
+Tags: coding, python, optimisation
+
+
+I made a [thing][wfe].  The thing is called "The WFE Thing", because I am unoriginal with names.  It is a thing for WFEs, which are World Factbook Entries, which are a part of a not-particularly-famous game called [NationStates][ns].  The importance of WFEs is hard to understand unless you understand raiding and defending in NationStates, and even then one could very easily fail to recognise the necessity of the tool I have constructed.  Essentially, sometimes bad people delete other people's data, but this is entirely legal and acceptable in the game.  To counter this, other people come along afterwards and undo it, not because they have to as moderators or admins, but out of the fun of doing so, and out of care for the people whose data was deleted.  The WFE Thing records some (but not all) of this data from historical points so that it can be accessed easily at any time.  If this makes any sense to you at all, you're a better person than me.
+
+[wfe]: <http://wfe.johz.me>
+[ns]: <http://www.nationstates.net/>
+
+But enough about NationStates, let's talk about The WFE Thing, because it was fun to make and I need an excuse to write a blog post because I've been really missing it recently.
+
+The need for a historical list of WFEs (just think of this as a more regular, specific version of the [Wayback Machine][wayback]) has produced multiple versions of The WFE Thing.  The original was created by a lovely chap named Solm, in PHP, and it generally worked really well, until at some point it stopped working.  At that point, I decided that I could make my own one.  This was around the time that I had been making this blog, and what I really like about this blog is that it is entirely static, and yet the Javascript on it gives it a lovely dynamic feel.  So I wondered if I could make a WFE thing that was entirely static except for a javascript-based frontend.
+
+[wayback]: <http://archive.org/web/>
+
+The basic idea was that if pages could be static files, so could too could the API a set of static .json files in an `api/` directory somewhere.  There's a lot of merit to this idea in many respects.  If you use traditional server software such as [Apache][apache] or [Nginx][nginx], you've already got a system that is extremely optimised for throwing files down the right tubes to make a website.  Things go quickly, but they also go efficiently, which, when you have a site with a lot of load, means things break a lot less.  Now I didn't expect to recieve a lot of load, but the idea of high speeds without much work appealed to my naive sensibilities, and so the second WFE thing was convieved.
+
+[apache]: <http://www.apache.org/>
+[nginx]: <http://wiki.nginx.org/Main>
+
+There are, however, a lot of reasons why one would use a database over keeping data in the filesystem.  The first of these is that a database usually has a very sensible and clever query language or API to go with it.  For example, when I obtain a new piece of data, I want to attach it to the correct file.  Because in my case the data doesn't change very often, I also don't want to repeat myself.  Specifically, if the new data is the same as the older piece of data, I want to save a "null row" into the system that identifies that this row is a duplicate of a previous row.  As a result, to decide if I want to save this particular piece of data, I can execute the following query:
+
+    :::sql
+    SELECT myfield FROM mytable WHERE
+        dataname = '<dataname>' AND
+        date < '<inputdate>' AND
+        myfield NOT NULL
+    ORDER BY date DESC
+    LIMIT 1
+
+Here, I specify the name, and (because I don't necessarily insert data in chronological order) that the in-table data must come from before a particular date.  I also specify that the `myfield` field isn't null, because if it is null then I know that this was a duplicate of a previous row, so I'd need to continue searching anyway.  I can also add `LIMIT 1`, which ensures that the database query stops as soon as it's found the relevant data.  Then I can test the value of `myfield` against the data that I have just obtained, to decide if I need to add a new one.  It's simple, pretty quick (because almost all the logic is being performed by the highly-optimised database), and it works every time.
+
+On the other hand, in a filesystem database with .json files, I need to put a lot more logic into my application to deal with this kind of query.  Here's a basic implementation in Python that attempts to do roughly the same thing.
+
+    :::python
+    items = json.load('<dataname>')
+    for row in sorted(items, key=lambda x: x['date']):
+        if row['date'] > '<inputdate>':
+            continue # We're only looking at rows before inputdate
+
+        if datavalue is None:
+            continue # We don't want null values
+
+        return row['myfield'] # Assuming this is tucked into a function somehow
+
+This isn't very simple, and it does a lot of unnecessary work.  For a start, I need to access the entire file, even the parts of it that I have no interest in using.  For small files, this isn't much of an issue, but it's slow.  For larger files, there's a good chance that I'm looking at a tiny fraction of the actual file, which is just wasteful.  Thankfully Python's sort functions are apparently very efficient, and the `key` argument makes sorting by a particular field very easy.  However, I can't add conditions into my sort or selection here, so once the files have been sorted I'll also need to filter out rows that don't match my date criteria, (and at Python-speeds rather than the optimised SQL-speeds).  It's only then that I can actually return the small piece of data that I was looking for.
+
+There are other problems with this, not least the fact that this particular piece of code relies on the JSON file being an array, rather than an object, which is actually a security risk in certain cases.  But the worst crime of all is that this snippet is so much longer than the other one to do exactly the same thing but slower.  Now of course this logic has been put into a function (hence the `return` at the end), but if I'm writing worse code to do a worse job, something's going wrong.
+
+That's not the only difference between a file-system and a database.  For a start, if I'm using JSON, I need to store the name of each field, and I need to store it in every single file on the system.  On the other hand, in a traditional SQL database I store the name of each field once (we'll ignore special cases like MongoDB and other NoSQL systems for now), and each row just needs a basic separator.  I could shorten the names of the json fields, or even convert each row to an array, but then I'd need an encoding and decoding library on both sides of the app.  I also haven't begun to talk about locking and synchronisation issues.  In this case it probably isn't so bad, as there is only ever one person putting new data into the system at a time (that's me!).  As far as I can tell, the worst possible case is that in certain circumstances a user might get outdated data, which isn't a desperately troublesome issue for The WFE Thing.  Of course, in the general case, this may not be true at all, and if I'd gone much further, I'd probably end up missing the ACIDity of most SQL databases.
+
+Despite all this, I do feel the need to point out that I can still see the case for a static API in very specific circumstances.  It's definitely more work, but it may be worth it.  There are a lot of optimisations that a clever load script could make, including ensuring the data is always pre-sorted rather than sorting it on the fly.  Indeed, I've assumed that I should try to minimise the filesize in both cases, but if I knew I had the space, I could very easily save `myfield` every single time, even if it was repeated data.  This is actually what I server to users, so that's another optimisation to make.
+
+Why, then, did I use a [SQLite][sqlite] database as my primary storage mechanism in the end?  Because I was performing premature optimisations.  You can read more about why premature optimisations are the root of all evil by searching "premature optimisation is the root of all evil" anywhere.  Even Bing would be able to return some good advice.  However, you probably won't recognise the truth of the problem until you've prematurely optimised yourself.  With that in mind, allow me to elucidate the situation where a static API might be useful.
+
+[sqlite]: <http://www.sqlite.org/>
+
+The site needs to have a lot of visitors.  A hell of a lot of visitors.  Facebook-level visitors.  Enough visitors that even on the most secure and stable of servers (hell, even using NodeJS' webscaleity) you're starting to be a bit worried.  You should also have a genuine worry about such things as DDoS attacks.  Your site also sends a lot of hits (hundreds, thousands) to the backend API with each request to the mainpage.  There's probably a lot of very rapid and heavy polling involved.  Your site is probably designed badly, but for some unknown reason you are unable to change that part of it.  Additionally (and this one is very important) only the backend triggers changes, and those changes occur infrequently.  We're also not talking about Big Data - there's not enough data that you're using several servers and need to worry about routing, and you also probably don't need to sort it in complex ways to understand the patterns within the data.
+
+If you do find yourself in this situation...  Get out of there as fast as you can.  Or you could try a static API.  If that *specific* set of circumstances were to come about.
+
+I would like to finish with a quick story that I hope suggests that I've learned my lesson about premature optimisations, and might be of some interest to Python programmers.  The backend is now written in the beautiful (if somewhat overshadowed) [Bottle][] microframework, which was great fun, especially as I got to use Python 3.4 (the best Python!).  Bottle makes deployment relatively easy, at is already has basic configurations for a number of Python WSGI servers.  (Think of Bottle as your PHP scripts, and the WSGI servers as your Apache setup - it's basically like that but completely different.)  Originally I was going to use the standard mod_wsgi setup on my webfaction server, but trying to set that up with the structure I currently had wasn't going very well, so I quickly Googled what the fastest WSGI server was.  (The answer, it turns out, is probably [Bjoern][bjoern].)  However, while looking for this, I found a few reports that suggested [Meinheld][] was quite good for combining speed with stability.  So, remembering my lesson about premature optimisation, I tested everything, quite thoroughly, against some of the slower servers.  Every server came out exactly the same.
+
+[bottle]: <http://bottlepy.org/docs/dev/index.html#>
+[bjoern]: <https://github.com/jonashaag/bjoern>
+[meinheld]: <http://meinheld.org/>
+
+The reason is quite obvious: I didn't need any async fanciness, because I wasn't going to get enough requests to merit anything so complex.  The users of this app will almost all access it between 6:00am - 1:00pm, 6:00pm - 1:am GMT.  There will be about five unique users in total, making perhaps 30-40 requests over that seven hour period on the rare busy day.  That's pretty much the entire usage I'm expecting.  I don't need to optimise the speed of my server.  What I should, however, be optimising is how quickly I can make this site instead of leaving the users to struggle with my old broken attempts.  Additionally, I need to remember to optimise the usefulness of the UI.  Speed, for me, doesn't come into this, which means I have time to optimise the things that I forgot about last time in my quest for the fastest response.  Today I finally learned that premature optimisation is the root of all evil.  And more importantly, it makes things *hard*.
