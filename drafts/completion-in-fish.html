@@ -37,7 +37,7 @@
     document.write(quotes[index])
   </script>
   <noscript>
-    - zen -
+    <a href='https://github.com/MrJohz'>Fork me on GitHub!</a>  Fix an issue with Johz&nbsp;today!
   </noscript>
 </h3>
         <!-- nav -->
@@ -56,7 +56,7 @@
 <section class="content">
 
   <h3 class="posttitle">
-    <a class="nodec" href="/posts/2015/Aug/14/completion-in-fish/" rel="bookmark" title="Permalink to Shell Completion in Fish">
+    <a class="nodec" href="/drafts/completion-in-fish.html" rel="bookmark" title="Permalink to Shell Completion in Fish">
       Shell Completion in&nbsp;Fish
     </a>
   </h3>
@@ -103,7 +103,8 @@ OPTIONS:
 </pre></div>
 
 
-<p>This is okay, but it&#8217;s a bit boring.  Many options require an argument of some kind.  How does that&nbsp;work?</p>
+<h2>Arguments</h2>
+<p>This is all okay, but it&#8217;s a bit boring.  Many options require an argument of some kind.  How does that&nbsp;work?</p>
 <p>Fish has a couple of different switches here.  Firstly, option arguments can be specified using the <code>--arguments</code> option.  <code>--arguments</code> takes a single parameter that takes &#8220;a space-separated list of possible option-arguments, which may contain&nbsp;subshells&#8221;.</p>
 <p>There&#8217;s also some extra switches that specify particulars about how the argument should be treated.  For example, the <code>--require-parameter</code> switch tells fish that a particular argument must have an argument.  This means, among other things, that it can&#8217;t be used in the middle of a set of short options.  For example, given a command with options <code>-a -b -c</code> where <code>-b</code> has a required parameter, fish shell knows that <code>-ac</code> can still be followed by another option, but that <code>-ab</code> cannot be followed by the <code>-c</code> option, it will be followed by an&nbsp;argument.</p>
 <p>Additionally, by default fish will assume that the files in the current directory can always be passed as arguments to the current option.  To prevent this, the <code>--no-files</code> switch can be passed.  <code>--no-files</code> can be combined with <code>--require-parameter</code> using the <code>--exclusive</code> switch.</p>
@@ -135,13 +136,14 @@ OPTIONS:
 
 <p>You can try both of those fairly easily, although the first one doesn&#8217;t really do all that much.  The last option, <code>--command</code>, is the most interesting.  It takes a cargo command.  This could be produced by manually typing out all the different cargo commands, but dammit this is the future, and if we aren&#8217;t allowed hoverboards and ray-guns we might as well use what we have&nbsp;got.</p>
 <p>What we have is subshells.  Interestingly, in fish, subshells aren&#8217;t expanded inside strings as one might expect, which means that the <code>complete</code> command can use them to define short functions that list the available arguments dynamically.  This particular feature isn&#8217;t necessarily all that useful for listing cargo commands, as those commands are unlikely to change very often, but it is pretty neat and comes in handy&nbsp;elsewhere.</p>
-<p>To get a list of cargo commands, I&#8217;ve used the command <code>cargo --list | tr -d ' ' | sed '1d'</code>.  It probably isn&#8217;t the most efficient, but it&nbsp;works.</p>
+<p>To get a list of cargo commands, I&#8217;ve used <code>cargo --list</code>, removed all of the spaces, and cut off the first line.  It probably isn&#8217;t the most efficient, but it&nbsp;works.</p>
 <div class="highlight"><pre><span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> --short-option <span class="s1">&#39;c&#39;</span> --long-option <span class="s1">&#39;command&#39;</span> <span class="se">\</span>
     --exclusive --arguments <span class="s2">&quot;(cargo --list | tr -d &#39; &#39; | sed &#39;1d&#39;)&quot;</span> <span class="se">\</span>
     --description <span class="s1">&#39;The cargo command to execute beforehand&#39;</span>
 </pre></div>
 
 
+<p>The&nbsp;arguments</p>
 <div class="footnote">
 <hr />
 <ol>
