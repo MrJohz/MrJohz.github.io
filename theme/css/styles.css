@@ -112,6 +112,15 @@ a { /* Generic link styling, greyish and underlined. */
     text-decoration: none;
 }
 
+.emph {
+    color: #000D96;
+}
+
+.emph:hover {
+    border-top: 1px solid #000D96;
+    border-bottom: 1px solid #000D96;
+}
+
 a:hover { /* Hover style: transition to blue. Cool! */
     -o-transition:color .1s ease-in-out;
     -webkit-transition:color .1s ease-in-out;
