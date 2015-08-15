@@ -2,12 +2,14 @@
 <html lang="en">
 
   <head>
+      <meta name="viewport" content="width=device-width, intial-scale=1" />
+
       <title>Johz</title>
       <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css' />
       <link href='//fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'/>
       <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700' rel='stylesheet' type='text/css'/>
-      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/icons.css"/>
-      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/styles.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/styles.css"/>
       <meta charset="utf-8" />
   </head>
 
@@ -15,7 +17,7 @@
     <!-- header -->
     <header class="siteheader">
         <div class= "sitetitle">
-          <a class="nodec emph" href="https://mrjohz.github.io">
+          <a class="nodec emph" href="http://www.johz.me">
             Johz
           </a>
         </div>
@@ -37,7 +39,7 @@
     document.write(quotes[index])
   </script>
   <noscript>
-    <a href='https://github.com/MrJohz'>Fork me on GitHub!</a>  Fix an issue with Johz&nbsp;today!
+    - zen -
   </noscript>
 </h3>
         <!-- nav -->
@@ -56,8 +58,8 @@
 <section class="content">
 
   <h3 class="posttitle">
-    <a class="nodec" href="/drafts/nimrod-good-bad-and-ugly.html" rel="bookmark" title="Permalink to “Nim: Good, Bad, and Ugly. Who Knew?”">
-      <span class="dquo">&#8220;</span>Nim: Good, Bad, and Ugly.  Who&nbsp;Knew?&#8221;
+    <a class="nodec" href="/drafts/nimrod-good-bad-and-ugly.html" rel="bookmark" title="Permalink to "Nim: Good, Bad, and Ugly. Who Knew?"">
+      "Nim: Good, Bad, and Ugly.  Who Knew?"
     </a>
   </h3>
 
@@ -69,9 +71,9 @@
   </div><!-- .postinfo -->
 
   <div class="article">
-    <p>Nimrod is an expressive, statically-typed systems language that takes inspiration from Python&#8217;s syntactical style, Pascal&#8217;s type system, Lisp&#8217;s macros, and adds its own slant on them with a focus on compile-time programming.  It&#8217;s also my favourite new toy this week, and so I&#8217;m going to try and explain its merits and flaws in the oh-so-original &#8220;good, bad, and ugly&#8221;&nbsp;format.</p>
-<p>First, an explanation for what Nimrod actually is.  Nimrod is one of the growing number of (C++)++ languages, along with D, Rust, Swift, and arguably Go.  The general theme of these languages is to produce the next generation of C, and so they generally feature basic functional programming styles, implicit static typing, intelligent type systems, and lots of other paradigms that might rudely (and disingenuously) be described as &#8220;things Haskell had before it was cool&#8221;.  Nimrod itself is no exception, featuring implicit typing as standard and an extremely powerful type system.  There&#8217;s even a fair amount of support for functional programming (first-class functions, anonymous functions, a stdlib module full of functional procedures) although I suspect even the most ardent Nimrod fans would stop short of saying Nimrod thrives in the functional&nbsp;style.</p>
-<p>Among the features more specific to Nimrod are an extremely fast and efficient (yet also entirely optional) <span class="caps">GC</span> system, which is designed for &#8220;soft real-time systems&#8221; such as games; a large emphasis on compile-time programming so that only the essentials are happening at runtime; and language constructs such as fast, efficient iterators.  Nimrod also &#8216;compiles through C&#8217; - that is, the <code>nimrod compile</code> command firstly transforms the Nimrod input code into efficient C code, then compiles that C code using one of the standard C compilers.  Various parts of the C-compilation step can be changed using pragmas that are passed through to the C compiler, and also by changing which compiler Nimrod&nbsp;uses.</p>
+    <p>Nimrod is an expressive, statically-typed systems language that takes inspiration from Python's syntactical style, Pascal's type system, Lisp's macros, and adds its own slant on them with a focus on compile-time programming.  It's also my favourite new toy this week, and so I'm going to try and explain its merits and flaws in the oh-so-original "good, bad, and ugly" format.</p>
+<p>First, an explanation for what Nimrod actually is.  Nimrod is one of the growing number of (C++)++ languages, along with D, Rust, Swift, and arguably Go.  The general theme of these languages is to produce the next generation of C, and so they generally feature basic functional programming styles, implicit static typing, intelligent type systems, and lots of other paradigms that might rudely (and disingenuously) be described as "things Haskell had before it was cool".  Nimrod itself is no exception, featuring implicit typing as standard and an extremely powerful type system.  There's even a fair amount of support for functional programming (first-class functions, anonymous functions, a stdlib module full of functional procedures) although I suspect even the most ardent Nimrod fans would stop short of saying Nimrod thrives in the functional style.</p>
+<p>Among the features more specific to Nimrod are an extremely fast and efficient (yet also entirely optional) GC system, which is designed for "soft real-time systems" such as games; a large emphasis on compile-time programming so that only the essentials are happening at runtime; and language constructs such as fast, efficient iterators.  Nimrod also 'compiles through C' - that is, the <code>nimrod compile</code> command firstly transforms the Nimrod input code into efficient C code, then compiles that C code using one of the standard C compilers.  Various parts of the C-compilation step can be changed using pragmas that are passed through to the C compiler, and also by changing which compiler Nimrod uses.</p>
 <p>Nimrod code looks a lot like Python code.  The three biggest differences are the type-helpers in functions, the fact that all variables need to be initialised with <code>var</code>, <code>let</code> or <code>const</code>, and that all the functions are called procedures and get defined with the word <code>proc</code>:</p>
 <div class="highlight"><pre><span class="c"># Takes in a file-type (defaulting to the standard input) and returns a float.</span>
 <span class="k">proc </span><span class="nf">averageLineLength</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">TFile</span> <span class="o">=</span> <span class="n">stdin</span><span class="p">):</span> <span class="kt">float</span> <span class="o">=</span>  <span class="c"># Note the param name (f), type (TFile) and default argument (stdin)</span>
@@ -94,9 +96,9 @@
 </pre></div>
 
 
-<p>Now personally - and this is a highly subjective opinion, probably comparable to stating that I&#8217;ve never got on well with either emacs or vim - I really quite like the Python-esque syntax.  I like the lack of braces and semi-colons, and the benefits afforded to iterators.  Hell, I even like the significant whitespace.  But these are largely just syntactical issues that pull on my Pythonista heart-strings and make me give Nimrod a first glance amongst all the other languages out there.  What makes me <em>really</em> start to like the language is what&#8217;s undeneath that&nbsp;syntax.</p>
-<p>The best place to start in terms of Good Nimrod Features is probably a matter of contention, but for me the &#8220;killer feature&#8221; is the emphasis on compile-time processing.  To a certain extent, like Rust, this means ensuring type safety, but that&#8217;s just a tiny portion of what Nimrod&#8217;s compiler attempts to&nbsp;achieve.</p>
-<p>The first instance of this is templates.  Templates are somewhat like procedures, but instead of returning the result of a set of instructions, they simply return the set of instructions.  A simple example might look a bit like&nbsp;this:</p>
+<p>Now personally - and this is a highly subjective opinion, probably comparable to stating that I've never got on well with either emacs or vim - I really quite like the Python-esque syntax.  I like the lack of braces and semi-colons, and the benefits afforded to iterators.  Hell, I even like the significant whitespace.  But these are largely just syntactical issues that pull on my Pythonista heart-strings and make me give Nimrod a first glance amongst all the other languages out there.  What makes me <em>really</em> start to like the language is what's undeneath that syntax.</p>
+<p>The best place to start in terms of Good Nimrod Features is probably a matter of contention, but for me the "killer feature" is the emphasis on compile-time processing.  To a certain extent, like Rust, this means ensuring type safety, but that's just a tiny portion of what Nimrod's compiler attempts to achieve.</p>
+<p>The first instance of this is templates.  Templates are somewhat like procedures, but instead of returning the result of a set of instructions, they simply return the set of instructions.  A simple example might look a bit like this:</p>
 <div class="highlight"><pre><span class="k">template</span> <span class="n">fakeIf</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">iftrue</span><span class="p">,</span> <span class="n">iffalse</span><span class="p">:</span> <span class="n">expr</span><span class="p">):</span> <span class="n">expr</span> <span class="o">=</span>
   <span class="c"># cond, and the results may be any type of expression.</span>
   <span class="k">if</span> <span class="n">cond</span><span class="p">:</span>
@@ -113,9 +115,9 @@
 </pre></div>
 
 
-<p>It&#8217;s helpful to run through line 11 as if it were a procedure first.  Firstly, we note that <code>fakeIf</code> has three arguments.  The <code>echo()</code> proc is a built in procedure that prints out a line to stdout - it&#8217;s a function with a side effect.  The first argument is a conditional.  The procedure form, at runtime, will evaluate all three of these (printing both &#8220;greater&#8221; and &#8220;lesser&#8221; to the screen).  This is generally how we want procedures to operate, but in this case, with an if-statement, we just want one of the paths to&nbsp;evaluate.</p>
-<p>On the other hand, as a template, at compile-time, Nimrod sees this call and replaces it with the body of the <code>fakeIf</code>.  Additionally, the reference to <code>cond</code> in the argument list is replaced by the <code>x &gt; 0</code> expression, and the <code>iftrue</code> and <code>iffalse</code> arguments are replaced by the two echo expressions.  Note that we are talking about expressions here, not values.  The difference between expressions and values is the difference between 7 + 4 and 11.  An expression is something that will happen, while a value is something that has&nbsp;happened.</p>
-<p>The <code>fakeIf</code> call will actually look something like this at the point before it&#8217;s transformed into C and&nbsp;compiled:</p>
+<p>It's helpful to run through line 11 as if it were a procedure first.  Firstly, we note that <code>fakeIf</code> has three arguments.  The <code>echo()</code> proc is a built in procedure that prints out a line to stdout - it's a function with a side effect.  The first argument is a conditional.  The procedure form, at runtime, will evaluate all three of these (printing both "greater" and "lesser" to the screen).  This is generally how we want procedures to operate, but in this case, with an if-statement, we just want one of the paths to evaluate.</p>
+<p>On the other hand, as a template, at compile-time, Nimrod sees this call and replaces it with the body of the <code>fakeIf</code>.  Additionally, the reference to <code>cond</code> in the argument list is replaced by the <code>x &gt; 0</code> expression, and the <code>iftrue</code> and <code>iffalse</code> arguments are replaced by the two echo expressions.  Note that we are talking about expressions here, not values.  The difference between expressions and values is the difference between 7 + 4 and 11.  An expression is something that will happen, while a value is something that has happened.</p>
+<p>The <code>fakeIf</code> call will actually look something like this at the point before it's transformed into C and compiled:</p>
 <div class="highlight"><pre><span class="sd">## from</span>
 <span class="n">fakeIf</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">echo</span><span class="p">(</span><span class="s">&quot;greater&quot;</span><span class="p">),</span> <span class="n">echo</span><span class="p">(</span><span class="s">&quot;lesser&quot;</span><span class="p">))</span>
 
@@ -127,9 +129,9 @@
 </pre></div>
 
 
-<p>Nimrod comes with a range of built-in templates.  For example, the <code>!==</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>notin</code>, and <code>isnot</code> operators are all templates that, at runtime, turn into the negation of the inverse operator (<code>!==</code> -&gt; <code>not ==</code> etc).  This means that the number of operators one needs to override when defining a new type is effectively halved, as the other operators will all come&nbsp;free.</p>
-<p>However, templates don&#8217;t allow programatic access to the Abstract Syntax Tree that the Nimrod compiler uses to represent the code you&#8217;ve written.  It&#8217;s good, but it&#8217;s not quite good enough for Nimrod, which also provides full macro capabilities.  These are a lot like templates in that they operate at compile time, and are passed expressions rather than values, but instead of simply inserting these expressions into a set of predefined slots, they are allowed to manipulate them in a variety of ways, create new expressions, and eventually return a new expression which is embedded into the original program at the same place that the original macro call took&nbsp;place.</p>
-<p>Examples for macros are inevitably complex, as they very often end up building Nimrod code from the ground up, unlike templates which are given a, well, template.  I&#8217;d like to do another blog post all about macros, but for now I&#8217;ll demonstrate their power with two examples.  The first is a short macro that can be given a set of expressions as arguments, and will then print out those arguments along with some information about what they&nbsp;contain.</p>
+<p>Nimrod comes with a range of built-in templates.  For example, the <code>!==</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>notin</code>, and <code>isnot</code> operators are all templates that, at runtime, turn into the negation of the inverse operator (<code>!==</code> -&gt; <code>not ==</code> etc).  This means that the number of operators one needs to override when defining a new type is effectively halved, as the other operators will all come free.</p>
+<p>However, templates don't allow programatic access to the Abstract Syntax Tree that the Nimrod compiler uses to represent the code you've written.  It's good, but it's not quite good enough for Nimrod, which also provides full macro capabilities.  These are a lot like templates in that they operate at compile time, and are passed expressions rather than values, but instead of simply inserting these expressions into a set of predefined slots, they are allowed to manipulate them in a variety of ways, create new expressions, and eventually return a new expression which is embedded into the original program at the same place that the original macro call took place.</p>
+<p>Examples for macros are inevitably complex, as they very often end up building Nimrod code from the ground up, unlike templates which are given a, well, template.  I'd like to do another blog post all about macros, but for now I'll demonstrate their power with two examples.  The first is a short macro that can be given a set of expressions as arguments, and will then print out those arguments along with some information about what they contain.</p>
 <div class="highlight"><pre><span class="c"># This example is adapted from the Nimrod manual</span>
 <span class="kn">import</span> <span class="n">macros</span>
 
@@ -156,7 +158,7 @@
 </pre></div>
 
 
-<p>This is a fairly simple macro, but it shows how easy it is to produce something extremely useful from a very simple line of code.  Of course, the other end of the scale is more complex, but it is much more useful.  That&#8217;s why I quite like this next piece of code, which uses a third party library called <a href="https://github.com/fenekku/commandeer">Commandeer</a></p>
+<p>This is a fairly simple macro, but it shows how easy it is to produce something extremely useful from a very simple line of code.  Of course, the other end of the scale is more complex, but it is much more useful.  That's why I quite like this next piece of code, which uses a third party library called <a href="https://github.com/fenekku/commandeer">Commandeer</a></p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="n">commandeer</span>  <span class="c"># from github.com/fenekku/comandeer</span>
 
 <span class="n">commandline</span><span class="p">:</span>  <span class="c"># call macro with the following body as a stmt arg</span>
@@ -178,24 +180,24 @@
 </pre></div>
 
 
-<p>Here you can see a <span class="caps">DSL</span> being used.  The lines of code after the <code>commandLine</code> statement are completely unnacceptably Nimrod syntax.  If you ran them through the Nimrod compiler it would produce a list of complaints as long as your arm.  However, they are acceptable the Nimrod parser, which can transform them into an <span class="caps">AST</span>.  This <span class="caps">AST</span> can then be passed to the <code>commandLine</code> macro, which will parse them into something that Nimrod will be able to use.  (In this case, what&#8217;s happening under the hood is that each argument and option is being turned into a variable declaration, and then the correct value taken from the commandline arguments is being assigned to each&nbsp;variable.)</p>
-<p>But that&#8217;s just one good thing about Nimrod, and if all I wanted from a language was the ability to bend it&#8217;s syntax to my will I&#8217;d find a nice Lisp, and drown my sorrows in parentheses.  Thankfully Nimrod has more tricks up its sleeves, not least its&nbsp;elegance.</p>
-<p><span class="caps">GOOD</span>:
+<p>Here you can see a DSL being used.  The lines of code after the <code>commandLine</code> statement are completely unnacceptably Nimrod syntax.  If you ran them through the Nimrod compiler it would produce a list of complaints as long as your arm.  However, they are acceptable the Nimrod parser, which can transform them into an AST.  This AST can then be passed to the <code>commandLine</code> macro, which will parse them into something that Nimrod will be able to use.  (In this case, what's happening under the hood is that each argument and option is being turned into a variable declaration, and then the correct value taken from the commandline arguments is being assigned to each variable.)</p>
+<p>But that's just one good thing about Nimrod, and if all I wanted from a language was the ability to bend it's syntax to my will I'd find a nice Lisp, and drown my sorrows in parentheses.  Thankfully Nimrod has more tricks up its sleeves, not least its elegance.</p>
+<p>GOOD:
   - Compile-time
   - Simplicity
   - Friendliness
-  -&nbsp;C-ossity</p>
-<p><span class="caps">BAD</span>:
+  - C-ossity</p>
+<p>BAD:
   - Ecosystem
   - Size
   - Babel
-  - Compiler&nbsp;issues</p>
-<p><span class="caps">UGLY</span>:
+  - Compiler issues</p>
+<p>UGLY:
   - Imports
-  - <span class="caps">OO</span>-ness
+  - OO-ness
   - Style-insensitivity
   - Comments?
-  -&nbsp;Result</p>
+  - Result</p>
   </div><!-- .content -->
 
 </section>

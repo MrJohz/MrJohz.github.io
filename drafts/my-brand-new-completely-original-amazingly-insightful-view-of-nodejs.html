@@ -2,12 +2,14 @@
 <html lang="en">
 
   <head>
+      <meta name="viewport" content="width=device-width, intial-scale=1" />
+
       <title>Johz</title>
       <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css' />
       <link href='//fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'/>
       <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700' rel='stylesheet' type='text/css'/>
-      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/icons.css"/>
-      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/styles.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/styles.css"/>
       <meta charset="utf-8" />
   </head>
 
@@ -15,7 +17,7 @@
     <!-- header -->
     <header class="siteheader">
         <div class= "sitetitle">
-          <a class="nodec emph" href="https://mrjohz.github.io">
+          <a class="nodec emph" href="http://www.johz.me">
             Johz
           </a>
         </div>
@@ -37,7 +39,7 @@
     document.write(quotes[index])
   </script>
   <noscript>
-    Disclaimer: I have no idea what I'm doing']&lt;&amp;#47;div&gt;); DROP TABLE&nbsp;*;
+    The blog that's always right, for an entirely arbitrary value of&nbsp;'right'.
   </noscript>
 </h3>
         <!-- nav -->
@@ -56,8 +58,8 @@
 <section class="content">
 
   <h3 class="posttitle">
-    <a class="nodec" href="/drafts/my-brand-new-completely-original-amazingly-insightful-view-of-nodejs.html" rel="bookmark" title="Permalink to My Brand New, Completely Original, Amazingly Insightful View Of NodeJS">
-      My Brand New, Completely Original, Amazingly Insightful View Of&nbsp;NodeJS
+    <a class="nodec" href="/drafts/my-brand-new-completely-original-amazingly-insightful-view-of-nodejs.html" rel="bookmark" title="Permalink to My Brand New, Completely Original, Amazingly Insightful View Of NodeJS">
+      My Brand New, Completely Original, Amazingly Insightful View Of NodeJS
     </a>
   </h3>
 
@@ -69,13 +71,13 @@
   </div><!-- .postinfo -->
 
   <div class="article">
-    <p>Node is one of those ideas that is destined to either be a bright trailblazing star, bursting through the sky of programming like a beautiful comet, or an obscure idea that will ultimately come to nothing.  When I first saw the NodeJS platform, I knew immediately that it would fit into one or the other of these categories.  There really was no other&nbsp;option.</p>
-<p>Unfortunately, when I first saw NodeJS, I suspected it would probably be the latter.  After all, server-side Javascript is not necessarily the most obvious of ideas to have.  For a start, everyone knows that Javascript is a client-side language, and so would obviously struggle in the heavy-duty world of server-side programming.  On top of that, everyone also knows that Javascript is one of the worst programming languages in existence.  I mean, it&#8217;s dynamically-typed, it has a unified number type, and it doesn&#8217;t do object-oriented programming, at least not in the same way that Java does object-oriented programming, which is the most obvious and useful way.  It&#8217;s hard to see why it has survived so&nbsp;long.</p>
-<p>As a result, I honestly have to say that I left Node.js alone for a very long time.  It was only later that I began to realise the beauties that Node could offer&nbsp;me.</p>
-<p>For a start, Node runs Google&#8217;s V8 engine, which is the same engine that runs Chrome, which is the browser I use, so I felt comfortable accepting Google&#8217;s dominion over my life.  V8 is one of the fastest Javascript engines in the world, and it does this by making use of a <span class="caps">JIT</span>.  The <span class="caps">JIT</span> takes the Javascript you write, and compiles it while it&#8217;s interpreting it, so you can get a compiler in your interpreter while you interpret your compiler.  The result of this is that some of your Javascript code will actually run faster than pure, hand-written assembly, without you doing any work at&nbsp;all.</p>
-<p>There are obviously trade-offs, of which the greatest is probably single-threaded execution, but the libraries and APIs that are offered by the NodeJS platform are able to mitigate some of the problems that one might face as a developer.  For example, Node is asynchronous by default.  This means that all <span class="caps">IO</span> is done separately to the main flow of the program.  The result of this is actually quite surprising - your program will only ever take as long to execute as the interpreter takes to read it.  For most programs, this means that it starts and finishes almost instantly.  Of course, it may take a while for the <span class="caps">IO</span> to finish processing, and so for the final result of the program to be displayed, but this is not NodeJS&#8217; fault, and requires more work to be done by kernel&nbsp;developers.</p>
-<p>Unfortunately, asynchronous execution also contains the seeds to Node&#8217;s downfall.  As programs get more and more complex, it becomes more and more difficult to work out what is meant to be happening at any particular point.  Additionally, functions become more nested and less readable, which adds several seconds onto execution time as the interpreter firstly tries to work out what on earth could be happening that would force you to write such ugly code, and then proceeds to bash its metaphorical head against a wall several times.  There are many solutions to this, for example using promises, but all proposed solutions are guaranteed to slow the program down by a matter of whole nanoseconds.  In most systems, a nanosecond&#8217;s worth of delay probably wouldn&#8217;t matter too much, but because Node.js executes instantaneously, nanoseconds feel longer to the user, and so in very real terms can actually be considered to be minutes-worth of delay.  Sometimes even hours-worth.  This is crazy&nbsp;stuff.</p>
-<p>Thankfully, there are ways out of this tricky conundrum, and one of those ways is to not write&nbsp;Javascript.</p>
+    <p>Node is one of those ideas that is destined to either be a bright trailblazing star, bursting through the sky of programming like a beautiful comet, or an obscure idea that will ultimately come to nothing.  When I first saw the NodeJS platform, I knew immediately that it would fit into one or the other of these categories.  There really was no other option.</p>
+<p>Unfortunately, when I first saw NodeJS, I suspected it would probably be the latter.  After all, server-side Javascript is not necessarily the most obvious of ideas to have.  For a start, everyone knows that Javascript is a client-side language, and so would obviously struggle in the heavy-duty world of server-side programming.  On top of that, everyone also knows that Javascript is one of the worst programming languages in existence.  I mean, it's dynamically-typed, it has a unified number type, and it doesn't do object-oriented programming, at least not in the same way that Java does object-oriented programming, which is the most obvious and useful way.  It's hard to see why it has survived so long.</p>
+<p>As a result, I honestly have to say that I left Node.js alone for a very long time.  It was only later that I began to realise the beauties that Node could offer me.</p>
+<p>For a start, Node runs Google's V8 engine, which is the same engine that runs Chrome, which is the browser I use, so I felt comfortable accepting Google's dominion over my life.  V8 is one of the fastest Javascript engines in the world, and it does this by making use of a JIT.  The JIT takes the Javascript you write, and compiles it while it's interpreting it, so you can get a compiler in your interpreter while you interpret your compiler.  The result of this is that some of your Javascript code will actually run faster than pure, hand-written assembly, without you doing any work at all.</p>
+<p>There are obviously trade-offs, of which the greatest is probably single-threaded execution, but the libraries and APIs that are offered by the NodeJS platform are able to mitigate some of the problems that one might face as a developer.  For example, Node is asynchronous by default.  This means that all IO is done separately to the main flow of the program.  The result of this is actually quite surprising - your program will only ever take as long to execute as the interpreter takes to read it.  For most programs, this means that it starts and finishes almost instantly.  Of course, it may take a while for the IO to finish processing, and so for the final result of the program to be displayed, but this is not NodeJS' fault, and requires more work to be done by kernel developers.</p>
+<p>Unfortunately, asynchronous execution also contains the seeds to Node's downfall.  As programs get more and more complex, it becomes more and more difficult to work out what is meant to be happening at any particular point.  Additionally, functions become more nested and less readable, which adds several seconds onto execution time as the interpreter firstly tries to work out what on earth could be happening that would force you to write such ugly code, and then proceeds to bash its metaphorical head against a wall several times.  There are many solutions to this, for example using promises, but all proposed solutions are guaranteed to slow the program down by a matter of whole nanoseconds.  In most systems, a nanosecond's worth of delay probably wouldn't matter too much, but because Node.js executes instantaneously, nanoseconds feel longer to the user, and so in very real terms can actually be considered to be minutes-worth of delay.  Sometimes even hours-worth.  This is crazy stuff.</p>
+<p>Thankfully, there are ways out of this tricky conundrum, and one of those ways is to not write Javascript.</p>
   </div><!-- .content -->
 
 </section>

@@ -2,12 +2,14 @@
 <html lang="en">
 
   <head>
+      <meta name="viewport" content="width=device-width, intial-scale=1" />
+
       <title>Johz</title>
       <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css' />
       <link href='//fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'/>
       <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700' rel='stylesheet' type='text/css'/>
-      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/icons.css"/>
-      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/styles.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/styles.css"/>
       <meta charset="utf-8" />
   </head>
 
@@ -15,7 +17,7 @@
     <!-- header -->
     <header class="siteheader">
         <div class= "sitetitle">
-          <a class="nodec emph" href="https://mrjohz.github.io">
+          <a class="nodec emph" href="http://www.johz.me">
             Johz
           </a>
         </div>
@@ -37,7 +39,7 @@
     document.write(quotes[index])
   </script>
   <noscript>
-    Currently working towards being 100% <a href='http://xkcd.com/1271'>XKCD/1271</a>&nbsp;compliant.
+    <a href='https://github.com/MrJohz'>Fork me on GitHub!</a>  Fix an issue with Johz&nbsp;today!
   </noscript>
 </h3>
         <!-- nav -->
@@ -56,8 +58,8 @@
 <section class="content">
 
   <h3 class="posttitle">
-    <a class="nodec" href="/drafts/thoughts-on-nim.html" rel="bookmark" title="Permalink to Thoughts on Nim">
-      Thoughts on&nbsp;Nim
+    <a class="nodec" href="/drafts/thoughts-on-nim.html" rel="bookmark" title="Permalink to Thoughts on Nim">
+      Thoughts on Nim
     </a>
   </h3>
 
@@ -69,12 +71,12 @@
   </div><!-- .postinfo -->
 
   <div class="article">
-    <p>So I&#8217;ve got very excited about <a href="http://nim-lang.org/">Nim</a> recently.  Nim is the new name for Nimrod, which is that programming language that you&#8217;ve been meaning to have a proper look at, you know, when you&#8217;ve got a free weekend spare or something, for the past few years now.  It&#8217;s one of the attempts to revolutionise systems programming that I&#8217;ve collectively termed the &#8220;(C++)++&#8221; languages - Go, D, Rust etc.  Considering that, before September at least, the closest I&#8217;ve ever come to this kind of programming has been letting Java&#8217;s <span class="caps">JIT</span> compiler work its magic for me, I was impressed by how much fun I&nbsp;had.</p>
-<p>(A side note before I begin: Nimrod has officially been renamed to Nim, beginning with the 0.10.0 &#8220;bigbreak&#8221; release.  However, my mind has not yet scrubbed all of the references to the old name, so I imagine at some point in this post I&#8217;ll slip up and use the wrong&nbsp;one.)</p>
-<p>Nim is a statically-typed systems programming language that compiles via a transpilation stage through C.  It takes inspiration from Python&#8217;s syntactical style, Pascal&#8217;s type system, Lisp&#8217;s macros, C&#8217;s imperativity, and many other languages, whilst adding in it&#8217;s own additions, such as the powerful ability for compile-time programming.  Like many of its peers Nim has implicit typing, strong support for functional programming, and other newfangled<sup id="fnref:newfangled"><a class="footnote-ref" href="#fn:newfangled" rel="footnote">1</a></sup> concepts.  Unlike many of its peers, Nim can completely rewrite large chunks of its code during the compilation&nbsp;stage.</p>
-<p>Over the past few weeks, in order to get to know Nim, I&#8217;ve been working on a bit of project.  Recently, a trend has been growing for &#8220;incremental&#8221; games - games where one simply sits and waits, and perhaps performs some basic actions to make numbers grow bigger.  Of course, there&#8217;s a huge variety, some where one clicks up, some where one clicks down, some where one buys upgrades, others still where one buys upgrades that it in turn buy upgrades.  One of the most recognisable is probably <a href="http://orteil.dashnet.org/cookieclicker/">Cookie Clicker</a> by Orteil.  Essentially, you click the big cookie until you can buy things, then use those things to click the cookie even more.  Eventually you get chocolate milk, an Excel spreadsheet, and another pointless&nbsp;hobby.</p>
-<p>So I saw the success of these games, and I thought to myself &#8220;Wow!  I bet I could reproduce that and make millions!&#8221;.  Presumably millions of imaginary cookies.  I was also looking for a mildly interesting project to play around with using Nim.  The conclusion?  <a href="https://github.com/MrJohz/nim-clicker">Nim Clicker</a>, the world&#8217;s most truly terrible clicker game, written entirely in Nimrod (with a single configuration file).  Terrible as it might be, it was good fun to make, mainly because I got a good chance to try out Nim on a decent-sized &#8220;home-grown&#8221;&nbsp;project.</p>
-<p>My first thought on Nim was that it looked a fair bit like Python.  Not necessarily in terms of syntax and programming style (<code>proc</code> rather than <code>def</code>, types rather than classes, vars and lets all over the place) but more in terms of being verbose and obvious about what was happening.  For example, there&#8217;s the usage of <code>and</code>, <code>or</code>, and <code>not</code> instead of <code>&amp;&amp;</code>, <code>||</code>or <code>!</code>, which make the operators clear and explicit, as well as highly&nbsp;readable.</p>
+    <p>So I've got very excited about <a href="http://nim-lang.org/">Nim</a> recently.  Nim is the new name for Nimrod, which is that programming language that you've been meaning to have a proper look at, you know, when you've got a free weekend spare or something, for the past few years now.  It's one of the attempts to revolutionise systems programming that I've collectively termed the "(C++)++" languages - Go, D, Rust etc.  Considering that, before September at least, the closest I've ever come to this kind of programming has been letting Java's JIT compiler work its magic for me, I was impressed by how much fun I had.</p>
+<p>(A side note before I begin: Nimrod has officially been renamed to Nim, beginning with the 0.10.0 "bigbreak" release.  However, my mind has not yet scrubbed all of the references to the old name, so I imagine at some point in this post I'll slip up and use the wrong one.)</p>
+<p>Nim is a statically-typed systems programming language that compiles via a transpilation stage through C.  It takes inspiration from Python's syntactical style, Pascal's type system, Lisp's macros, C's imperativity, and many other languages, whilst adding in it's own additions, such as the powerful ability for compile-time programming.  Like many of its peers Nim has implicit typing, strong support for functional programming, and other newfangled<sup id="fnref:newfangled"><a class="footnote-ref" href="#fn:newfangled" rel="footnote">1</a></sup> concepts.  Unlike many of its peers, Nim can completely rewrite large chunks of its code during the compilation stage.</p>
+<p>Over the past few weeks, in order to get to know Nim, I've been working on a bit of project.  Recently, a trend has been growing for "incremental" games - games where one simply sits and waits, and perhaps performs some basic actions to make numbers grow bigger.  Of course, there's a huge variety, some where one clicks up, some where one clicks down, some where one buys upgrades, others still where one buys upgrades that it in turn buy upgrades.  One of the most recognisable is probably <a href="http://orteil.dashnet.org/cookieclicker/">Cookie Clicker</a> by Orteil.  Essentially, you click the big cookie until you can buy things, then use those things to click the cookie even more.  Eventually you get chocolate milk, an Excel spreadsheet, and another pointless hobby.</p>
+<p>So I saw the success of these games, and I thought to myself "Wow!  I bet I could reproduce that and make millions!".  Presumably millions of imaginary cookies.  I was also looking for a mildly interesting project to play around with using Nim.  The conclusion?  <a href="https://github.com/MrJohz/nim-clicker">Nim Clicker</a>, the world's most truly terrible clicker game, written entirely in Nimrod (with a single configuration file).  Terrible as it might be, it was good fun to make, mainly because I got a good chance to try out Nim on a decent-sized "home-grown" project.</p>
+<p>My first thought on Nim was that it looked a fair bit like Python.  Not necessarily in terms of syntax and programming style (<code>proc</code> rather than <code>def</code>, types rather than classes, vars and lets all over the place) but more in terms of being verbose and obvious about what was happening.  For example, there's the usage of <code>and</code>, <code>or</code>, and <code>not</code> instead of <code>&amp;&amp;</code>, <code>||</code>or <code>!</code>, which make the operators clear and explicit, as well as highly readable.</p>
 <div class="footnote">
 <hr />
 <ol>

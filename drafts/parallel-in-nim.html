@@ -2,12 +2,14 @@
 <html lang="en">
 
   <head>
+      <meta name="viewport" content="width=device-width, intial-scale=1" />
+
       <title>Johz</title>
       <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css' />
       <link href='//fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'/>
       <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700' rel='stylesheet' type='text/css'/>
-      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/icons.css"/>
-      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/styles.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/styles.css"/>
       <meta charset="utf-8" />
   </head>
 
@@ -15,7 +17,7 @@
     <!-- header -->
     <header class="siteheader">
         <div class= "sitetitle">
-          <a class="nodec emph" href="https://mrjohz.github.io">
+          <a class="nodec emph" href="http://www.johz.me">
             Johz
           </a>
         </div>
@@ -37,7 +39,7 @@
     document.write(quotes[index])
   </script>
   <noscript>
-    More than just a blog, it's a way of&nbsp;life.
+    Currently working towards being 100% <a href='http://xkcd.com/1271'>XKCD/1271</a>&nbsp;compliant.
   </noscript>
 </h3>
         <!-- nav -->
@@ -56,8 +58,8 @@
 <section class="content">
 
   <h3 class="posttitle">
-    <a class="nodec" href="/drafts/parallel-in-nim.html" rel="bookmark" title="Permalink to Getting Parallel in Nim">
-      Getting Parallel in&nbsp;Nim
+    <a class="nodec" href="/drafts/parallel-in-nim.html" rel="bookmark" title="Permalink to Getting Parallel in Nim">
+      Getting Parallel in Nim
     </a>
   </h3>
 
@@ -69,10 +71,10 @@
   </div><!-- .postinfo -->
 
   <div class="article">
-    <p>Nim has recently got two new syntaxes for doing parallel programming.  That sounds like a good excuse to take my latest favourite language out for a test drive,&nbsp;right?</p>
-<p>Parallel programming is a fairly simple concept that is remarkably difficult to get right.  Most computers these days have multiple cores, and therefore can do more than one thing at a time.  Parallel programming is about enabling that, whilst also ensuring that things don&#8217;t get lost whilst doing so.  It&#8217;s harder than it sounds - if two operations running at the same time try to operate on the same piece of data, it becomes very difficult to reason through the logic of the code.  For this reason, there have been many attempts to &#8220;solve&#8221; parallel programming, with varying degrees of&nbsp;success.</p>
-<p>Nim has two ways of doing parallel programming.  One is fairly low-level, and simply spawns procedures, allowing the user to determine how and when to collect the results back together, whilst the other is more complex, proving at compile-time whether certain operations may create race-conditions.  I&#8217;ll create a program that uses the first format, then show how the second format can make writing the same code simpler and&nbsp;safer.</p>
-<p>The first thing that any parallel operation needs is an operation.  Let&#8217;s start with something fairly simple - we just want to print out every letter of a name, all at the same&nbsp;time.</p>
+    <p>Nim has recently got two new syntaxes for doing parallel programming.  That sounds like a good excuse to take my latest favourite language out for a test drive, right?</p>
+<p>Parallel programming is a fairly simple concept that is remarkably difficult to get right.  Most computers these days have multiple cores, and therefore can do more than one thing at a time.  Parallel programming is about enabling that, whilst also ensuring that things don't get lost whilst doing so.  It's harder than it sounds - if two operations running at the same time try to operate on the same piece of data, it becomes very difficult to reason through the logic of the code.  For this reason, there have been many attempts to "solve" parallel programming, with varying degrees of success.</p>
+<p>Nim has two ways of doing parallel programming.  One is fairly low-level, and simply spawns procedures, allowing the user to determine how and when to collect the results back together, whilst the other is more complex, proving at compile-time whether certain operations may create race-conditions.  I'll create a program that uses the first format, then show how the second format can make writing the same code simpler and safer.</p>
+<p>The first thing that any parallel operation needs is an operation.  Let's start with something fairly simple - we just want to print out every letter of a name, all at the same time.</p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="n">threadpool</span>
 <span class="kn">import</span> <span class="n">os</span>
 
@@ -108,7 +110,7 @@
 </pre></div>
 
 
-<p>Note that the second time our script mixed up some of the letters.  Clearly, printing things out to the console is not a good way of producing output - what would work a lot better is a way to get the result of a spawned procedure.  The other thing to note is that each letter needs to be printed one at a time anyway.  We executed all the print statements in parallel, only for the computer to only give each one access to the console one at a time, meaning most of our time there was entirely&nbsp;wasted.</p>
+<p>Note that the second time our script mixed up some of the letters.  Clearly, printing things out to the console is not a good way of producing output - what would work a lot better is a way to get the result of a spawned procedure.  The other thing to note is that each letter needs to be printed one at a time anyway.  We executed all the print statements in parallel, only for the computer to only give each one access to the console one at a time, meaning most of our time there was entirely wasted.</p>
 <p>Threads</p>
   </div><!-- .content -->
 

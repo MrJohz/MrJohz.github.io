@@ -2,12 +2,14 @@
 <html lang="en">
 
   <head>
+      <meta name="viewport" content="width=device-width, intial-scale=1" />
+
       <title>Johz</title>
       <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css' />
       <link href='//fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'/>
       <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700' rel='stylesheet' type='text/css'/>
-      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/icons.css"/>
-      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/styles.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/styles.css"/>
       <meta charset="utf-8" />
   </head>
 
@@ -15,7 +17,7 @@
     <!-- header -->
     <header class="siteheader">
         <div class= "sitetitle">
-          <a class="nodec emph" href="https://mrjohz.github.io">
+          <a class="nodec emph" href="http://www.johz.me">
             Johz
           </a>
         </div>
@@ -37,7 +39,7 @@
     document.write(quotes[index])
   </script>
   <noscript>
-    This div container is left deliberately&nbsp;blank.
+    - zen -
   </noscript>
 </h3>
         <!-- nav -->
@@ -56,8 +58,8 @@
 <section class="content">
 
   <h3 class="posttitle">
-    <a class="nodec" href="/drafts/python-in-python.html" rel="bookmark" title="Permalink to Writing Python in Python">
-      Writing Python in&nbsp;Python
+    <a class="nodec" href="/drafts/python-in-python.html" rel="bookmark" title="Permalink to Writing Python in Python">
+      Writing Python in Python
     </a>
   </h3>
 
@@ -71,17 +73,17 @@
   <div class="article">
     <p>Python was my first programming language.  Some time around the age of sixteen or
 seventeen, I got it into my head that I should learn a programming language, and one thing
-lead to another, and I ended up working through Swaroop&#8217;s <a href="http://www.swaroopch.com/notes/python/">A Byte of Python</a>, and
-then Sande <span class="amp">&amp;</span> Sande&#8217;s <a href="http://www.manning.com/sande/">Hello World</a>.  The latter was particularly good,
+lead to another, and I ended up working through Swaroop's <a href="http://www.swaroopch.com/notes/python/">A Byte of Python</a>, and
+then Sande &amp; Sande's <a href="http://www.manning.com/sande/">Hello World</a>.  The latter was particularly good,
 and I learned a lot of stuff, and, alongside most new programmers, I loved getting my
-computer to do things that I&#8217;d told it to&nbsp;do.</p>
-<p>That said, Python didn&#8217;t excite me.  Programming was cool, and new, and fun, but Python
+computer to do things that I'd told it to do.</p>
+<p>That said, Python didn't excite me.  Programming was cool, and new, and fun, but Python
 itself was, well, the tool I used.  And a fairly standard tool at that.  What changed
 was <a href="http://corepython.com/">Core Python Programming</a>.  (Yes, this is basically book review corner,
-I&#8217;ll get to the more interesting stuff in a minute&#8230;)  Core Python, despite being
+I'll get to the more interesting stuff in a minute...)  Core Python, despite being
 somewhat out-of-date at this point (although it does include notes on pre-announced 2.6
 features, and a couple of paragraphs on how Python will slowly be transitioning to
-&#8220;Python 3000&#8221;, which I&#8217;m sure if very exciting news for all of us!) was a particularly
+"Python 3000", which I'm sure if very exciting news for all of us!) was a particularly
 good book at describing Python, rather than just programming.  Which finally brings us
 on to the first bit of code that made me feel really excited about <em>Python</em>.</p>
 <div class="highlight"><pre><span class="k">class</span> <span class="nc">MyNumber</span><span class="p">:</span>
@@ -97,10 +99,10 @@ on to the first bit of code that made me feel really excited about <em>Python</e
 </pre></div>
 
 
-<p>What&#8217;s so special about these two lines?  Well, this is a method inside a user-defined
-class in Python.  More specifically, it&#8217;s a &#8220;magic method&#8221;, or dunder method (dunder as
+<p>What's so special about these two lines?  Well, this is a method inside a user-defined
+class in Python.  More specifically, it's a "magic method", or dunder method (dunder as
 in double underscore) that is called when the addition operator is used on the defined
-class.  It allows the user of this class to write code that looks like&nbsp;this:</p>
+class.  It allows the user of this class to write code that looks like this:</p>
 <div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MyNumber</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">MyNumber</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>  <span class="c"># MAGIC!</span>
@@ -109,12 +111,12 @@ class.  It allows the user of this class to write code that looks like&nbsp;this
 </pre></div>
 
 
-<p>To me, however, this was my first chance to break open Python and write&nbsp;inside.</p>
+<p>To me, however, this was my first chance to break open Python and write inside.</p>
 <p>You see, Python is written in Python.  This is an almost entirely untrue statement, so I
-probably ought to explain myself first.  I&#8217;m not talking about the interpreter, which for
-most people is written in C.  No, I&#8217;m talking about the language itself.  The language
-&#8220;Python&#8221; is written in&nbsp;Python.</p>
-<p>This statement is only somewhat untrue.  That&#8217;s a start!  Here&#8217;s an&nbsp;example.</p>
+probably ought to explain myself first.  I'm not talking about the interpreter, which for
+most people is written in C.  No, I'm talking about the language itself.  The language
+"Python" is written in Python.</p>
+<p>This statement is only somewhat untrue.  That's a start!  Here's an example.</p>
 <div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">MyNumber</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
@@ -152,8 +154,8 @@ most people is written in C.  No, I&#8217;m talking about the language itself.  
 
 
 <p>The most interesting bits here are the differences between the built-in int operations,
-and the custom MyNumber class operations.  Here&#8217;s each one in&nbsp;turn:</p>
-<p>Firstly, in Python 3, classes have functions attached to them.&nbsp;Instances</p>
+and the custom MyNumber class operations.  Here's each one in turn:</p>
+<p>Firstly, in Python 3, classes have functions attached to them.  Instances</p>
   </div><!-- .content -->
 
 </section>

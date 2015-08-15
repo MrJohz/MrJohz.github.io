@@ -2,12 +2,14 @@
 <html lang="en">
 
   <head>
+      <meta name="viewport" content="width=device-width, intial-scale=1" />
+
       <title>Johz</title>
       <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css' />
       <link href='//fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'/>
       <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700' rel='stylesheet' type='text/css'/>
-      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/icons.css"/>
-      <link rel="stylesheet" type="text/css" href="https://mrjohz.github.io/theme/css/styles.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/styles.css"/>
       <meta charset="utf-8" />
   </head>
 
@@ -15,7 +17,7 @@
     <!-- header -->
     <header class="siteheader">
         <div class= "sitetitle">
-          <a class="nodec emph" href="https://mrjohz.github.io">
+          <a class="nodec emph" href="http://www.johz.me">
             Johz
           </a>
         </div>
@@ -37,7 +39,7 @@
     document.write(quotes[index])
   </script>
   <noscript>
-    - zen -
+    Proud Fenda Scum
   </noscript>
 </h3>
         <!-- nav -->
@@ -56,8 +58,8 @@
 <section class="content">
 
   <h3 class="posttitle">
-    <a class="nodec" href="/posts/2013/Oct/20/a-splash-of-colour/" rel="bookmark" title="Permalink to A Splash of Colour">
-      A Splash of&nbsp;Colour
+    <a class="nodec" href="/posts/2013/Oct/20/a-splash-of-colour/" rel="bookmark" title="Permalink to A Splash of Colour">
+      A Splash of Colour
     </a>
   </h3>
 
@@ -69,22 +71,22 @@
   </div><!-- .postinfo -->
 
   <div class="article">
-    <p>The aim is that this will be my last post about my blog for a while, but I just wanted to point out some of the interesting features, because I think that&#8217;s what one does on technology-related blogs, and really I just want to fit in an be like the other cool guys.  Dammit, I&#8217;m a terrible&nbsp;person.</p>
-<p>As mentioned before, this is a <a href="http://blog.getpelican.com/">Pelican</a> blog.  Excuse the mild ideosyncracies of the documentation (particularly that if you click on a link, you will <em>never</em> be able to get back to the main page), it&#8217;s actually quite a nice system.  Pelican is a static-site generator, in the style of all the other static-site generators that I&#8217;m sure we could name between us, but with a few nice touches of it&#8217;s own.  For example, unlike Jekyll and associated software, it only requires a directory of posts and pages, as opposed to a directory containing all the parts of a blog.  It&#8217;s relatively well supported, particularly among the French-speaking community.  It&#8217;s also written in Python, which, as a Pythonista first and foremost, means I can read the code and actually understand most of what it&#8217;s&nbsp;doing.</p>
-<p>Secondly, you&#8217;ll notice the theme.  The theme is custom-built.  This is amazing.  My knowledge of <span class="caps">CSS</span> is approximately equal to my knowledge on the dietary habits of pregnant sperm whales.  Seriously, any good impressions you have of the styling of this site are more an indication of the power and ease-of-use of <a href="http://lesscss.org/">less</a> than my own ability.  Some interesting and exciting&nbsp;things:</p>
+    <p>The aim is that this will be my last post about my blog for a while, but I just wanted to point out some of the interesting features, because I think that's what one does on technology-related blogs, and really I just want to fit in an be like the other cool guys.  Dammit, I'm a terrible person.</p>
+<p>As mentioned before, this is a <a href="http://blog.getpelican.com/">Pelican</a> blog.  Excuse the mild ideosyncracies of the documentation (particularly that if you click on a link, you will <em>never</em> be able to get back to the main page), it's actually quite a nice system.  Pelican is a static-site generator, in the style of all the other static-site generators that I'm sure we could name between us, but with a few nice touches of it's own.  For example, unlike Jekyll and associated software, it only requires a directory of posts and pages, as opposed to a directory containing all the parts of a blog.  It's relatively well supported, particularly among the French-speaking community.  It's also written in Python, which, as a Pythonista first and foremost, means I can read the code and actually understand most of what it's doing.</p>
+<p>Secondly, you'll notice the theme.  The theme is custom-built.  This is amazing.  My knowledge of CSS is approximately equal to my knowledge on the dietary habits of pregnant sperm whales.  Seriously, any good impressions you have of the styling of this site are more an indication of the power and ease-of-use of <a href="http://lesscss.org/">less</a> than my own ability.  Some interesting and exciting things:</p>
 <ul>
 <li>
-<p>You can change the colour-scheme!  I know a number of people who have really strong preferences over light vs dark, so if you scroll to the bottom, you&#8217;ll find a switcher that allows you to switch between light and dark.  Everything is entirely client-side, and the preference is saved in localStorage so your theme-choice will persist between sessions.  If you don&#8217;t have either localStorage, or javascript in general, the page will load the dark theme by default, because dark is clearly the cooler&nbsp;choice.</p>
+<p>You can change the colour-scheme!  I know a number of people who have really strong preferences over light vs dark, so if you scroll to the bottom, you'll find a switcher that allows you to switch between light and dark.  Everything is entirely client-side, and the preference is saved in localStorage so your theme-choice will persist between sessions.  If you don't have either localStorage, or javascript in general, the page will load the dark theme by default, because dark is clearly the cooler choice.</p>
 </li>
 <li>
-<p>The theme includes a random quote of the page load.  This is the second &#8216;bubble&#8217; that appears on the main page.  The quotes are taken from the <span class="caps">RANDOMQUOTES</span> pelican option, and then every time the page loads, a javascript function writes out a div containing a random quote.  Obviously, if there is no javascript, the div never gets written at all, and so the page still runs&nbsp;beautifully.</p>
+<p>The theme includes a random quote of the page load.  This is the second 'bubble' that appears on the main page.  The quotes are taken from the RANDOMQUOTES pelican option, and then every time the page loads, a javascript function writes out a div containing a random quote.  Obviously, if there is no javascript, the div never gets written at all, and so the page still runs beautifully.</p>
 </li>
 <li>
-<p>The theme is largely <span class="caps">XKCD</span>/1271 compliant.  For those that don&#8217;t obsessively follow the famous webcomic, <a href="http://xkcd.com/1271">comic #1271</a> recently described the habit of highlighting text while browsing websites, and then feeling good when the highlighted text makes a beautiful shape.  As someone who suffers from a similar compulsion (for reference, I consider option 4 of Randall&#8217;s list to be the only viable option) I spent last night redesigning parts of the article layout so that when one highlights text in Chrome, there are no longer any horrible&nbsp;overhangs.</p>
+<p>The theme is largely XKCD/1271 compliant.  For those that don't obsessively follow the famous webcomic, <a href="http://xkcd.com/1271">comic #1271</a> recently described the habit of highlighting text while browsing websites, and then feeling good when the highlighted text makes a beautiful shape.  As someone who suffers from a similar compulsion (for reference, I consider option 4 of Randall's list to be the only viable option) I spent last night redesigning parts of the article layout so that when one highlights text in Chrome, there are no longer any horrible overhangs.</p>
 </li>
 </ul>
-<p>There are still a few things that I haven&#8217;t quite sorted, that I still need to work on.  I&#8217;ve only really been concentrating on the index template and the pages template, so it might be that other pages look slightly more broken.  When I get comments, you can tell me about those pages.  Although first I really need to get a comments system in&nbsp;place.</p>
-<p>The theme is open source, obviously, and is available <a href="https://github.com/MrJohz/pillbox-theme">on GitHub</a> as the Pillbox theme.  Feel free to fork&nbsp;away.</p>
+<p>There are still a few things that I haven't quite sorted, that I still need to work on.  I've only really been concentrating on the index template and the pages template, so it might be that other pages look slightly more broken.  When I get comments, you can tell me about those pages.  Although first I really need to get a comments system in place.</p>
+<p>The theme is open source, obviously, and is available <a href="https://github.com/MrJohz/pillbox-theme">on GitHub</a> as the Pillbox theme.  Feel free to fork away.</p>
   </div><!-- .content -->
 
 </section>
