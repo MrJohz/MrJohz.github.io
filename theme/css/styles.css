@@ -25,14 +25,14 @@ body {
 .siteheader {
     box-sizing: border-box;
     width: 100%;
-    margin-bottom: 0.5em;
+    margin-bottom: 1.25em;
     display: table;
 }
 
 @media (min-width: 700px) {
     .siteheader {
         padding: 0 3em;
-        margin-bottom: 2em;
+        margin-bottom: 5em;
     }
 }
 
