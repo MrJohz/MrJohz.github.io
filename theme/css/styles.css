@@ -71,6 +71,11 @@ body {
 
 /* Article list on index page. */
 
+#postlist {
+    left: 0;
+    padding-left: 0;
+}
+
 .posttitle {
     font-size: 1.6em;
 }
@@ -94,6 +99,7 @@ body {
 
 .post {
     margin-bottom: 20px;
+    list-style: none;
 }
 
 /* Links. */

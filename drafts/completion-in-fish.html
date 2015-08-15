@@ -37,7 +37,7 @@
     document.write(quotes[index])
   </script>
   <noscript>
-    The blog that's always right, for an entirely arbitrary value of&nbsp;'right'.
+    - zen -
   </noscript>
 </h3>
         <!-- nav -->
@@ -96,10 +96,10 @@ OPTIONS:
 
 
 <p>To test that this works, run those commands in a fish shell, then type <code>my-favourite-program -&lt;tab&gt;</code>.  You should get something that looks a bit like&nbsp;this:</p>
-<div class="highlight"><pre><span class="go">$ my-favourite-program -</span>
+<div class="highlight"><pre><span class="gp">$</span> my-favourite-program -
 <span class="go">--all  (Do all the favourite things)  -u  (Only use unsigned integers)  -weird  (Weird &quot;old-style&quot; option)</span>
 <span class="go">-a     (Do all the favourite things)  -w    (Weird &quot;old-style&quot; option)</span>
-<span class="go">$ my-favourite-program -weird</span>
+<span class="gp">$</span> my-favourite-program -weird
 </pre></div>
 
 
@@ -143,7 +143,21 @@ OPTIONS:
 </pre></div>
 
 
-<p>The&nbsp;arguments</p>
+<p>Originally, I thought that the <code>--arguments</code> option only applied to options.  It doesn&#8217;t - this also works for general arguments.  Assuming <code>my-favourite-program</code> now takes files as arguments, but only accepts files with no &#8216;s&#8217; in them in the local directory, you might get something like&nbsp;this:</p>
+<div class="highlight"><pre><span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> <span class="se">\</span>
+    --exclusive --arguments <span class="s2">&quot;(ls -p | grep -v &#39;/&#39; | grep -v &#39;s&#39;)&quot;</span> <span class="se">\</span>
+    --description <span class="s1">&#39;Argument!&#39;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="gp">$</span> my-favourite-program
+<span class="go">fabfile.py   (Argument!)  Makefile     (Argument!)  pelicanconf.py   (Argument!)</span>
+<span class="go">fabfile.pyc  (Argument!)  pelican.pid  (Argument!)  pelicanconf.pyc  (Argument!)</span>
+</pre></div>
+
+
+<h2>Subcommands</h2>
+<p>S</p>
 <div class="footnote">
 <hr />
 <ol>
