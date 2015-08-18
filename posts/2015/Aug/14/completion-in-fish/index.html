@@ -41,7 +41,7 @@
     document.write(quotes[index])
   </script>
   <noscript>
-    Proud Fenda Scum
+    More than just a blog, it's a way of&nbsp;life.
   </noscript>
 </h3>
           <!-- nav -->
@@ -61,7 +61,7 @@
 <section class="content">
 
   <h3 class="posttitle">
-    <a class="nodec" href="/drafts/completion-in-fish.html" rel="bookmark" title="Permalink to Shell Completion in Fish">
+    <a class="nodec" href="/posts/2015/Aug/14/completion-in-fish/" rel="bookmark" title="Permalink to Shell Completion in Fish">
       Shell Completion in Fish
     </a>
   </h3>
@@ -108,7 +108,7 @@ OPTIONS:
 </pre></div>
 
 
-<h2>Arguments</h2>
+<h2>Getting more complex - adding arguments</h2>
 <p>This is all okay, but it's a bit boring.  Many options require an argument of some kind.  How does that work?</p>
 <p>Fish has a couple of different switches here.  Firstly, option arguments can be specified using the <code>--arguments</code> option.  <code>--arguments</code> takes a single parameter that takes "a space-separated list of possible option-arguments, which may contain subshells".</p>
 <p>There's also some extra switches that specify particulars about how the argument should be treated.  For example, the <code>--require-parameter</code> switch tells fish that a particular argument must have an argument.  This means, among other things, that it can't be used in the middle of a set of short options.  For example, given a command with options <code>-a -b -c</code> where <code>-b</code> has a required parameter, fish shell knows that <code>-ac</code> can still be followed by another option, but that <code>-ab</code> cannot be followed by the <code>-c</code> option, it will be followed by an argument.</p>
@@ -155,14 +155,140 @@ OPTIONS:
 </pre></div>
 
 
-<div class="highlight"><pre><span class="gp">$</span> my-favourite-program &lt;tab&gt;
+<div class="highlight"><pre><span class="gp">$</span> ls
+<span class="go">cache/      develop_server.sh*  Makefile        pelicanconf.pyc  publishconf.py   requirements.txt  theme2/</span>
+<span class="go">content/    fabfile.py          output/         pelican.pid      publishconf.pyc  srv.pid</span>
+<span class="go">crowsfoot/  fabfile.pyc         pelicanconf.py  plugins/         __pycache__/     theme/</span>
+<span class="gp">$</span> my-favourite-program &lt;tab&gt;
 <span class="go">fabfile.py   (Argument!)  Makefile     (Argument!)  pelicanconf.py   (Argument!)</span>
 <span class="go">fabfile.pyc  (Argument!)  pelican.pid  (Argument!)  pelicanconf.pyc  (Argument!)</span>
 </pre></div>
 
 
-<h2>Subcommands</h2>
-<p>S</p>
+<h2>Screw it all - subcommands</h2>
+<p>So far, the quest for fish completion has been pretty simple.  Generally there's been an option to pass to the <code>complete</code> command that has taken care of any trouble.  If something more complex has been required, it's generally been just a subshell away.</p>
+<p>Unfortunately, that all goes away when subcommands turn up.  Fish's autocomplete doesn't have any concept of subcommands, just different arguments, so there's no single switch that can declare the exact syntax of the command.  A naive attempt might be to use multiple <code>--command</code> options, but that just applies the same completion to different top-level commands.  I also tried using a command with spaces in (e.g. <code>--command 'git status'</code>) but that just set  up the completions for the command <code>git\ status</code>.  Which is basically exactly what I expected, but it's nice to at least hope once to be able to use the easy option...</p>
+<p>What is there, then?  Well, one of the options for <code>complete</code> is <code>--condition</code>.  This option takes a string indicating a function to call.  Every time a particular command is tab-completed, fish will call the condition-function for each completion, and if that condition returns <code>0</code> or true, it will display that completion.</p>
+<p>Additionally, fish also provides a function for retrieving the current "buffer" - the text written so far at the prompt.  In theory, it should be possible to work out which subcommand's completions are needed by working out what subcommands are currently in that buffer.</p>
+<p>As an example, and to show that this applies to literally any form of the completion that we've seen so far, let's consider a command that, if the string <code>'opt'</code> is given on the commandline - anywhere at all - the option <code>--mytest</code> can be completed.</p>
+<div class="highlight"><pre># first, we need to define this function
+# also it turns out that pygments doesn&#39;t support fish, and my computer doesn&#39;t like
+# pretending that this is any other shell language, so no highlighting, sorry.  :/
+
+function __fish_complete_test
+    set cmd (commandline -opc) # gets the current buffer
+    if contains &#39;opt&#39; $cmd
+        return 0 # can completion
+    end
+    return 1 # cannot complete
+end
+</pre></div>
+
+
+<div class="highlight"><pre><span class="c"># Now define the completion</span>
+<span class="c"># For the curious, this can be highlighted as sh because it doesn&#39;t contain</span>
+<span class="c"># any if-end blocks.</span>
+<span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> --long <span class="s1">&#39;mytest&#39;</span> <span class="se">\</span>
+    --condition <span class="s1">&#39;__fish_complete_test&#39;</span> <span class="se">\</span>
+    --description <span class="s1">&#39;defies description&#39;</span>
+</pre></div>
+
+
+<p>That works, but now the value that the command is looking for is hardcoded.  That's an easy problem to solve - functions can take parameters, just as they can elsewhere in the fish shell.  To test it, if the shell contains <code>'opt'</code>, it will give the mytest option, but if it contains <code>'arg'</code>, it will have the mytest argument.</p>
+<div class="highlight"><pre>function __fish_complete_test
+    set cmd (commandline -opc) # gets the current buffer
+    set needle $argv[1]
+    if contains $needle $cmd
+        return 0 # can completion
+    end
+    return 1 # cannot complete
+end
+</pre></div>
+
+
+<div class="highlight"><pre><span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> --long <span class="s1">&#39;mytest&#39;</span> <span class="se">\</span>
+    --condition <span class="s1">&#39;__fish_complete_test opt&#39;</span> <span class="se">\</span>
+    --description <span class="s1">&#39;defies description&#39;</span>
+<span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> --arguments <span class="s1">&#39;mytest&#39;</span> <span class="se">\</span>
+    --condition <span class="s1">&#39;__fish_complete_test arg&#39;</span> <span class="se">\</span>
+    --description <span class="s1">&#39;defies description&#39;</span>
+</pre></div>
+
+
+<p>And that works as well!  However, there's another snag here.  <code>'opt'</code> and <code>'arg'</code> could be anywhere in the command, not just in the correct places.  But subcommands rely on an order or hierarchy, from the base command through each subcommand to the final leaf subcommand that is executed.  That can still be determined, it just requires a bit more effort.  Given a list of subcommands with a certain depth, the simplest way that I can come up with without hardcoding too much is to loop through each of the subcommands and check that the token on the buffer at that position equals the subcommand at that level.</p>
+<p>An example will probably explain this better.</p>
+<div class="highlight"><pre>function __fish_at_level
+  set cmd (commandline -opc)
+  set subcommands $argv
+  set subcommands_len (count $subcommands)
+  if [ (count $cmd) -eq $subcommands_len ]
+    for i in (seq $subcommands_len)
+      if [ $subcommands[$i] != $cmd[$i] ]
+        return 1
+      end
+    end
+    return 0
+  end
+
+  return 1
+end
+</pre></div>
+
+
+<div class="highlight"><pre><span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> <span class="se">\</span>
+    --condition <span class="s1">&#39;__fish_at_level my-favourite-program&#39;</span>
+    --arguments <span class="s1">&#39;open close&#39;</span> --exclusive
+<span class="nb">complete</span> --command <span class="s1">&#39;my-favourite-program&#39;</span> <span class="se">\</span>
+    --condition <span class="s1">&#39;__fish_at_level my-favourite-program subcommand&#39;</span>
+    --arguments <span class="s1">&#39;yes no&#39;</span> --exclusive
+</pre></div>
+
+
+<p>If the prompt starts with just <code>my-favourite-program</code>, autocomplete will produce <code>'open'</code> or <code>'close'</code>.  On the other hand, if the prompt reads <code>my-favourite-program subcommand</code>, then autocomplete will suggest <code>'yes'</code> and <code>'no'</code>.</p>
+<p>This doesn't work perfectly.  There are two big issues with it that I can see.  Firstly, it pins the name of the command being completed.  The fish shell has a concept of "wrapping" commands that allows one command to inherit another's completions.  However, the condition function defined here pins the command down - another command wrapping this would never pass the condition because it wouldn't have the same first token on the buffer.</p>
+<p>The other big issue is that this allows for one, and only one completion for each subcommand.  That is, if the input so far has been "myprog foo --opt=arg", then the condition won't select any arguments for the command foo, because <code>--opt=arg</code> already exists on the buffer.</p>
+<p>I'm not going to work through the solutions for these right here, because they're complicated, and I'm not entirely sure my solution is all that brilliant.  Bear in mind that I'm looking for a generic solution I write out as a header to all of my Rust program's completion scripts - in general, it may (read will) be far more efficient to tailor the condition function to the command you're writing a completion for.</p>
+<p>However, to finish, I'll show the finished condition function, and link to a <a href="https://github.com/MrJohz/completist/blob/2a120d8174c58ae85f87123844ae8988e39e9a47/samples/fish_completion.fish">file on Github</a> that demonstrates how to use it, and provides completions for a basic imaginary command.</p>
+<div class="highlight"><pre>function __fish_at_level
+  # set useful variables
+  set cmd (commandline -opc)
+  set subcmd_index (contains --index &#39;&#39; $argv)
+  if [ $subcmd_index -eq 1 ]
+    set subcommands # empty list
+  else
+    set subcommands $argv[1..(math $subcmd_index - 1)]
+  end
+  if [ $subcmd_index -eq (count $argv) ]
+    set ignore_commands # empty list
+  else
+    set ignore_commands $argv[(math $subcmd_index + 1)..-1]
+  end
+  set subcommands_len (count $subcommands)
+
+  # Test that the initial subcommands are always equal
+  if [ (count $cmd) -le $subcommands_len ]
+    return 1
+  end
+  for i in (seq $subcommands_len)
+    if [ $subcommands[$i] != $cmd[(math $i + 1)] ]
+      return 1
+    end
+  end
+
+  # Test that the most recent command isn&#39;t a further subcommand
+  for i in $ignore_commands
+    if [ (count $cmd) -lt (math $subcommands_len + 2) ]
+      return 0
+    else if [ $cmd[(math $subcommands_len + 2)] = $i ]
+      return 1
+    end
+  end
+
+  return 0
+end
+</pre></div>
+
+
 <div class="footnote">
 <hr />
 <ol>

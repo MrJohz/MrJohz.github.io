@@ -1,5 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Johz</title><link>http://www.johz.me/</link><description></description><atom:link href="http://www.johz.me/feeds/jonathan-frere.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 17 Jan 2015 12:02:32 +0000</lastBuildDate><item><title>A Collection of Benchmarks that I Found Useful</title><link>http://www.johz.me/posts/2015/Jan/17/get-benched/</link><description>&lt;p&gt;As Donald Knuth once explained, 97% of a programmer's time should be spent making their code as fast as possible.  (The other 3% is waiting for the code to compile.)  Most programmers have a host of shortcuts, tricks, and clever codes up their sleeves to ensure that their code runs as fast as it possibly can.  For example, in JavaScript, many developers have spent years studying the secret arts of the for-loop to determine how to loop through arbitrary numbers most quickly.  (The answer to this particular question is actually an inverse-backwards while-never-done-loop, where the first character on each line is an 'a', and where the programmer chants hymns worshipping Azathoth.)  The faster their code works, the more web-scale their &lt;del&gt;node.js&lt;/del&gt; io.js programs will be.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Johz</title><link>http://www.johz.me/</link><description></description><atom:link href="http://www.johz.me/feeds/jonathan-frere.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 14 Aug 2015 14:50:04 +0100</lastBuildDate><item><title>Shell Completion in Fish</title><link>http://www.johz.me/posts/2015/Aug/14/completion-in-fish/</link><description>&lt;p&gt;I use the &lt;a href="http://fishshell.com/"&gt;fish shell&lt;/a&gt; as my go-to shell.  It's fun, it's colourful, it's full of features, and I'd highly recommend it.  One of those features is a shell-completion mechanism in the form of the &lt;code&gt;complete&lt;/code&gt; command.  Now many other shells have completion, but for now I'm just going to play with the fish version, and then see if I can apply it to other shells later on, perhaps in a future post.&lt;/p&gt;
+&lt;p&gt;I'm interested in shell completions because I got bored the other day and started learning &lt;a href="http://rust-lang.org/"&gt;Rust&lt;/a&gt;, and now I'm trying to build a program that, given an input definition, will output a shell script to define the shell completions for that input.  Yesterday I got to the point that I could just about comprehend the Rust part (if in doubt, stick another "&lt;code&gt;&amp;amp;&lt;/code&gt;" in front of it&lt;sup id="fnref:rust-advice"&gt;&lt;a class="footnote-ref" href="#fn:rust-advice" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;), and realised that actually the new difficulty was that I didn't really know how to do shell completion.&lt;/p&gt;
+&lt;h2&gt;First steps - just options&lt;/h2&gt;
+&lt;p&gt;The best place to start is with a program to define the completions for.  Starting as simple as possible, here's one defined in a sort-of-docopt-y form.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;USAGE:
+    my-favourite-program [OPTIONS]
+
+OPTIONS:
+    -a, --all               Do all the favourite things
+    -u                      Only use unsigned integers
+    -w, -weird              Weird &amp;quot;old-style&amp;quot; option
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Only options, but three different kinds.  There's short options (&lt;code&gt;-x&lt;/code&gt;), long options (&lt;code&gt;--long-opt&lt;/code&gt;) and also weird single-dashed long options that fish calls "old-style".  The example given in the fish shell docs is &lt;code&gt;-Wall&lt;/code&gt;, but then I've always understood that to be "-W, with the argument 'all'".  Regardless, how do you complete this different options?&lt;/p&gt;
+&lt;p&gt;The full signature of a program can't be given in one single definition, instead each option is given separately.  The &lt;code&gt;complete&lt;/code&gt; command starts by defining what command the completion applies to using the &lt;code&gt;--command&lt;/code&gt; option.  This is followed by all of the alternatives for each option, using the &lt;code&gt;--short-option&lt;/code&gt; flag for short options, the &lt;code&gt;--long-option&lt;/code&gt; flag for long options, and the &lt;code&gt;--old-option&lt;/code&gt; flag for old options.  Finally, an optional description can be attached using the &lt;code&gt;--description&lt;/code&gt; flag.&lt;/p&gt;
+&lt;p&gt;The order of the flags passed to &lt;code&gt;complete&lt;/code&gt; don't actually matter as far as I can tell, but doing it in the same order each time makes it much easier to read the command, so I'll do it that way.  All in all, that means the completion file might look something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;complete&lt;/span&gt; --command &lt;span class="s1"&gt;&amp;#39;my-favourite-program&amp;#39;&lt;/span&gt; --short-option &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt; --long-option &lt;span class="s1"&gt;&amp;#39;all&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --description &lt;span class="s1"&gt;&amp;#39;Do all the favourite things&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;complete&lt;/span&gt; --command &lt;span class="s1"&gt;&amp;#39;my-favourite-program&amp;#39;&lt;/span&gt; --short-option &lt;span class="s1"&gt;&amp;#39;u&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --description &lt;span class="s1"&gt;&amp;#39;Only use unsigned integers&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;complete&lt;/span&gt; --command &lt;span class="s1"&gt;&amp;#39;my-favourite-program&amp;#39;&lt;/span&gt; --short-option &lt;span class="s1"&gt;&amp;#39;w&amp;#39;&lt;/span&gt; --old-option &lt;span class="s1"&gt;&amp;#39;weird&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --description &lt;span class="s1"&gt;&amp;#39;Weird &amp;quot;old-style&amp;quot; option&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To test that this works, run those commands in a fish shell, then type &lt;code&gt;my-favourite-program -&amp;lt;tab&amp;gt;&lt;/code&gt;.  You should get something that looks a bit like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; my-favourite-program -&amp;lt;tab&amp;gt;
+&lt;span class="go"&gt;--all  (Do all the favourite things)  -u  (Only use unsigned integers)  -weird  (Weird &amp;quot;old-style&amp;quot; option)&lt;/span&gt;
+&lt;span class="go"&gt;-a     (Do all the favourite things)  -w    (Weird &amp;quot;old-style&amp;quot; option)&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; my-favourite-program -weird
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Getting more complex - adding arguments&lt;/h2&gt;
+&lt;p&gt;This is all okay, but it's a bit boring.  Many options require an argument of some kind.  How does that work?&lt;/p&gt;
+&lt;p&gt;Fish has a couple of different switches here.  Firstly, option arguments can be specified using the &lt;code&gt;--arguments&lt;/code&gt; option.  &lt;code&gt;--arguments&lt;/code&gt; takes a single parameter that takes "a space-separated list of possible option-arguments, which may contain subshells".&lt;/p&gt;
+&lt;p&gt;There's also some extra switches that specify particulars about how the argument should be treated.  For example, the &lt;code&gt;--require-parameter&lt;/code&gt; switch tells fish that a particular argument must have an argument.  This means, among other things, that it can't be used in the middle of a set of short options.  For example, given a command with options &lt;code&gt;-a -b -c&lt;/code&gt; where &lt;code&gt;-b&lt;/code&gt; has a required parameter, fish shell knows that &lt;code&gt;-ac&lt;/code&gt; can still be followed by another option, but that &lt;code&gt;-ab&lt;/code&gt; cannot be followed by the &lt;code&gt;-c&lt;/code&gt; option, it will be followed by an argument.&lt;/p&gt;
+&lt;p&gt;Additionally, by default fish will assume that the files in the current directory can always be passed as arguments to the current option.  To prevent this, the &lt;code&gt;--no-files&lt;/code&gt; switch can be passed.  &lt;code&gt;--no-files&lt;/code&gt; can be combined with &lt;code&gt;--require-parameter&lt;/code&gt; using the &lt;code&gt;--exclusive&lt;/code&gt; switch.&lt;/p&gt;
+&lt;p&gt;Let's go back to the original program definition, change it so some of the commands take arguments, and try to fill those arguments in.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;USAGE:
+    my-favourite-program [OPTIONS]
+
+OPTIONS:
+    -f, --file FILE         Include FILE in program
+    -x, --extra on|off      Turns extra on or off
+    -c, --command COMMAND   The cargo command to execute beforehand
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Okay, so this program is getting more and more contrived.  I've added a few different options to play with to try out different things.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;--file&lt;/code&gt; option is probably the easiest one to start with.  It takes any file - that's fish's default anyway.  It is also a required parameter, so the &lt;code&gt;--require-parameter&lt;/code&gt; option can be added in.  This is what it looks like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;complete&lt;/span&gt; --command &lt;span class="s1"&gt;&amp;#39;my-favourite-program&amp;#39;&lt;/span&gt; --short-option &lt;span class="s1"&gt;&amp;#39;f&amp;#39;&lt;/span&gt; --long-option &lt;span class="s1"&gt;&amp;#39;file&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --require-parameter &lt;span class="se"&gt;\&lt;/span&gt;
+    --description &lt;span class="s1"&gt;&amp;#39;Include FILE in program&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The second option, &lt;code&gt;--extra&lt;/code&gt; is also fairly simple.  It takes either 'on' or 'off' and nothing else.  As there's a required option, and files aren't allowed, this deserves the &lt;code&gt;--exclusive&lt;/code&gt; switch, as well as the argument specification.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;complete&lt;/span&gt; --command &lt;span class="s1"&gt;&amp;#39;my-favourite-program&amp;#39;&lt;/span&gt; --short-option &lt;span class="s1"&gt;&amp;#39;x&amp;#39;&lt;/span&gt; --long-option &lt;span class="s1"&gt;&amp;#39;extra&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclusive --arguments &lt;span class="s1"&gt;&amp;#39;on off&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --description &lt;span class="s1"&gt;&amp;#39;Turns extra on or off&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can try both of those fairly easily, although the first one doesn't really do all that much.  The last option, &lt;code&gt;--command&lt;/code&gt;, is the most interesting.  It takes a cargo command.  This could be produced by manually typing out all the different cargo commands, but dammit this is the future, and if we aren't allowed hoverboards and ray-guns we might as well use what we have got.&lt;/p&gt;
+&lt;p&gt;What we have is subshells.  Interestingly, in fish, subshells aren't expanded inside strings as one might expect, which means that the &lt;code&gt;complete&lt;/code&gt; command can use them to define short functions that list the available arguments dynamically.  This particular feature isn't necessarily all that useful for listing cargo commands, as those commands are unlikely to change very often, but it is pretty neat and comes in handy elsewhere.&lt;/p&gt;
+&lt;p&gt;To get a list of cargo commands, I've used &lt;code&gt;cargo --list&lt;/code&gt;, removed all of the spaces, and cut off the first line.  It probably isn't the most efficient, but it works.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;complete&lt;/span&gt; --command &lt;span class="s1"&gt;&amp;#39;my-favourite-program&amp;#39;&lt;/span&gt; --short-option &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt; --long-option &lt;span class="s1"&gt;&amp;#39;command&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclusive --arguments &lt;span class="s2"&gt;&amp;quot;(cargo --list | tr -d &amp;#39; &amp;#39; | sed &amp;#39;1d&amp;#39;)&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --description &lt;span class="s1"&gt;&amp;#39;The cargo command to execute beforehand&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Originally, I thought that the &lt;code&gt;--arguments&lt;/code&gt; option only applied to options.  It doesn't - this also works for general arguments.  Assuming &lt;code&gt;my-favourite-program&lt;/code&gt; now takes files as arguments, but only accepts files with no 's' in them in the local directory, you might get something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;complete&lt;/span&gt; --command &lt;span class="s1"&gt;&amp;#39;my-favourite-program&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --exclusive --arguments &lt;span class="s2"&gt;&amp;quot;(ls -p | grep -v &amp;#39;/&amp;#39; | grep -v &amp;#39;s&amp;#39;)&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --description &lt;span class="s1"&gt;&amp;#39;Argument!&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; ls
+&lt;span class="go"&gt;cache/      develop_server.sh*  Makefile        pelicanconf.pyc  publishconf.py   requirements.txt  theme2/&lt;/span&gt;
+&lt;span class="go"&gt;content/    fabfile.py          output/         pelican.pid      publishconf.pyc  srv.pid&lt;/span&gt;
+&lt;span class="go"&gt;crowsfoot/  fabfile.pyc         pelicanconf.py  plugins/         __pycache__/     theme/&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; my-favourite-program &amp;lt;tab&amp;gt;
+&lt;span class="go"&gt;fabfile.py   (Argument!)  Makefile     (Argument!)  pelicanconf.py   (Argument!)&lt;/span&gt;
+&lt;span class="go"&gt;fabfile.pyc  (Argument!)  pelican.pid  (Argument!)  pelicanconf.pyc  (Argument!)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Screw it all - subcommands&lt;/h2&gt;
+&lt;p&gt;So far, the quest for fish completion has been pretty simple.  Generally there's been an option to pass to the &lt;code&gt;complete&lt;/code&gt; command that has taken care of any trouble.  If something more complex has been required, it's generally been just a subshell away.&lt;/p&gt;
+&lt;p&gt;Unfortunately, that all goes away when subcommands turn up.  Fish's autocomplete doesn't have any concept of subcommands, just different arguments, so there's no single switch that can declare the exact syntax of the command.  A naive attempt might be to use multiple &lt;code&gt;--command&lt;/code&gt; options, but that just applies the same completion to different top-level commands.  I also tried using a command with spaces in (e.g. &lt;code&gt;--command 'git status'&lt;/code&gt;) but that just set  up the completions for the command &lt;code&gt;git\ status&lt;/code&gt;.  Which is basically exactly what I expected, but it's nice to at least hope once to be able to use the easy option...&lt;/p&gt;
+&lt;p&gt;What is there, then?  Well, one of the options for &lt;code&gt;complete&lt;/code&gt; is &lt;code&gt;--condition&lt;/code&gt;.  This option takes a string indicating a function to call.  Every time a particular command is tab-completed, fish will call the condition-function for each completion, and if that condition returns &lt;code&gt;0&lt;/code&gt; or true, it will display that completion.&lt;/p&gt;
+&lt;p&gt;Additionally, fish also provides a function for retrieving the current "buffer" - the text written so far at the prompt.  In theory, it should be possible to work out which subcommand's completions are needed by working out what subcommands are currently in that buffer.&lt;/p&gt;
+&lt;p&gt;As an example, and to show that this applies to literally any form of the completion that we've seen so far, let's consider a command that, if the string &lt;code&gt;'opt'&lt;/code&gt; is given on the commandline - anywhere at all - the option &lt;code&gt;--mytest&lt;/code&gt; can be completed.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# first, we need to define this function
+# also it turns out that pygments doesn&amp;#39;t support fish, and my computer doesn&amp;#39;t like
+# pretending that this is any other shell language, so no highlighting, sorry.  :/
+
+function __fish_complete_test
+    set cmd (commandline -opc) # gets the current buffer
+    if contains &amp;#39;opt&amp;#39; $cmd
+        return 0 # can completion
+    end
+    return 1 # cannot complete
+end
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Now define the completion&lt;/span&gt;
+&lt;span class="c"&gt;# For the curious, this can be highlighted as sh because it doesn&amp;#39;t contain&lt;/span&gt;
+&lt;span class="c"&gt;# any if-end blocks.&lt;/span&gt;
+&lt;span class="nb"&gt;complete&lt;/span&gt; --command &lt;span class="s1"&gt;&amp;#39;my-favourite-program&amp;#39;&lt;/span&gt; --long &lt;span class="s1"&gt;&amp;#39;mytest&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --condition &lt;span class="s1"&gt;&amp;#39;__fish_complete_test&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --description &lt;span class="s1"&gt;&amp;#39;defies description&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That works, but now the value that the command is looking for is hardcoded.  That's an easy problem to solve - functions can take parameters, just as they can elsewhere in the fish shell.  To test it, if the shell contains &lt;code&gt;'opt'&lt;/code&gt;, it will give the mytest option, but if it contains &lt;code&gt;'arg'&lt;/code&gt;, it will have the mytest argument.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;function __fish_complete_test
+    set cmd (commandline -opc) # gets the current buffer
+    set needle $argv[1]
+    if contains $needle $cmd
+        return 0 # can completion
+    end
+    return 1 # cannot complete
+end
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;complete&lt;/span&gt; --command &lt;span class="s1"&gt;&amp;#39;my-favourite-program&amp;#39;&lt;/span&gt; --long &lt;span class="s1"&gt;&amp;#39;mytest&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --condition &lt;span class="s1"&gt;&amp;#39;__fish_complete_test opt&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --description &lt;span class="s1"&gt;&amp;#39;defies description&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;complete&lt;/span&gt; --command &lt;span class="s1"&gt;&amp;#39;my-favourite-program&amp;#39;&lt;/span&gt; --arguments &lt;span class="s1"&gt;&amp;#39;mytest&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --condition &lt;span class="s1"&gt;&amp;#39;__fish_complete_test arg&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --description &lt;span class="s1"&gt;&amp;#39;defies description&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And that works as well!  However, there's another snag here.  &lt;code&gt;'opt'&lt;/code&gt; and &lt;code&gt;'arg'&lt;/code&gt; could be anywhere in the command, not just in the correct places.  But subcommands rely on an order or hierarchy, from the base command through each subcommand to the final leaf subcommand that is executed.  That can still be determined, it just requires a bit more effort.  Given a list of subcommands with a certain depth, the simplest way that I can come up with without hardcoding too much is to loop through each of the subcommands and check that the token on the buffer at that position equals the subcommand at that level.&lt;/p&gt;
+&lt;p&gt;An example will probably explain this better.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;function __fish_at_level
+  set cmd (commandline -opc)
+  set subcommands $argv
+  set subcommands_len (count $subcommands)
+  if [ (count $cmd) -eq $subcommands_len ]
+    for i in (seq $subcommands_len)
+      if [ $subcommands[$i] != $cmd[$i] ]
+        return 1
+      end
+    end
+    return 0
+  end
+
+  return 1
+end
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;complete&lt;/span&gt; --command &lt;span class="s1"&gt;&amp;#39;my-favourite-program&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --condition &lt;span class="s1"&gt;&amp;#39;__fish_at_level my-favourite-program&amp;#39;&lt;/span&gt;
+    --arguments &lt;span class="s1"&gt;&amp;#39;open close&amp;#39;&lt;/span&gt; --exclusive
+&lt;span class="nb"&gt;complete&lt;/span&gt; --command &lt;span class="s1"&gt;&amp;#39;my-favourite-program&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    --condition &lt;span class="s1"&gt;&amp;#39;__fish_at_level my-favourite-program subcommand&amp;#39;&lt;/span&gt;
+    --arguments &lt;span class="s1"&gt;&amp;#39;yes no&amp;#39;&lt;/span&gt; --exclusive
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If the prompt starts with just &lt;code&gt;my-favourite-program&lt;/code&gt;, autocomplete will produce &lt;code&gt;'open'&lt;/code&gt; or &lt;code&gt;'close'&lt;/code&gt;.  On the other hand, if the prompt reads &lt;code&gt;my-favourite-program subcommand&lt;/code&gt;, then autocomplete will suggest &lt;code&gt;'yes'&lt;/code&gt; and &lt;code&gt;'no'&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This doesn't work perfectly.  There are two big issues with it that I can see.  Firstly, it pins the name of the command being completed.  The fish shell has a concept of "wrapping" commands that allows one command to inherit another's completions.  However, the condition function defined here pins the command down - another command wrapping this would never pass the condition because it wouldn't have the same first token on the buffer.&lt;/p&gt;
+&lt;p&gt;The other big issue is that this allows for one, and only one completion for each subcommand.  That is, if the input so far has been "myprog foo --opt=arg", then the condition won't select any arguments for the command foo, because &lt;code&gt;--opt=arg&lt;/code&gt; already exists on the buffer.&lt;/p&gt;
+&lt;p&gt;I'm not going to work through the solutions for these right here, because they're complicated, and I'm not entirely sure my solution is all that brilliant.  Bear in mind that I'm looking for a generic solution I write out as a header to all of my Rust program's completion scripts - in general, it may (read will) be far more efficient to tailor the condition function to the command you're writing a completion for.&lt;/p&gt;
+&lt;p&gt;However, to finish, I'll show the finished condition function, and link to a &lt;a href="https://github.com/MrJohz/completist/blob/2a120d8174c58ae85f87123844ae8988e39e9a47/samples/fish_completion.fish"&gt;file on Github&lt;/a&gt; that demonstrates how to use it, and provides completions for a basic imaginary command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;function __fish_at_level
+  # set useful variables
+  set cmd (commandline -opc)
+  set subcmd_index (contains --index &amp;#39;&amp;#39; $argv)
+  if [ $subcmd_index -eq 1 ]
+    set subcommands # empty list
+  else
+    set subcommands $argv[1..(math $subcmd_index - 1)]
+  end
+  if [ $subcmd_index -eq (count $argv) ]
+    set ignore_commands # empty list
+  else
+    set ignore_commands $argv[(math $subcmd_index + 1)..-1]
+  end
+  set subcommands_len (count $subcommands)
+
+  # Test that the initial subcommands are always equal
+  if [ (count $cmd) -le $subcommands_len ]
+    return 1
+  end
+  for i in (seq $subcommands_len)
+    if [ $subcommands[$i] != $cmd[(math $i + 1)] ]
+      return 1
+    end
+  end
+
+  # Test that the most recent command isn&amp;#39;t a further subcommand
+  for i in $ignore_commands
+    if [ (count $cmd) -lt (math $subcommands_len + 2) ]
+      return 0
+    else if [ $cmd[(math $subcommands_len + 2)] = $i ]
+      return 1
+    end
+  end
+
+  return 0
+end
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:rust-advice"&gt;
+&lt;p&gt;This is not true&amp;#160;&lt;a class="footnote-backref" href="#fnref:rust-advice" rev="footnote" title="Jump back to footnote 1 in the text"&gt;[back]&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jonathan Frere</dc:creator><pubDate>Fri, 14 Aug 2015 14:50:04 +0100</pubDate><guid>tag:www.johz.me,2015-08-14:posts/2015/Aug/14/completion-in-fish/</guid><category>fish-shell</category><category>coding</category></item><item><title>A Collection of Benchmarks that I Found Useful</title><link>http://www.johz.me/posts/2015/Jan/17/get-benched/</link><description>&lt;p&gt;As Donald Knuth once explained, 97% of a programmer's time should be spent making their code as fast as possible.  (The other 3% is waiting for the code to compile.)  Most programmers have a host of shortcuts, tricks, and clever codes up their sleeves to ensure that their code runs as fast as it possibly can.  For example, in JavaScript, many developers have spent years studying the secret arts of the for-loop to determine how to loop through arbitrary numbers most quickly.  (The answer to this particular question is actually an inverse-backwards while-never-done-loop, where the first character on each line is an 'a', and where the programmer chants hymns worshipping Azathoth.)  The faster their code works, the more web-scale their &lt;del&gt;node.js&lt;/del&gt; io.js programs will be.&lt;/p&gt;
 &lt;p&gt;There are lots of myths, legends, and rumours about optimization, and it's often very difficult to sort out the truth from the lies.  However, to help us in our quest for absolute speed, good programmers should always use benchmarks.  Benchmarks are a way of comparing like-for-like speeds of two programs, each containing different ways of doing the same thing, to determine which method is the quickest, and should therefore be used in all circumstances.  Of course, true benchmarks are often extremely difficult, and so programmers are often forced to compare unlike-for-unlike.  However, the major differences between like-for-like and unlike-for-unlike are usually negligible, and so a good programmer can almost always simplify a complex comparison into a very straight race between two arbitrary pieces of code, and interpret the results correctly.  This simplification is done in much the same way that a physicist simplifies complex problems to simple ones using spherical cows in a vacuum.&lt;/p&gt;
 &lt;h3&gt;The Importance of Whitespace&lt;/h3&gt;
 &lt;p&gt;The first misconception that many programmers have is that whitespace makes no difference.  While in most cases, good compilers can optimize away whitespace, and sometimes even remove it entirely from the resulting binary, it can still make a large difference to compile-times, and as programmers need to spend at least 97% of their time optimising, decreasing the length of time that a programmer needs to wait to compile a program is always a good thing.  Of course, this is to say nothing of interpreted programs, where there is no compilation stage, and so the whitespace cannot ever be optimized away, and must remain during the final execution of the program.&lt;/p&gt;
