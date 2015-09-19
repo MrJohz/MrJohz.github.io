@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta name="viewport" content="width=device-width, intial-scale=1" />
+
+      <title>Johz</title>
+      <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css' />
+      <link href='//fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'/>
+      <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:200,400,700' rel='stylesheet' type='text/css'/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/icons.css"/>
+      <link rel="stylesheet" type="text/css" href="http://www.johz.me/theme/css/styles.css"/>
+      <meta charset="utf-8" />
+  </head>
+
+  <body id="index">
+    <!-- header -->
+    <header class="siteheader">
+      <div class="siteheader-cell">
+        <div class= "sitetitle">
+          <a class="nodec emph" href="http://www.johz.me">
+            Johz
+          </a>
+        </div>
+      </div>
+      <div class="siteheader-cell">
+        <div class = "sitebanner">
+          <h3 class ="sitesubtitle">  <script>
+    quotes = [
+        "The blog that's always right, for an entirely arbitrary value of&nbsp;'right'.",
+        "Disclaimer: I have no idea what I'm doing']&lt;&amp;#47;div&gt;); DROP TABLE&nbsp;*;",
+        "Currently working towards being 100% <a href='http://xkcd.com/1271'>XKCD/1271</a>&nbsp;compliant.",
+        "More than just a blog, it's a way of&nbsp;life.",
+        "- zen -",
+        "This div container is left deliberately&nbsp;blank.",
+        "<a href='https://github.com/MrJohz'>Fork me on GitHub!</a>  Fix an issue with Johz&nbsp;today!",
+        "Proud Fenda Scum",
+        "If you're reading this, the resistance is ready to march.  Send the signal via the usual channels.  Glory to the Great&nbsp;Cause!",
+        "This is not the blog.  The blog is down there.<br/>Stop looking at this.  It's getting weird&nbsp;now.",
+    ]
+
+    index = Math.floor(Math.random() * quotes.length);
+    document.write(quotes[index])
+  </script>
+  <noscript>
+    - zen -
+  </noscript>
+</h3>
+          <!-- nav -->
+          <nav class="menu">
+            <ul>
+              <!-- menu items-->
+              <!--pages-->
+              <!-- services icons -->
+            </ul>
+          </nav>
+        </div> <!-- sitebanner -->
+      </div>
+    </header>
+
+    <!-- content -->
+
+<section class="content">
+
+  <h3 class="posttitle">
+    <a class="nodec" href="/drafts/meet-figtree.html" rel="bookmark" title="Permalink to Meet Figtree">
+      Meet Figtree
+    </a>
+  </h3>
+
+  <div class="postinfo">
+    <p class="published" title="2015-09-19T12:26:20+01:00">
+      Sat 19 September 2015
+    </p>
+
+  </div><!-- .postinfo -->
+
+  <div class="article">
+    <p>You know sometimes you do a stupid thing and it turns out to be so much more fun than doing the sensible thing that you really can't seem to shake it?</p>
+<p>Meet figtree, my latest stupid thing.</p>
+<div class="highlight"><pre><span class="nx">figtree_is</span> <span class="p">{</span>
+    <span class="s2">&quot;noded&quot;</span><span class="o">:</span> <span class="s2">&quot;configuration&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;it looks&quot;</span><span class="o">:</span> <span class="s2">&quot;a bit like JSON&quot;</span><span class="p">,</span>
+
+    <span class="nx">except</span> <span class="p">{</span>
+        <span class="s2">&quot;for&quot;</span><span class="o">:</span> <span class="s2">&quot;these random blocks everywhere&quot;</span>
+
+        <span class="c1">// plus a few other details, not least the fact that, what with comments and</span>
+        <span class="c1">// everything, it&#39;s actually somewhat readable without too much effort.</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h2>What the hell is this?</h2>
+<p>Figtree is a configuration format, designed to be as expressive as possible, while also minimizing any sense of confusion.  Instead of simply being a nested mapping structure, it is built up of nodes.  A node can contain subnodes and values.  Values can't contain nodes, they're the "leaves" of the tree, with the nodes being the trunk and branches.</p>
+<p>Here's a better, more complex example, showing pretty much every interesting bit of syntax that I can think of.</p>
+<div class="highlight"><pre><span class="n">root_node {</span>
+    <span class="err">&quot;keys&quot;:</span> <span class="err">&quot;must</span> <span class="err">always</span> <span class="err">be</span> <span class="err">strings&quot;,</span>
+    <span class="err">&quot;values&quot;:</span> <span class="err">&quot;can</span> <span class="err">be</span> <span class="err">a</span> <span class="err">lot</span> <span class="err">of</span> <span class="err">things&quot;,</span>
+
+    <span class="n">value_types {</span>
+        <span class="err">&quot;list&quot;:</span> <span class="err">[&#39;contains&#39;,</span> <span class="err">&#39;individual&#39;,</span> <span class="err">&#39;values&#39;],</span>
+        <span class="err">&quot;dict&quot;:</span> <span class="err">{&#39;basic&#39;:</span> <span class="err">&#39;mapping&#39;},</span>  <span class="c">// both container types can be nested</span>
+        <span class="err">&quot;string&quot;:</span> <span class="err">[</span>
+            <span class="err">&quot;double</span> <span class="err">quotes&quot;,</span>
+            <span class="err">&#39;single</span> <span class="err">quotes&#39;,</span>
+            <span class="err">&quot;quotes&quot;</span> <span class="err">&quot;together&quot;</span> <span class="err">&quot;are&quot;</span> <span class="err">&#39;concatenated&#39;,</span>
+            <span class="err">&quot;quotes</span>
+            <span class="err">can</span> <span class="err">contain</span> <span class="err">newlines&quot;</span>
+            <span class="err">r/raw</span> <span class="err">string/,</span> <span class="c">/* can also use &#39;&quot;|$%() */</span>
+            <span class="err">r$$use</span> <span class="err">multiple</span> <span class="err">quote</span> <span class="err">characters</span> <span class="err">to</span> <span class="err">contain</span> <span class="err">$</span> <span class="err">quotes$$,</span>
+        <span class="err">],</span>
+        <span class="err">&quot;integer&quot;:</span> <span class="err">[</span>
+            <span class="err">+394,</span> <span class="err">-343,</span> <span class="c">/* standard decimal */</span>
+            <span class="err">0xDEADBEEF,</span> <span class="c">/* hexadecimal*/</span>
+            <span class="err">0d444,</span> <span class="c">/* nonstandard decimal */</span>
+            <span class="err">0b0100_0110,</span> <span class="c">/* binary, note all integers can contain underscores */</span>
+            <span class="err">0o34,</span> <span class="c">/* octal */</span>
+        <span class="err">],</span>
+        <span class="err">&quot;float&quot;:</span> <span class="err">[</span>
+            <span class="err">34.53,</span> <span class="err">+34.53,</span> <span class="err">-34.53,</span> <span class="c">/* bog standard */</span>
+            <span class="err">34.,</span> <span class="err">.53,</span> <span class="c">/* leave bits off */</span>
+            <span class="err">34e-34,</span> <span class="c">/* and e-notation */</span>
+        <span class="err">],</span>
+        <span class="err">&quot;boolean&quot;:</span> <span class="err">[</span>
+            <span class="err">true,</span> <span class="err">false,</span> <span class="c">/* only lowercase, only these two literals allowed */</span>
+        <span class="err">],</span>
+        <span class="err">&quot;identifiers&quot;:</span> <span class="err">[</span>
+            <span class="err">!hjef,</span> <span class="c">/* follow the same rules as identifiers for nodes */</span>
+            <span class="err">!includes_underscores,</span> <span class="c">/* but always preceded by a &#39;!&#39; token */</span>
+            <span class="err">!`can</span> <span class="err">have</span> <span class="err">quoted</span> <span class="err">idents`,</span> <span class="c">/* uses same escaping as strings, but can&#39;t contain newlines */</span>
+        <span class="err">]</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<h2>Okay, better question, why does it exist?</h2>
+<p>Figtree is designed especially for configuration files.</p>
+  </div><!-- .content -->
+
+</section>
+
+
+    <!-- footer -->
+    <footer>
+      <p>
+        © Jonathan Frere, license <a href=""> </a>
+        unless otherwise noted.
+        Generated by <a href= "http://docs.getpelican.com/">Pelican</a> with
+        <a href="http://github.com/porterjamesj/crowsfoot">crowsfoot</a> theme.
+      </p>
+    </footer>
+  </body>
+</html>
