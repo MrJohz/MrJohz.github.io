@@ -43,7 +43,7 @@
     document.write(quotes[index])
   </script>
   <noscript>
-    - zen -
+    Currently working towards being 100% <a href='http://xkcd.com/1271'>XKCD/1271</a>&nbsp;compliant.
   </noscript>
 </h3>
           <!-- nav -->
@@ -92,9 +92,20 @@
 </pre></div>
 
 
-<h2>What the hell is this?</h2>
-<p>Figtree is a configuration format, designed to be as expressive as possible, while also minimizing any sense of confusion.  Instead of simply being a nested mapping structure, it is built up of nodes.  A node can contain subnodes and values.  Values can't contain nodes, they're the "leaves" of the tree, with the nodes being the trunk and branches.</p>
-<p>Here's a better, more complex example, showing pretty much every interesting bit of syntax that I can think of.</p>
+<p>Figtree, as the example says, is a noded configuration file format.  By "noded", I mean that it allows configuration values to sorted into sections ("nodes"), and ensures that those nodes are syntactically distinct from simple nested data.  As a configuration file format, as opposed to a general data format, I tried to make it expressive and easy-to-read, on the basis that the people who might actually need to read and write figtree files should be able to pick it up and use it easily.</p>
+<p>Nodes are made up from an identifier and a brace block, so they look a lot like function definitions or block structures in most C-like languages.  Identifiers use the same rules as Swift, because I liked the idea of emoji winding everyone up all the time, but mainly because those rules seemed fairly sane.</p>
+<blockquote>
+<p><strong>Rules of Swift</strong>:
+Identifiers begin with an uppercase or lowercase letter A through Z, an underscore (_), a noncombining alphanumeric Unicode character in the Basic Multilingual Plane, or a character outside the Basic Multilingual Plane that isn’t in a Private Use Area. After the first character, digits and combining Unicode characters are also allowed.</p>
+</blockquote>
+<p>On the basis that there may be some circumstances where that wasn't enough, it's also possible to use arbitrary strings as identifiers, by enclosing them with <code>`backticks`</code>.  These "quoted idents" can't contain raw newlines (although you can include newlines using <code>\n</code> if you need), but otherwise follow the same rules for strings.</p>
+<p>Nodes can contain subnodes, but they can also contain key-value pairs known as "attributes".  In figtree, keys are <em>always</em> strings.  This is a limitation, but I suspect there aren't many circumstances where non-key strings are needed.  Using only strings makes the resultant structure much easier to use in statically-typed languages, and also significantly simpler to parse.</p>
+<p>Attribute pairs must be separated by commas, and may optionally (i.e. almost always should) have a trailing comma at the end.  You don't need a comma between an attribute and a node, and you can't have a comma after a node (much like how you don't have semicolons after brace-blocks in most braced languages).</p>
+<p>Values are either simple, or complex.  Simple values are strings, integers, floats, booleans, and identifiers, while complex values are lists and dicts, that contain sub-values inside them.</p>
+<p>Strings are roughly like JSON strings, except for a few of features.  Firstly, they are multiline by default, as opposed to JSON strings which can only include newlines using the escape sequence <code>\n</code>.  Secondly, they can use either single (<code>'</code>) or double (<code>"</code>) quotes.  Thirdly, all the rules for JSON strings can be liberally ignored using raw strings, which are strings that are preceded by the letter <code>r</code>, as in <code>r"this is a raw string"</code>.  Raw strings use both the standard quote characters, but can also use <code>/slashes/</code>, <code>$dollar signs$</code>, <code>%percent signs%</code>, <code>|pipe signs|</code>, <code>#hashes#</code>, or <code>(brackets)</code>.  Inside raw strings, no backslash-escapes can be used.  To allow for the use of the quote character inside a raw string, it's possible to repeat the number of quote characters multiple times, and the string will only close when the same number of quote characters happens again in sequence.  For example, <code>r$$$this string can contain up to two $ signs ($$) because the outer quote uses three signs$$$</code> will be parsed as one string.</p>
+<p>For string values (although not for keys) whenever multiple strings are found with no separator, they will be concatenated (as in Python).  This makes it possible to write relatively long prose without having to worry about excess whitespace.</p>
+<p>Integers are fairly simple, they can either be the standard decimal, optionally preceded by a positive or negative sign, or a hexadecimal, octal, decimal, or binary number, preceded by a <code>0x</code>, <code>0o</code>, <code>0d</code>, or <code>0b</code> respectively.</p>
+<p>Floats, likewise, follow fairly standard rules.  There must be at least one decimal point and at least one integer on one side or the other of that point.  There can be a sign at the start, and an exponent at the end.</p>
 <div class="highlight"><pre><span class="n">root_node {</span>
     <span class="err">&quot;keys&quot;:</span> <span class="err">&quot;must</span> <span class="err">always</span> <span class="err">be</span> <span class="err">strings&quot;,</span>
     <span class="err">&quot;values&quot;:</span> <span class="err">&quot;can</span> <span class="err">be</span> <span class="err">a</span> <span class="err">lot</span> <span class="err">of</span> <span class="err">things&quot;,</span>
@@ -137,7 +148,7 @@
 
 
 <h2>Okay, better question, why does it exist?</h2>
-<p>Figtree is designed especially for configuration files.</p>
+<p>Figtree is designed especially for configuration files.  A lot of configuration involves nested hierachies, groups and subgroups.  For example, a configuration dealing with a particular web application might need to contain the ports and addresses to run the server on, the connection details for the databases it needs to connect to,</p>
   </div><!-- .content -->
 
 </section>
