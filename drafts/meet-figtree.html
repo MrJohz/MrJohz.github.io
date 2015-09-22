@@ -43,7 +43,7 @@
     document.write(quotes[index])
   </script>
   <noscript>
-    Currently working towards being 100% <a href='http://xkcd.com/1271'>XKCD/1271</a>&nbsp;compliant.
+    If you're reading this, the resistance is ready to march.  Send the signal via the usual channels.  Glory to the Great&nbsp;Cause!
   </noscript>
 </h3>
           <!-- nav -->
@@ -102,48 +102,51 @@ Identifiers begin with an uppercase or lowercase letter A through Z, an undersco
 <p>Nodes can contain subnodes, but they can also contain key-value pairs known as "attributes".  In figtree, keys are <em>always</em> strings.  This is a limitation, but I suspect there aren't many circumstances where non-key strings are needed.  Using only strings makes the resultant structure much easier to use in statically-typed languages, and also significantly simpler to parse.</p>
 <p>Attribute pairs must be separated by commas, and may optionally (i.e. almost always should) have a trailing comma at the end.  You don't need a comma between an attribute and a node, and you can't have a comma after a node (much like how you don't have semicolons after brace-blocks in most braced languages).</p>
 <p>Values are either simple, or complex.  Simple values are strings, integers, floats, booleans, and identifiers, while complex values are lists and dicts, that contain sub-values inside them.</p>
-<p>Strings are roughly like JSON strings, except for a few of features.  Firstly, they are multiline by default, as opposed to JSON strings which can only include newlines using the escape sequence <code>\n</code>.  Secondly, they can use either single (<code>'</code>) or double (<code>"</code>) quotes.  Thirdly, all the rules for JSON strings can be liberally ignored using raw strings, which are strings that are preceded by the letter <code>r</code>, as in <code>r"this is a raw string"</code>.  Raw strings use both the standard quote characters, but can also use <code>/slashes/</code>, <code>$dollar signs$</code>, <code>%percent signs%</code>, <code>|pipe signs|</code>, <code>#hashes#</code>, or <code>(brackets)</code>.  Inside raw strings, no backslash-escapes can be used.  To allow for the use of the quote character inside a raw string, it's possible to repeat the number of quote characters multiple times, and the string will only close when the same number of quote characters happens again in sequence.  For example, <code>r$$$this string can contain up to two $ signs ($$) because the outer quote uses three signs$$$</code> will be parsed as one string.</p>
+<p>Strings are roughly like JSON strings, except for a few of features.  Firstly, they are multiline by default, as opposed to JSON strings which can only include newlines using the escape sequence <code>\n</code>.  Secondly, they can use either single (<code>'</code>) or double (<code>"</code>) quotes.  Thirdly, all the rules for JSON strings can be liberally ignored using raw strings, which are strings that are preceded by the letter <code>r</code>, as in <code>r"this is a raw string"</code>.  Raw strings use both the standard quote characters, but can also use <code>/slashes/</code>, <code>$dollar signs$</code>, <code>%percent signs%</code>, <code>|pipe signs|</code>, or <code>#hashes#</code>.  Inside raw strings, no backslash-escapes can be used.  To allow for the use of the quote character inside a raw string, it's possible to repeat the number of quote characters multiple times, and the string will only close when the same number of quote characters happens again in sequence.  For example, <code>r$$$this string can contain up to two $ signs ($$) because the outer quote uses three signs$$$</code> will be parsed as one string.</p>
 <p>For string values (although not for keys) whenever multiple strings are found with no separator, they will be concatenated (as in Python).  This makes it possible to write relatively long prose without having to worry about excess whitespace.</p>
 <p>Integers are fairly simple, they can either be the standard decimal, optionally preceded by a positive or negative sign, or a hexadecimal, octal, decimal, or binary number, preceded by a <code>0x</code>, <code>0o</code>, <code>0d</code>, or <code>0b</code> respectively.</p>
 <p>Floats, likewise, follow fairly standard rules.  There must be at least one decimal point and at least one integer on one side or the other of that point.  There can be a sign at the start, and an exponent at the end.</p>
+<p>The fifth basic datatype is, I suspect, more unique: the identifier type.  This is a bang (exclamation point, <code>!</code>), followed by an identifier, using the same rules for identifiers here as when they're part of the node name.</p>
+<p>Identifiers are essentially another kind of string, but they're specifically designed to represent identifiers and values in code.  For example, the configuration for the CherryPy framework requires the user to specify the class to use for routing as a raw module path to that class.  In Figtree, that might be represented with the value <code>!`cherrypy.routing.SpecificRouter()`</code>.  The code that loads this configuration would then have the duty of loading the correct value from the identifier path.</p>
+<p>This is a compromise regarding YAML's ability to arbitrarily load any function or class available.  While that is a useful and powerful tool, having it be on-by-default when loading YAML files can cause security issues - indeed it has done, multiple times.  Figtree identifiers are designed to be able to do useful things like this, but only when specifically asked to by the developer using the figtree library.  This seems like a fair compromise to me.</p>
 <div class="highlight"><pre><span class="n">root_node {</span>
-    <span class="err">&quot;keys&quot;:</span> <span class="err">&quot;must</span> <span class="err">always</span> <span class="err">be</span> <span class="err">strings&quot;,</span>
-    <span class="err">&quot;values&quot;:</span> <span class="err">&quot;can</span> <span class="err">be</span> <span class="err">a</span> <span class="err">lot</span> <span class="err">of</span> <span class="err">things&quot;,</span>
+    <span class="s">&quot;keys&quot;</span><span class="p">:</span> <span class="s">&quot;must always be strings&quot;</span><span class="p">,</span>
+    <span class="s">&quot;values&quot;</span><span class="p">:</span> <span class="s">&quot;can be a lot of things&quot;</span><span class="p">,</span>
 
     <span class="n">value_types {</span>
-        <span class="err">&quot;list&quot;:</span> <span class="err">[&#39;contains&#39;,</span> <span class="err">&#39;individual&#39;,</span> <span class="err">&#39;values&#39;],</span>
-        <span class="err">&quot;dict&quot;:</span> <span class="err">{&#39;basic&#39;:</span> <span class="err">&#39;mapping&#39;},</span>  <span class="c">// both container types can be nested</span>
-        <span class="err">&quot;string&quot;:</span> <span class="err">[</span>
-            <span class="err">&quot;double</span> <span class="err">quotes&quot;,</span>
-            <span class="err">&#39;single</span> <span class="err">quotes&#39;,</span>
-            <span class="err">&quot;quotes&quot;</span> <span class="err">&quot;together&quot;</span> <span class="err">&quot;are&quot;</span> <span class="err">&#39;concatenated&#39;,</span>
-            <span class="err">&quot;quotes</span>
-            <span class="err">can</span> <span class="err">contain</span> <span class="err">newlines&quot;</span>
-            <span class="err">r/raw</span> <span class="err">string/,</span> <span class="c">/* can also use &#39;&quot;|$%() */</span>
-            <span class="err">r$$use</span> <span class="err">multiple</span> <span class="err">quote</span> <span class="err">characters</span> <span class="err">to</span> <span class="err">contain</span> <span class="err">$</span> <span class="err">quotes$$,</span>
-        <span class="err">],</span>
-        <span class="err">&quot;integer&quot;:</span> <span class="err">[</span>
-            <span class="err">+394,</span> <span class="err">-343,</span> <span class="c">/* standard decimal */</span>
-            <span class="err">0xDEADBEEF,</span> <span class="c">/* hexadecimal*/</span>
-            <span class="err">0d444,</span> <span class="c">/* nonstandard decimal */</span>
-            <span class="err">0b0100_0110,</span> <span class="c">/* binary, note all integers can contain underscores */</span>
-            <span class="err">0o34,</span> <span class="c">/* octal */</span>
-        <span class="err">],</span>
-        <span class="err">&quot;float&quot;:</span> <span class="err">[</span>
-            <span class="err">34.53,</span> <span class="err">+34.53,</span> <span class="err">-34.53,</span> <span class="c">/* bog standard */</span>
-            <span class="err">34.,</span> <span class="err">.53,</span> <span class="c">/* leave bits off */</span>
-            <span class="err">34e-34,</span> <span class="c">/* and e-notation */</span>
-        <span class="err">],</span>
-        <span class="err">&quot;boolean&quot;:</span> <span class="err">[</span>
-            <span class="err">true,</span> <span class="err">false,</span> <span class="c">/* only lowercase, only these two literals allowed */</span>
-        <span class="err">],</span>
-        <span class="err">&quot;identifiers&quot;:</span> <span class="err">[</span>
-            <span class="err">!hjef,</span> <span class="c">/* follow the same rules as identifiers for nodes */</span>
-            <span class="err">!includes_underscores,</span> <span class="c">/* but always preceded by a &#39;!&#39; token */</span>
-            <span class="err">!`can</span> <span class="err">have</span> <span class="err">quoted</span> <span class="err">idents`,</span> <span class="c">/* uses same escaping as strings, but can&#39;t contain newlines */</span>
-        <span class="err">]</span>
-    <span class="err">}</span>
-<span class="err">}</span>
+        <span class="s">&quot;list&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;contains&#39;</span><span class="p">,</span> <span class="s">&#39;individual&#39;</span><span class="p">,</span> <span class="s">&#39;values&#39;</span><span class="p">],</span>
+        <span class="s">&quot;dict&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;basic&#39;</span><span class="p">:</span> <span class="s">&#39;mapping&#39;</span><span class="p">},</span>  <span class="c1">// both container types can be nested</span>
+        <span class="s">&quot;string&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s">&quot;double quotes&quot;</span><span class="p">,</span>
+            <span class="s">&#39;single quotes&#39;</span><span class="p">,</span>
+            <span class="s">&quot;quotes&quot;</span> <span class="s">&quot;together&quot;</span> <span class="s">&quot;are&quot;</span> <span class="s">&#39;concatenated&#39;</span><span class="p">,</span>
+            <span class="s">&quot;quotes</span>
+<span class="s">            can contain newlines&quot;</span>
+            <span class="s">r/raw string/</span><span class="p">,</span> <span class="cm">/* can also use &#39;&quot;|$%() */</span>
+            <span class="s">r$$use multiple quote characters to contain $ quotes$$</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s">&quot;integer&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mi">+394</span><span class="p">,</span> <span class="mi">-343</span><span class="p">,</span> <span class="cm">/* standard decimal */</span>
+            <span class="mh">0xDEADBEEF</span><span class="p">,</span> <span class="cm">/* hexadecimal*/</span>
+            <span class="mi">0d444</span><span class="p">,</span> <span class="cm">/* nonstandard decimal */</span>
+            <span class="mb">0b0100_0110</span><span class="p">,</span> <span class="cm">/* binary, note all integers can contain underscores */</span>
+            <span class="mo">0o34</span><span class="p">,</span> <span class="cm">/* octal */</span>
+        <span class="p">],</span>
+        <span class="s">&quot;float&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mf">34.53</span><span class="p">,</span> <span class="mf">+34.53</span><span class="p">,</span> <span class="mf">-34.53</span><span class="p">,</span> <span class="cm">/* bog standard */</span>
+            <span class="mf">34.</span><span class="p">,</span> <span class="mf">.53</span><span class="p">,</span> <span class="cm">/* leave bits off */</span>
+            <span class="mf">34.e-34</span><span class="p">,</span> <span class="cm">/* and e-notation */</span>
+        <span class="p">],</span>
+        <span class="s">&quot;boolean&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="kc">true</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="cm">/* only lowercase, only these two literals allowed */</span>
+        <span class="p">],</span>
+        <span class="s">&quot;identifiers&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="nv">!hjef</span><span class="p">,</span> <span class="cm">/* follow the same rules as identifiers for nodes */</span>
+            <span class="nv">!includes_underscores</span><span class="p">,</span> <span class="cm">/* but always preceded by a &#39;!&#39; token */</span>
+            <span class="nv">!`can have quoted idents`</span><span class="p">,</span> <span class="cm">/* uses same escaping as strings, but can&#39;t contain newlines */</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 
