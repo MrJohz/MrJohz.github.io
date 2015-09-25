@@ -32,7 +32,8 @@ body {
 @media (min-width: 700px) {
     .siteheader {
         padding: 0 3em;
-        margin-bottom: 5em;
+        margin-top: 1em;
+        margin-bottom: 3em;
     }
 }
 
@@ -129,6 +130,10 @@ body {
     margin-bottom: 10px;
     color: #666;
     font-size: .7em;
+}
+
+.divider {
+    text-align: center;
 }
 
 .post {
