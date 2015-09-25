@@ -5,28 +5,35 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.johz.me/</loc>
-<lastmod>2015-09-25T01:17:47-00:00</lastmod>
+<lastmod>2015-09-25T11:40:41-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.johz.me/tags.html</loc>
-<lastmod>2015-09-25T01:17:47-00:00</lastmod>
+<lastmod>2015-09-25T11:40:41-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.johz.me/categories.html</loc>
-<lastmod>2015-09-25T01:17:47-00:00</lastmod>
+<lastmod>2015-09-25T11:40:41-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.johz.me/pages/about-me.html</loc>
-<lastmod>2015-09-25T01:17:47-00:00</lastmod>
+<lastmod>2015-09-25T11:40:41-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.johz.me/posts/2015/Sep/19/meet-figtree/</loc>
+<lastmod>2015-09-19T12:26:20+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -124,7 +131,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.johz.me/category/misc.html</loc>
-<lastmod>2015-08-14T14:50:04-00:01</lastmod>
+<lastmod>2015-09-19T12:26:20-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -180,7 +187,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.johz.me/tag/coding.html</loc>
-<lastmod>2015-08-14T14:50:04-00:01</lastmod>
+<lastmod>2015-09-19T12:26:20-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -221,6 +228,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://www.johz.me/tag/configuration.html</loc>
+<lastmod>2015-09-19T12:26:20-00:01</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://www.johz.me/tag/optimisation.html</loc>
 <lastmod>2014-07-16T10:35:18-00:01</lastmod>
 <changefreq>daily</changefreq>
@@ -228,8 +242,15 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://www.johz.me/tag/rust.html</loc>
+<lastmod>2015-09-19T12:26:20-00:01</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://www.johz.me/author/jonathan-frere.html</loc>
-<lastmod>2015-08-14T14:50:04-00:01</lastmod>
+<lastmod>2015-09-19T12:26:20-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

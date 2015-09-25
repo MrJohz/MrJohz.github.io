@@ -1,0 +1,146 @@
+title: Meet Figtree
+slug: meet-figtree
+date: 2015-09-19 12:26:20
+tags: rust, coding, configuration
+
+
+You know sometimes you do a stupid thing and it turns out to be so much more fun than doing the sensible thing that you really can't seem to shake it?
+
+Meet Figtree, my latest stupid thing.
+
+```figtree
+figtree_is {
+    "noded": "configuration",
+    "it looks": "a bit like JSON",
+
+    except {
+        "for": "these random blocks everywhere"
+
+        // plus a few other details, not least the fact that, what with comments and
+        // everything, it's actually somewhat readable without too much effort.
+    }
+}
+```
+
+## What is Figtree
+
+Figtree, as the example says, is a noded configuration file format.  By "noded", I mean that it allows configuration values to sorted into sections ("nodes"), and ensures that those nodes are syntactically distinct from simple nested data.  As a configuration file format, as opposed to a general data format, I tried to make it expressive and easy-to-read, on the basis that the people who might actually need to read and write Figtree files should be able to pick it up and use it easily.
+
+Nodes are made up from an identifier and a brace block, so they look a lot like function definitions or block structures in most C-like languages.  Identifiers use the same rules as Swift, because I liked the idea of emoji winding everyone up all the time, but mainly because those rules seemed fairly sane.
+
+> **Rules of Swift**:
+> Identifiers begin with an uppercase or lowercase letter A through Z, an underscore (_), a noncombining alphanumeric Unicode character in the Basic Multilingual Plane, or a character outside the Basic Multilingual Plane that isn’t in a Private Use Area. After the first character, digits and combining Unicode characters are also allowed.
+
+On the basis that there may be some circumstances where that wasn't enough, it's also possible to use arbitrary strings as identifiers, by enclosing them with `` `backticks` ``.  These "quoted idents" can't contain raw newlines (although you can include newlines using `\n` if you need), but otherwise follow the same rules for strings.
+
+Nodes can contain subnodes, but they can also contain key-value pairs known as "attributes".  In Figtree, keys are *always* strings.  This is a limitation, but I suspect there aren't many circumstances where non-key strings are needed.  Using only strings makes the resultant structure much easier to use in statically-typed languages, and also significantly simpler to parse.
+
+Attribute pairs must be separated by commas, and may optionally (i.e. almost always should) have a trailing comma at the end.  You don't need a comma between an attribute and a node, and you can't have a comma after a node (much like how you don't have semicolons after brace-blocks in most braced languages).
+
+Values are either simple, or complex.  Simple values are strings, integers, floats, booleans, the null value, and identifiers, while complex values are lists and dicts, that contain sub-values inside them.
+
+Strings are roughly like JSON strings, except for a few of features.  Firstly, they are multiline by default, as opposed to JSON strings which can only include newlines using the escape sequence `\n`.  Secondly, they can use either single (`'`) or double (`"`) quotes.  Thirdly, all the rules for JSON strings can be liberally ignored using raw strings, which are strings that are preceded by the letter `r`, as in `r"this is a raw string"`.  Raw strings use both the standard quote characters, but can also use `/slashes/`, `$dollar signs$`, `%percent signs%`, `|pipe signs|`, or `#hashes#`.  Inside raw strings, no backslash-escapes can be used.  To allow for the use of the quote character inside a raw string, it's possible to repeat the number of quote characters multiple times, and the string will only close when the same number of quote characters happens again in sequence.  For example, `r$$$this string can contain up to two $ signs ($$) because the outer quote uses three signs$$$` will be parsed as one string.
+
+For string values (although not for keys) whenever multiple strings are found with no separator, they will be concatenated (as in Python).  This makes it possible to write relatively long prose without having to worry about excess whitespace.
+
+Integers are fairly simple, they can either be the standard decimal, optionally preceded by a positive or negative sign, or a hexadecimal, octal, decimal, or binary number, preceded by a `0x`, `0o`, `0d`, or `0b` respectively.
+
+Floats, likewise, follow fairly standard rules.  There must be at least one decimal point and at least one integer on one side or the other of that point.  There can be a sign at the start, and an exponent at the end.
+
+Booleans can be either `true` or `false`.  They must be entirely lowercase.  I'm potentially considering expanding this to include `on`/`off`, `yes`/`no`, and perhaps even `enabled`/`disabled`, for much the same reasons that YAML interprets all of these values as boolean.  Unlike YAML, these tokens can't be parsed as implicit strings - currently, their use is a syntax error - so this is a relatively painless addition to the parser.
+
+The null value is simply the literal value `null`.
+
+The sixth basic datatype is, I suspect, more unique: the identifier type.  This is a bang (exclamation point, `!`), followed by an identifier, using the same rules for identifiers here as when they're part of the node name.
+
+Identifiers are essentially another kind of string, but they're specifically designed to represent identifiers and values in code.  For example, the configuration for the CherryPy framework requires the user to specify the class to use for routing as a raw module path to that class.  In Figtree, that might be represented with the value ``!`cherrypy.routing.SpecificRouter()` ``.  The code that loads this configuration would then have the duty of loading the correct value from the identifier path.
+
+This is a compromise regarding YAML's ability to arbitrarily load any function or class available.  While that is a useful and powerful tool, having it be on-by-default when loading YAML files can cause security issues - indeed it has done, multiple times.  Figtree identifiers are designed to be able to do useful things like this, but only when specifically asked to by the developer using a Figtree library.  This seems like a fair compromise to me.
+
+Here's a full example of as much syntax as I could cram into one document.
+
+```figtree
+root_node {
+    "keys": "must always be strings",
+    "values": "can be a lot of things",
+
+    value_types {
+        "list": ['contains', 'individual', 'values'],
+        "dict": {'basic': 'mapping'},  // both container types can be nested
+        "string": [
+            "double quotes",
+            'single quotes',
+            "quotes" "together" "are" 'concatenated',
+            "quotes
+            can contain newlines"
+            r/raw string/, /* can also use '"|$%# */
+            r$$use multiple quote characters to contain $ quotes$$,
+        ],
+        "integer": [
+            +394, -343, /* standard decimal */
+            0xDEADBEEF, /* hexadecimal*/
+            0d444, /* nonstandard decimal */
+            0b0100_0110, /* binary, note all integers can contain underscores */
+            0o34, /* octal */
+        ],
+        "float": [
+            34.53, +34.53, -34.53, /* bog standard */
+            34., .53, /* leave bits off */
+            34.e-34, /* and e-notation */
+        ],
+        "boolean": [
+            true, false, /* only lowercase, only these two literals allowed */
+        ],
+        "null value": null,
+        "identifiers": [
+            !hjef, /* follow the same rules as identifiers for nodes */
+            !includes_underscores, /* but always preceded by a '!' token */
+            !`can have quoted idents`, /* uses same escaping as strings, but can't contain newlines */
+        ]
+    }
+}
+
+multiple_roots_allowed_in_one_document {
+    "key": true,  // note trailing comma here
+}
+```
+
+## Some quick comparisons
+
+I've enjoyed writing Figtree largely as a hobby project, but at this point I'm convinced it actually offers some benefits over a few existing configuration formats.  This may be the late-night madness kicking in, but I'll explain my comparisons here for you to judge.
+
+### INI
+
+- INI `[sections]` are very similar to Figtree nodes, although, depending on the parser, it isn't always possible to nest sections, or escape characters in the section name.
+- INI values tend to just be strings, while Figtree has a full range of datatypes, included collections.
+- Figtree has a concrete, absolute syntax that has been standardised.  There isn't even a standardised file extension for INI files, let alone a standard syntax for values.  This isn't necessarily a bad thing, but it does mean that people can be absolutely clear how to write a Figtree file and can expect it to work pretty much anywhere where there's a parser.
+
+### JSON
+
+- JSON doesn't have sections.  This means that `{"a": {"b": true}}` could be setting the value of setting `a.b` to `true`, or it could be setting the value of `a` to `{"b": true}`.  Figtree makes a distinction between these two cases.
+- JSON and Figtree share a lot of value types, although Figtree usually has more ways to express any particular value, depending on the user's need.  The one big new addition is Figtree's identifier type, which has no equivalent in JSON.
+- JSON is fairly limiting as a configuration language - the specification is strict, and disallows comments and trailing commas, only allows double-quoted strings, and doesn't allow for non-decimal integers.  Figtree allows all of those things to ensure the user can write out a configuration that they can hopefully understand in six months' time.
+- JSON is ubiquitous, and can even be evaluated as Javascript.  Figtree has one library in Rust.
+
+### YAML
+
+- YAML is designed to be used by humans, as has Figtree.  They've both take very different paths to get there, but they share the same goal.
+- YAML uses whitespace, Figtree uses braces, and this probably shouldn't matter to anyone.
+- Like JSON, YAML does not differentiate between sections and mappings.  A YAML user could write sections using one syntax and maps using another, but the parser will treat them both the same.
+- The YAML parser does a few things implicitly.  One of these is implicit strings, where if an unquoted value can't be parsed as another type, and it doesn't contain any special characters, the parser will assume it to be a string.  This can cause subtle bugs.  Figtree distinguishes each value type and unambiguously parses each one separately.
+- The YAML parser also automatically loads classes, modules, and functions when asked to by the file.  This is safe in most circumstances if you use YAML only for private configuration, but it has caused security risks and breaches in the past.  Figtree replaces this autoload functionality with identifiers, which must be loaded manually be the developer if they so wish.
+
+### TOML
+
+- TOML looks like it has sections like INI files, but in reality has key-value maps like JSON and YAML.  Worse, these sections don't visibly nest, and the structure of the parsed data can vary depending on the order of the sections.  Figtree attempts to keep things as simple as possible.
+- TOML arrays cannot contain mixed types.  Figtree arrays probably *shouldn't* contain mixed types, but assume that if the user wants to do that then they probably know bet.
+- TOML uses semi-syntactically significant whitespace, and can just about be parsed by a fairly simple line-based parser.  Figtree has a much more complex syntax, which means it can't be parsed as easily, but can be formatted in any way the user wants.  This may or may not be a positive for Figtree...
+
+
+## Why shouldn't you use Figtree?
+
+I always think the best way to show you understand a tool is to be able to come up with good reasons not to use it.  Figtree is great, but it isn't perfect by any means.  For a start, there's one library that can parse Figtree files, in Rust, and I am currently the sole contributor.  The wider Figtree specification - aside from not having been written down formally yet - may well change at will.  As I said earlier, I'm currently considering adding new boolean literals.  I'm also vaguely working on an idea to add the ability to reference the values of other nodes/attributes.  Neither of those changes will break old Figtree files, but they will make new files unparseable in old parsers.
+
+Aside from the "it just isn't ready" argument, Figtree is specifically designed for nested-section configuration.  It's pretty inefficient for message passing, data representation, and other needs that you might use JSON or XML for.  It's also more complex than other languages commonly used for config files - not all configuration needs a distinction between mappings and sections.  It is probably worth sticking with a fairly simple, widely-used format if you know you don't need all that Figtree offers.
+
+Figtree is also specifically about configuration, and I've no plans to evolve it into a full scripting language like Lua.  If all you need is configuration, then Figtree will be fine, but in some circumstances you need a format that can describe more than just predefined behaviours.  A this point scripting may be a more viable option - code can often be better than overly complex configuration.
