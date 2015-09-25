@@ -130,12 +130,12 @@ I've enjoyed writing Figtree largely as a hobby project, but at this point I'm c
 - YAML uses whitespace, Figtree uses braces, and this probably shouldn't matter to anyone.
 - Like JSON, YAML does not differentiate between sections and mappings.  A YAML user could write sections using one syntax and maps using another, but the parser will treat them both the same.
 - The YAML parser does a few things implicitly.  One of these is implicit strings, where if an unquoted value can't be parsed as another type, and it doesn't contain any special characters, the parser will assume it to be a string.  This can cause subtle bugs.  Figtree distinguishes each value type and unambiguously parses each one separately.
-- The YAML parser also automatically loads classes, modules, and functions when asked to by the file.  This is safe in most circumstances if you use YAML only for private configuration, but it has caused security risks and breaches in the past.  Figtree replaces this autoload functionality with identifiers, which must be loaded manually be the developer if they so wish.
+- The YAML parser also automatically loads classes, modules, and functions when asked to by the file.  This is safe in most circumstances if you use YAML only for private configuration, but it has caused security risks and breaches in the past.  Figtree replaces this autoload functionality with identifiers, which must be loaded manually by the developer if they so wish.
 
 ### TOML
 
 - TOML looks like it has sections like INI files, but in reality has key-value maps like JSON and YAML.  Worse, these sections don't visibly nest, and the structure of the parsed data can vary depending on the order of the sections.  Figtree attempts to keep things as simple as possible.
-- TOML arrays cannot contain mixed types.  Figtree arrays probably *shouldn't* contain mixed types, but assume that if the user wants to do that then they probably know bet.
+- TOML arrays cannot contain mixed types.  Figtree arrays probably *shouldn't* contain mixed types, but assume that if the user wants to do that then they probably know best.
 - TOML uses semi-syntactically significant whitespace, and can just about be parsed by a fairly simple line-based parser.  Figtree has a much more complex syntax, which means it can't be parsed as easily, but can be formatted in any way the user wants.  This may or may not be a positive for Figtree...
 
 

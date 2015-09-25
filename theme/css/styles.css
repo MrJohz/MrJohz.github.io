@@ -229,6 +229,18 @@ sub {
     margin-top: 30px;
 }
 
+/* General text */
+
+.article, .postsummary {
+    text-align: justify;
+}
+
+@media (min-width: 700px) {
+    .article, .postsummary {
+        text-align: left;
+    }
+}
+
 /* Lists */
 
 .article * li, .postsummary * li {
@@ -315,7 +327,13 @@ sub {
 footer {
     color: grey;
     font-size: .7em;
-    width: 50%;
+    width: 90%;
     text-align: center;
     margin: 3em auto 1.7em auto;
+}
+
+@media (min-width: 700px) {
+    footer {
+        width: 50%;
+    }
 }
