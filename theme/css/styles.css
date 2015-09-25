@@ -131,10 +131,6 @@ body {
     font-size: .7em;
 }
 
-.postsummary {
-    font-weight: 300;
-}
-
 .post {
     margin-bottom: 20px;
     list-style: none;
@@ -206,7 +202,7 @@ sub {
 
 /* Lists */
 
-.article * li {
+.article * li, .postsummary * li {
     line-height: 1.1em;
     margin-top: 0.3em;
     margin-bottom: 0.3em;
@@ -214,24 +210,24 @@ sub {
 
 /* Paragraphs. */
 
-.article p {
+.article p, .postsummary p {
     line-height: 1.3em;
     margin-bottom: 1.5em;
 }
 
 /* Headers. */
 
-.article h1 {
+.article h1, .postsummary h1 {
     padding-bottom: 1em;
     font-size: 1.4em;
 }
 
-.article h2 {
+.article h2, .postsummary h2 {
     padding-bottom: 0.9em;
     font-size: 1.2em;
 }
 
-.article h3 {
+.article h3, .postsummary h3 {
     padding-bottom: 0.8em;
     font-size: 1em;
 }
@@ -253,7 +249,7 @@ sub {
 
 /* Blockquotes */
 
-.article blockquote {
+.article blockquote, .postsummary blockquote {
     font-size: 0.9em;
     font-style: italic;
     border-left: 3px solid #ccc;
@@ -273,14 +269,14 @@ sub {
     border-radius: 5px;
 }
 
-.article pre {
+.article pre, .postsummary pre {
     font-family: 'Source Code Pro';
     font-size: .85em;
     margin: auto;
     padding: 1em;
 }
 
-.article code {
+.article code, .postsummary pre {
     font-family: 'Source Code Pro';
     font-size: .85em;
 }
