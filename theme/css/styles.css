@@ -7,6 +7,31 @@ body {
     width: 80%;
 }
 
+.content {
+    width: 90%;
+}
+
+@media (min-width: 700px) {
+    body {
+        width: 80%;
+    }
+    .content {
+        width: 70%;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1200px) {
+    body {
+        width: 70%
+    }
+    .content {
+        width: 70%;
+        margin: 0 auto;
+
+    }
+}
+
 html { /* This stuff is for the sticky footer. */
     min-height:100%;
     position:relative;
@@ -16,7 +41,8 @@ html { /* This stuff is for the sticky footer. */
 
 body {
     background-color:#fafafa;
-    font-family:'Open Sans';
+    color: #2E2E2E;
+    font-family:'Lato', sans-serif;
     margin: 20px auto 100px auto; /* For sticky footer. */
 }
 
@@ -40,6 +66,7 @@ body {
 .siteheader-cell {
     width: 100%;
     display: block;
+    margin-bottom: 2em;
 }
 
 @media (min-width: 700px) {
@@ -59,7 +86,7 @@ body {
 .sitetitle {
     box-sizing: border-box;
     /*float: left;*/
-    font-family: 'Merriweather';
+    font-family: 'Lobster', cursive;
     text-align: center;
     font-weight: 300;
     font-size: 6em;
@@ -78,7 +105,6 @@ body {
     position: relative;
     font-size: 18;
     text-align: center;
-    font-family: Merriweather;
     /*float: right;*/
 }
 
@@ -91,7 +117,6 @@ body {
 }
 
 .sitesubtitle {
-    color: #000;
     font-size: 1em;
     margin-bottom: 30px;
     margin-top: 20px;
@@ -120,11 +145,6 @@ body {
     font-size: 1.6em;
 }
 
-.posttitle a {
-    padding-left: 10px; /* Hack to dodge :hover issue. */
-    position: relative; /* Hack to dodge :hover issue. */
-}
-
 .postinfo {
     margin-top: 5px;
     margin-bottom: 10px;
@@ -137,7 +157,7 @@ body {
 }
 
 .post {
-    margin-bottom: 20px;
+    margin-bottom: 3em;
     list-style: none;
 }
 
