@@ -43,7 +43,7 @@
     document.write(quotes[index])
   </script>
   <noscript>
-    Proud Fenda Scum
+    This div container is left deliberately&nbsp;blank.
   </noscript>
 </h3>
           <!-- nav -->
@@ -77,7 +77,7 @@
 
   <div class="article">
     <p>You know sometimes you do a stupid thing and it turns out to be so much more fun than doing the sensible thing that you really can't seem to shake it?</p>
-<p>Meet Figtree, my latest stupid thing.</p>
+<p>Meet <a href="https://github.com/MrJohz/figtree">Figtree</a>, my latest stupid thing.</p>
 <div class="highlight"><pre><span class="n">figtree_is {</span>
     <span class="s">&quot;noded&quot;</span><span class="p">:</span> <span class="s">&quot;configuration&quot;</span><span class="p">,</span>
     <span class="s">&quot;it looks&quot;</span><span class="p">:</span> <span class="s">&quot;a bit like JSON&quot;</span><span class="p">,</span>
@@ -192,6 +192,8 @@ Identifiers begin with an uppercase or lowercase letter A through Z, an undersco
 <p>I always think the best way to show you understand a tool is to be able to come up with good reasons not to use it.  Figtree is great, but it isn't perfect by any means.  For a start, there's one library that can parse Figtree files, in Rust, and I am currently the sole contributor.  The wider Figtree specification - aside from not having been written down formally yet - may well change at will.  As I said earlier, I'm currently considering adding new boolean literals.  I'm also vaguely working on an idea to add the ability to reference the values of other nodes/attributes.  Neither of those changes will break old Figtree files, but they will make new files unparseable in old parsers.</p>
 <p>Aside from the "it just isn't ready" argument, Figtree is specifically designed for nested-section configuration.  It's pretty inefficient for message passing, data representation, and other needs that you might use JSON or XML for.  It's also more complex than other languages commonly used for config files - not all configuration needs a distinction between mappings and sections.  It is probably worth sticking with a fairly simple, widely-used format if you know you don't need all that Figtree offers.</p>
 <p>Figtree is also specifically about configuration, and I've no plans to evolve it into a full scripting language like Lua.  If all you need is configuration, then Figtree will be fine, but in some circumstances you need a format that can describe more than just predefined behaviours.  A this point scripting may be a more viable option - code can often be better than overly complex configuration.</p>
+<h2>Using Figtree</h2>
+<p>Currently, Figtree can be used via Rust using the <a href="https://github.com/MrJohz/figtree">figtree</a> library that currently doesn't even have a crates page.  There is library documentation available <a href="http://www.johz.me/figtree">here</a>.</p>
   </div><!-- .content -->
 
 </section>

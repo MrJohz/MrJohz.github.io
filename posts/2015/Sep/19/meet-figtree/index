@@ -6,7 +6,7 @@ tags: rust, coding, configuration
 
 You know sometimes you do a stupid thing and it turns out to be so much more fun than doing the sensible thing that you really can't seem to shake it?
 
-Meet Figtree, my latest stupid thing.
+Meet [Figtree][], my latest stupid thing.
 
 ```figtree
 figtree_is {
@@ -21,6 +21,8 @@ figtree_is {
     }
 }
 ```
+
+[figtree]: <https://github.com/MrJohz/figtree>
 
 ## What is Figtree
 
@@ -144,3 +146,10 @@ I always think the best way to show you understand a tool is to be able to come 
 Aside from the "it just isn't ready" argument, Figtree is specifically designed for nested-section configuration.  It's pretty inefficient for message passing, data representation, and other needs that you might use JSON or XML for.  It's also more complex than other languages commonly used for config files - not all configuration needs a distinction between mappings and sections.  It is probably worth sticking with a fairly simple, widely-used format if you know you don't need all that Figtree offers.
 
 Figtree is also specifically about configuration, and I've no plans to evolve it into a full scripting language like Lua.  If all you need is configuration, then Figtree will be fine, but in some circumstances you need a format that can describe more than just predefined behaviours.  A this point scripting may be a more viable option - code can often be better than overly complex configuration.
+
+## Using Figtree
+
+Currently, Figtree can be used via Rust using the [figtree][ft-github] library that currently doesn't even have a crates page.  There is library documentation available [here][ft-docs].
+
+[ft-github]: <https://github.com/MrJohz/figtree>
+[ft-docs]: <http://www.johz.me/figtree>
