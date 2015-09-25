@@ -46,6 +46,10 @@ body {
     margin: 20px auto 100px auto; /* For sticky footer. */
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'PT Sans Caption', sans-serif;
+}
+
 /* Site header. */
 
 .siteheader {
@@ -86,7 +90,7 @@ body {
 .sitetitle {
     box-sizing: border-box;
     /*float: left;*/
-    font-family: 'Lobster', cursive;
+    font-family: 'PT Sans Caption', sans-serif;
     text-align: center;
     font-weight: 300;
     font-size: 6em;
