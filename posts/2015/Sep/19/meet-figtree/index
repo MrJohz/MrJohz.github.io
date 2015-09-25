@@ -45,7 +45,7 @@ Strings are roughly like JSON strings, except for a few of features.  Firstly, t
 
 For string values (although not for keys) whenever multiple strings are found with no separator, they will be concatenated (as in Python).  This makes it possible to write relatively long prose without having to worry about excess whitespace.
 
-Integers are fairly simple, they can either be the standard decimal, optionally preceded by a positive or negative sign, or a hexadecimal, octal, decimal, or binary number, preceded by a `0x`, `0o`, `0d`, or `0b` respectively.
+Integers are fairly simple, they can either be the standard decimal, optionally preceded by a positive or negative sign, or a hexadecimal, octal, decimal, or binary number, preceded by a `0x`, `0o`, `0d`, or `0b` respectively.  0[xdob] numbers can't be signed - this may change in future, but I can't really think of a good reason for them to be signed.
 
 Floats, likewise, follow fairly standard rules.  There must be at least one decimal point and at least one integer on one side or the other of that point.  There can be a sign at the start, and an exponent at the end.
 

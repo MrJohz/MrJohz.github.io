@@ -4,6 +4,7 @@
 /* General stuff. */
 
 body {
+    margin: 0 auto;
     width: 80%;
 }
 
@@ -43,7 +44,6 @@ body {
     background-color:#fafafa;
     color: #2E2E2E;
     font-family:'Lato', sans-serif;
-    margin: 20px auto 100px auto; /* For sticky footer. */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
 @media (min-width: 700px) {
     .siteheader {
         padding: 0 3em;
-        margin-top: 1em;
+        margin-top: 1.5em;
         margin-bottom: 3em;
     }
 }
@@ -313,9 +313,9 @@ sub {
 /* Footer at page bottom */
 
 footer {
-    bottom: 0;
     color: grey;
     font-size: .7em;
-    height: 30px;
-    position: absolute;
+    width: 50%;
+    text-align: center;
+    margin: 3em auto 1.7em auto;
 }
